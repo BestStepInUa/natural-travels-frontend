@@ -1,3 +1,8 @@
+.storyCard {
+  width: 100%;
+  max-width: 335px;
+}
+
 .storiesListTitle {
 
   font-weight: 700;
@@ -43,8 +48,8 @@
   border: 1px solid var(--opacity-neutral-darkest-15);
   border-radius: 6px;
   padding: 8px 48px 8px 8px;
-
-  width: 335px;
+  width: 100%;
+  max-width: 335px;
   height: 40px;
   background-color: transparent;
   font-size: 16px;
@@ -239,26 +244,4 @@
   color: var(--color-white);
   border-radius: 6px;
   background-color: var(--color-mantis-dark);
-}
-
-.storiesLoadMore {
-  display: block;
-  margin: 0 auto;
-  border: 1px solid var(--color-mantis-dark);
-  border-radius: 6px;
-  padding: 6px 12px;
-  width: 335px;
-  height: 48px;
-  background-color: var(--color-mantis-dark);
-  margin-top: 40px;
-
-  font-weight: 500;
-  font-size: 16px;
-  color: var(--color-white);
-}
-
-.storiesLoadMore:hover {
-  background-color: var(--opacity-neutral-darkest-5);
-  color: var(--color-scheme-2-text);
-  border: 1px solid var(--color-scheme-2-border);
 }

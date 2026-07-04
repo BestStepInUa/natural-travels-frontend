@@ -13,7 +13,7 @@ const categories = [
   { label: 'Полісся', slug: 'polissia' },
 ];
 
-export default function SidebarStories() {
+export default function Stories() {
   return (
     <section className={css.stories}>
       <h2 className={css.storiesListTitle}>Статті</h2>
@@ -38,6 +38,7 @@ export default function SidebarStories() {
         ))}
       </ul>
       <StoriesList />
+      <button className={css.storiesLoadMore}>Показати ще</button>
     </section>
   );
 }

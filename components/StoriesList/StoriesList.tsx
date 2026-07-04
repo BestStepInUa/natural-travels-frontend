@@ -37,7 +37,6 @@ export default function StoriesList() {
           </div>
         </div>
       ))}
-      <button className={css.storiesLoadMore}>Показати ще</button>
     </div>
   );
 }
