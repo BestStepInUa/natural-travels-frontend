@@ -14,3 +14,13 @@ width: 121px;
 height: 35px;
 background-color: blue;
 }
+@media(max-width: 768px) {
+  .container {
+  padding: 0 32px;
+}
+}
+@media(max-width: 375px) {
+  .container {
+  padding: 0 20px;
+}
+}

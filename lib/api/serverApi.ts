@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers';
+// import { cookies } from 'next/headers';
 import { nextServer } from './api';
 import { CheckSessionResponse, User } from './clientApi';
 
