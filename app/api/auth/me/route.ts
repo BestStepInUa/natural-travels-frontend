@@ -1,0 +1,20 @@
+
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import { api } from "../../api";
+import { ApiError, createErrorResponce } from "../../_utils/utils";
+
+export async function GET(){
+  const cookiesStore = cookies();
+  try{
+    const {data} = await api.get('/auth/me', {
+      headers:{
+        Cookie: (await cookiesStore).toString()
+      }
+    })
+    return NextResponse.json(data);
+  }catch(error){
+    return createErrorResponce(error as ApiError);
+  }
+
+}
