@@ -81,6 +81,7 @@ font-weight: 500;
 font-size: 16px;
 color: var(--color-scheme-2-text);
 line-height: 1.5;
+transition: var(--main-transition);
 }
 
 .cancelBtn:hover, .cancelBtn:focus{
@@ -118,6 +119,7 @@ font-weight: 500;
 font-size: 16px;
 color: var(--color-white);
 line-height: 1.5;
+transition: var(--main-transition);
 }
 
 .confirmBtn:hover, .confirmBtn:focus {
