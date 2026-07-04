@@ -1,13 +1,13 @@
-import { cookies } from 'next/headers';
+// import { cookies } from 'next/headers';
 import { nextServer } from './api';
-import { CheckSessionResponse } from './clientApi';
+import { CheckSessionResponse, User } from './clientApi';
 
 export const checkServerSession = async () => {
-  const cookieStore = await cookies();
-  const res = await nextServer.get<CheckSessionResponse>('/auth/session', {
-    headers: {
-      cookie: cookieStore.toString(),
-    },
-  });
-  return res;
+  const res = await nextServer.get<CheckSessionResponse>('/auth/session');
+  return res.data.success;
 };
+
+export const getMe = async () => {
+  const {data} = await nextServer.get<User>('auth/me');
+  return data;
+}
