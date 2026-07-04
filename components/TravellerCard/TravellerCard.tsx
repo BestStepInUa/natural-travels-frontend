@@ -1,13 +1,16 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import css from './TravellerCard.module.css';
 
 interface TravellerCardProps {
+  id: string ;
   name: string;
   articlesCount: number;
-  photoUrl?: string; // Поки заглушка
+  photoUrl?: string;
 }
 
 export const TravellerCard = ({
+  id,
   name,
   articlesCount,
   photoUrl,
@@ -27,9 +30,9 @@ export const TravellerCard = ({
         <p className={css.articlesCount}>Статей: {articlesCount}</p>
       </div>
 
-      <a href="#" className={css.linkButton}>
+      <Link href={`/travellers/${id}`} className={css.linkButton}>
         Переглянути профіль
-      </a>
+      </Link>
     </div>
   );
 };
