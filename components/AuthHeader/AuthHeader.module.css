@@ -1,0 +1,16 @@
+.header{
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 24px;
+  padding: 18px 0px;
+}
+
+.container {
+  width: 100%;
+  padding: 0 64px;
+}
+.content{
+width: 121px;
+height: 35px;
+background-color: blue;
+}
