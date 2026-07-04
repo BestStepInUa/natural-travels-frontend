@@ -3,13 +3,8 @@ import { nextServer } from './api';
 import { CheckSessionResponse, User } from './clientApi';
 
 export const checkServerSession = async () => {
-  const cookieStore = await cookies();
-  const res = await nextServer.get<CheckSessionResponse>('/auth/session', {
-    headers: {
-      cookie: cookieStore.toString(),
-    },
-  });
-  return res;
+  const res = await nextServer.get<CheckSessionResponse>('/auth/session');
+  return res.data.success;
 };
 
 export const getMe = async () => {
