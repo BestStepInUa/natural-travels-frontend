@@ -1,6 +1,7 @@
 import css from '@/components/StoriesList/StoriesList.module.css';
 import Image from 'next/image';
-import stories from '@/green-tourism.articles.json';
+import stories from './green-tourism.articles.json';
+import SaveIcon from './SaveIcon';
 
 export default function StoriesList() {
   return (
@@ -16,12 +17,9 @@ export default function StoriesList() {
           />
           <div className={css.storyCardContent}>
             <div className={css.storyCardAuthorContainer}>
-              <p className={css.storyCardAuthor}>{story.ownerId.$oid}</p>
-              &bull;
+              <p className={css.storyCardAuthor}>{story.ownerId.$oid}</p>•
               <p className={css.storyCardSaves}>{story.rate}</p>
-              <svg width="16" height="16">
-                <use href="#save-icon"></use>
-              </svg>
+              <SaveIcon width={16} height={16} />
             </div>
             <h3 className={css.storyCardTitle}>{story.title}</h3>
             <div className={css.storyCardButtonWrapper}>
@@ -29,9 +27,7 @@ export default function StoriesList() {
                 Переглянути статтю
               </button>
               <button className={css.storyCardSaveButton}>
-                <svg width="24" height="24">
-                  <use href="#save-icon"></use>
-                </svg>
+                <SaveIcon width={24} height={24} />
               </button>
             </div>
           </div>

@@ -1,106 +1,18 @@
 .storyCard {
+  flex: 1 1 100%;
   width: 100%;
-  max-width: 335px;
-}
-
-.storiesListTitle {
-
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: var(--color-scheme-1-text);
-  margin-bottom: 30px;
 }
 
 @media (min-width: 768px) {
-  .storiesListTitle {
-    font-size: 48px;
+  .storyCard {
+    flex: 1 1 calc(50% - 12px);
   }
 }
 
 @media (min-width: 1440px) {
-  .storiesListTitle {
-    font-size: 56px;
+  .storyCard {
+    flex: 1 1 calc(33.333% - 16px);
   }
-}
-
-.stories {
-  padding: 32px 0 64px;
-}
-
-@media (min-width: 768px) {
-  .stories {
-    padding: 48px 0 72px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .stories {
-    padding: 48px 0 72px;
-  }
-}
-
-
-.categoryListSelect {
-  display: block;
-  border: 1px solid var(--opacity-neutral-darkest-15);
-  border-radius: 6px;
-  padding: 8px 48px 8px 8px;
-  width: 100%;
-  max-width: 335px;
-  height: 40px;
-  background-color: transparent;
-  font-size: 16px;
-  color: var(--color-scheme-2-text);
-  margin-bottom: 40px;
-}
-
-.categoryList {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .categoryListSelect {
-    display: none;
-  }
-
-  .categoryList {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-}
-
-.categoryItem {
-
-  font-size: 16px;
-  color: var(--color-scheme-2-text);
-  padding: 6px 12px;
-
-}
-
-
-.categoryItem:hover {
-  background-color: var(--color-scheme-1-foreground);
-  border-radius: 8px;
-  padding: 4px 10px;
-  font-weight: 500;
-  font-size: 16px;
-  border: 1px solid var(--opacity-transparent);
-}
-
-@media only screen and (min-width: 1440px) {
-  .categoryItem {
-    font-size: 18px;
-  }
-
-  .categoryItem:hover {
-    font-size: 20px;
-  }
-
 }
 
 .storiesList {
@@ -153,6 +65,8 @@
 .storyCardAuthorContainer {
   display: flex;
   gap: 0 8px;
+  margin-bottom: 12px;
+  align-items: center;
 }
 
 .storyCardAuthor{
@@ -177,6 +91,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   width: 100%;
 
   overflow: hidden;
@@ -208,6 +123,7 @@
   font-weight: 500;
   font-size: 16px;
   color: var(--color-scheme-2-text);
+  transition: background-color 300ms ease;
 }
 
 .storyCardButton:hover {
@@ -237,6 +153,7 @@
   padding: 6px;
   width: 48px;
   height: 48px;
+  transition: background-color 300ms ease;
 }
 
 .storyCardSaveButton:hover {
