@@ -3,7 +3,7 @@ import { Montserrat } from 'next/font/google';
 import TanStackProvider from '@/components/TanStackProvider';
 import AuthProvider from '@/components/AuthProvider';
 // import Header from '@/components/Header';
-// import Footer from '@/components/Footer';
+import Footer from '@/components/Footer';
 
 import 'modern-normalize';
 import './globals.css';
@@ -49,7 +49,7 @@ export default function RootLayout({
           <AuthProvider>
           {/* <Header /> */}
           <main>{children}</main>
-          {/* <Footer /> */}
+          <Footer />
           </AuthProvider>
         </TanStackProvider>
       </body>
