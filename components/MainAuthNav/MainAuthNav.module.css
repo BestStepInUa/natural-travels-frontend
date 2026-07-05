@@ -1,0 +1,53 @@
+
+.container{
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 51px;
+margin: 0 auto;
+margin-bottom: 32px;
+}
+
+@media(max-width: 768px) {
+  .container {
+  padding: 0 32px;
+}
+}
+@media(max-width: 768px) {
+  .container {
+  padding: 0 20px;
+}
+}
+.active{
+border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+width: 322px;
+height: 1px;
+}
+
+.login{
+  padding: 12px 24px;
+width: 322px;
+height: 48px;
+text-align: center;
+
+font-family: "Montserrat", sans-serif;
+font-weight: 400;
+font-size: 18px;
+line-height: 1.5;
+color: #000;
+}
+
+.register{
+
+padding: 12px 24px;
+width: 322px;
+height: 48px;
+text-align: center;
+
+font-family: "Montserrat", sans-serif;
+font-weight: 400;
+font-size: 18px;
+line-height: 1.5;
+color: #000;
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import TanStackProvider from '@/components/TanStackProvider';
-// import AuthProvider from '@/components/AuthProvider';
+import AuthProvider from '@/components/AuthProvider';
 // import Header from '@/components/Header';
 // import Footer from '@/components/Footer';
 
@@ -46,11 +46,11 @@ export default function RootLayout({
     <html lang="uk" className={montserratFont.variable}>
       <body>
         <TanStackProvider>
-          {/* <AuthProvider> */}
+          <AuthProvider>
           {/* <Header /> */}
           <main>{children}</main>
           {/* <Footer /> */}
-          {/* </AuthProvider> */}
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>
