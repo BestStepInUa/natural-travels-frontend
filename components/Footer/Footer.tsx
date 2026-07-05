@@ -9,7 +9,7 @@ import {
 } from 'react-icons/fa6';
 import css from './Footer.module.css';
 
-const Footer: React.FC = () => {
+export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
@@ -85,6 +85,4 @@ const Footer: React.FC = () => {
       </p>
     </footer>
   );
-};
-
-export default Footer;
+}
