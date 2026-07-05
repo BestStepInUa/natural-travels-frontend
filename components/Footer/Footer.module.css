@@ -84,6 +84,16 @@
 
 /* Tablet styles */
 @media only screen and (min-width: 768px) {
+  .logo_and_social_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .socialIcon {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 /* Desktop styles */
