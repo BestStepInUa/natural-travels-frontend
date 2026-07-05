@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { api } from "../../api";
+import { api } from "@/app/api/api";
 import { ApiError, createErrorResponce } from "../../_utils/utils";
 import { cookies } from "next/headers";
 import { parseCookie } from "cookie";
@@ -39,6 +39,6 @@ export async function POST(req: NextRequest){
 
     return NextResponse.json({error: "Unautorized"}, {status: 401 })
   }catch(error){
-    createErrorResponce(error as ApiError);
+    return createErrorResponce(error as ApiError);
   }
 }
