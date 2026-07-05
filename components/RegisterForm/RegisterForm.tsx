@@ -53,22 +53,22 @@ export default function Register() {
     }
   };
   return (
-    <div className={css.container}>
-      <h1 className={css.register}>Реєстрація</h1>
-      <p className={css.p}>Раді вас бачити у спільноті мандрівників!</p>
+    <div className="container">
+      <h1 className={css.registerH1}>Реєстрація</h1>
+      <p className={css.textRegisterForm}>Раді вас бачити у спільноті мандрівників!</p>
       <Formik
         validationSchema={ValidationShemaRegister}
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
         {({ errors, touched, dirty, isValid }) => (
-          <Form className={css.form}>
-            <label className={css.label}>
+          <Form className={css.formRegister}>
+            <label className={css.labelRegisterForm}>
               Ім`я та прізвище*
               <Field
                 type="text"
                 name="userName"
-                className={`${css.input} ${
+                className={`${css.inputRegisterForm} ${
             errors.password && touched.password ? css.inputError : ""
           }`}
                 placeholder="Ваше ім'я та прізвище"
@@ -79,12 +79,12 @@ export default function Register() {
                 className={css.error}
               />
             </label>
-            <label className={css.label}>
+            <label className={css.labelRegisterForm}>
               Пошта*
               <Field
                 type="email"
                 name="email"
-                className={`${css.input} ${
+                className={`${css.inputRegisterForm} ${
             errors.password && touched.password ? css.inputError : ""
           }`}
                 placeholder="hello@podorozhnyky.ua"
@@ -95,12 +95,12 @@ export default function Register() {
                 className={css.error}
               />
             </label>
-            <label className={css.label}>
+            <label className={css.labelRegisterForm}>
               Пароль*
               <Field
                 type="password"
                 name="password"
-                className={`${css.input} ${
+                className={`${css.inputRegisterForm} ${
             errors.password && touched.password ? css.inputError : ""
           }`}
                 placeholder="********"

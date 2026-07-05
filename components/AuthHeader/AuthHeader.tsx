@@ -1,12 +1,14 @@
-import css from "./AuthHeader.module.css"
+import css from './AuthHeader.module.css';
 
-export default function AuthHeader(){
-  return(
+export default function AuthHeader() {
+  return (
     <header className={css.header}>
-      <div className={css.container}>
-      <div className={css.content}>
-      </div>
+      <div className="container">
+        <div className={css.content}>
+          <img src="" alt="icon" />
+          <p className={css.textAuthHeader}>Прирордні мандри</p>
+        </div>
       </div>
     </header>
-  )
+  );
 }

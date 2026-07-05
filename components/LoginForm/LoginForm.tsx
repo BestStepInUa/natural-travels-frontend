@@ -50,7 +50,7 @@ export default function LoginForm() {
     }
   };
   return (
-    <div className={css.container}>
+    <div className="container">
       <h1 className={css.register}>Вхід</h1>
       <p className={css.p}>Вітаємо знову у спільноту мандрівників!</p>
       <Formik
