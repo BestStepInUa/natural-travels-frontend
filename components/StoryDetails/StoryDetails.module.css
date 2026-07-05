@@ -63,10 +63,6 @@
   background: var(--opacity-neutral-darkest-5);
 }
 
-.article {
-  line-height: 1.6;
-}
-
 /* Tablet styles */
 @media only screen and (min-width: 768px) {
   .image {
@@ -87,5 +83,10 @@
     width: 755px;
     height: 502px;
     flex-shrink: 0;
+  }
+
+  .article {
+    width: 865px;
+    margin: 0 auto;
   }
 }
