@@ -1,6 +1,7 @@
 .footer {
   background-color: var(--color-scheme-2-foreground);
-  padding: 48px 0;
+  padding-top: 48px !important;
+  padding-bottom: 48px !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,6 +78,8 @@
 }
 
 .copyright {
+  width: 100%;
+  text-align: center;
   padding-top: 32px;
   border-top: 1px solid var(--color-scheme-2-border);
   font-size: 12px;
@@ -84,15 +87,29 @@
 
 /* Tablet styles */
 @media only screen and (min-width: 768px) {
+  .logo {
+    margin-bottom: 0;
+  }
   .logo_and_social_wrapper {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .socialList {
+    gap: 12px;
+    margin-bottom: 0;
   }
   .socialIcon {
     width: 24px;
     height: 24px;
+  }
+
+  .nav {
+    flex-direction: row;
+    gap: 32px;
   }
 }
 
