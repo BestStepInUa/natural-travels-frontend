@@ -39,8 +39,15 @@
     padding-bottom: 72px;
   }
 
+  .flexContainer {
+    justify-content: space-between;
+  }
+
   .cardWrapper {
-    width: auto;
+    width: calc(25% - 18px);
+    max-width: 310px;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
 }
 
