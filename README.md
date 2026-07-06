@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌍 Pryrodni Mandry (Natural Travels)
 
-## Getting Started
+## 🔗 [Live Demo](https://beststepinua.github.io/natural-travels-frontend/)
 
-First, run the development server:
+**Pryrodni Mandry** is a modern web platform designed for a community of conscious travelers. It enables users to share their travel stories, discover new eco-friendly routes, and connect with other nature enthusiasts, promoting sustainable tourism in Ukraine.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Key Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Responsive Multi-device Layout** — Fully adaptive design with support for mobile (from 320px), tablet (768px), and desktop (1440px) screens using a Mobile-First approach.
+* **Interactive Storytelling** — Robust functionality for publishing, viewing, filtering, and paginating travel stories.
+* **Smart State Management** — Efficient data synchronization using **Zustand** and **TanStack Query (React Query)** for server-state caching.
+* **Secure Routing** — Implementation of public and private routes using **Next.js 15 App Router**.
+* **Enhanced UX/UI** — Interactive elements, custom hover states, fluid animations, and sliders powered by **Swiper.js**.
+* **Advanced Forms** — Real-time form validation using **Formik** and **Yup**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Core** — Next.js 15 (App Router), React 19.
+* **Styling** — CSS Modules, `modern-normalize`.
+* **Data Fetching** — TanStack Query (React Query).
+* **State Management** — Zustand.
+* **Forms** — Formik, Yup.
+* **Optimization** — `next/image` for dynamic image loading, SEO (generateMetadata, OG tags).
+* **Code Quality** — Prettier.
 
-## Learn More
+## 📐 Design Specifications
 
-To learn more about Next.js, take a look at the following resources:
+* **Typography** — Precise implementation of font scales according to the Figma UI Kit.
+* **Layout** — Fluid styling using `min-width` media queries.
+* **Interactive States** — Stylized hover effects for all interactive elements and cursor changes for clickable zones.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/BestStepInUa/natural-travels-frontend.git](https://github.com/BestStepInUa/natural-travels-frontend.git)
