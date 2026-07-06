@@ -11,6 +11,7 @@ export async function GET() {
         Cookie: cookiesStore.toString(),
       },
     });
+    console.log(data)
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return createErrorResponce(error as ApiError);
