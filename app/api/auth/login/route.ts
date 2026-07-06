@@ -9,7 +9,7 @@ import { ApiError, createErrorResponce } from "../../_utils/utils";
 export async function POST(req: NextRequest){
   try{
     const body = await req.json();
-    const res = await api.post("auth/login", body);
+    const res = await api.post("/auth/login", body);
 
     const cookieStore = await cookies();
 

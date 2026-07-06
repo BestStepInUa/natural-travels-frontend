@@ -3,8 +3,8 @@
 import { ReactNode, useEffect, useState } from 'react';
 
 // import LoaderComponent from '@/components/Loader'
-import { checkServerSession, getServerMe } from '@/lib/api/serverApi';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
+import { checkSession, getMe } from '@/lib/api/clientApi';
 
 type Props = {
   children: ReactNode;
@@ -19,10 +19,10 @@ export default function AuthProvider({ children }: Props) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const isSessionValid = await checkServerSession();
+        const isSessionValid = await checkSession();
 
         if (isSessionValid) {
-          const user = await getServerMe();
+          const user = await getMe();
           if (user) {
             setUser(user);
           }

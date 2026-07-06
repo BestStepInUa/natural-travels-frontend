@@ -7,7 +7,7 @@ import { parseCookie } from "cookie";
 export async function POST(req: NextRequest){
   try{
     const body = await req.json();
-    const res = await api.post("auth/register", body);
+    const res = await api.post("/auth/register", body);
 
     const cookieStore = await cookies();
 
