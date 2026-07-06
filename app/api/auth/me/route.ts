@@ -5,11 +5,11 @@ import { api } from "../../api";
 import { ApiError, createErrorResponce } from "../../_utils/utils";
 
 export async function GET(){
-  const cookiesStore = cookies();
+  const cookiesStore = await cookies();
   try{
     const {data} = await api.get('/auth/me', {
       headers:{
-        Cookie: (await cookiesStore).toString()
+        Cookie: cookiesStore.toString()
       }
     })
     return NextResponse.json(data);

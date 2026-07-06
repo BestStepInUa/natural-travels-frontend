@@ -18,7 +18,7 @@ export async function POST(req: NextRequest){
 
      for (const cookieStr of cookieArray){
       const parsed = parseCookie(cookieStr);
-
+      
       const options = {
         expires: parsed.expires ? new Date(parsed.expires) : undefined,
         path: parsed.path,
