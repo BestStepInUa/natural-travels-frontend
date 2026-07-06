@@ -28,9 +28,3 @@
 * **Typography** — Precise implementation of font scales according to the Figma UI Kit.
 * **Layout** — Fluid styling using `min-width` media queries.
 * **Interactive States** — Stylized hover effects for all interactive elements and cursor changes for clickable zones.
-
-## 📦 Getting Started
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/BestStepInUa/natural-travels-frontend.git](https://github.com/BestStepInUa/natural-travels-frontend.git)
