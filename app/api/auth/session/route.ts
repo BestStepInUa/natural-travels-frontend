@@ -38,6 +38,9 @@ export async function GET() {
         if (parsed.refreshToken) {
           cookieStore.set('refreshToken', parsed.refreshToken, options);
         }
+        if (parsed.sessionId) {
+          cookieStore.set('sessionId', parsed.sessionId, options);
+        }
       }
 
       return NextResponse.json({success: true});
