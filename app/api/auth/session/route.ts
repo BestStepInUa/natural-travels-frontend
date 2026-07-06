@@ -13,7 +13,7 @@ export async function GET() {
     return NextResponse.json({ success: true });
   }
   if (refreshToken) {
-    const apiRes = await api.get('auth/session', {
+    const apiRes = await api.get('/auth/session', {
       headers: {
         Cookie: cookieStore.toString(),
       },
@@ -39,9 +39,8 @@ export async function GET() {
           cookieStore.set('refreshToken', parsed.refreshToken, options);
         }
       }
-
-      return NextResponse.json({success: true});
+      return NextResponse.json({ success: true });
     }
   }
-  return NextResponse.json({seccion:false})
+  return NextResponse.json({ seccion: false });
 }

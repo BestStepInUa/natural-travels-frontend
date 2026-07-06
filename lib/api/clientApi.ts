@@ -21,7 +21,7 @@ export type User = {
 }
 
 export const register = async(data: RegisterRequest) => {
-  const res = await nextServer.post<User>("auth/register", data);
+  const res = await nextServer.post<User>("/auth/register", data);
   return res.data;
 }
 
@@ -31,7 +31,7 @@ export type LoginRequest = {
 }
 
 export const login = async(data: LoginRequest) => {
-  const res = await nextServer.post<User>("auth/login", data);
+  const res = await nextServer.post<User>("/auth/login", data);
   return res.data;
 }
 
