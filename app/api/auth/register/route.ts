@@ -1,44 +1,25 @@
-import { NextRequest, NextResponse } from "next/server";
-import { api } from "@/app/api/api";
-import { ApiError, createErrorResponce } from "../../_utils/utils";
-import { cookies } from "next/headers";
-import { parseCookie } from "cookie";
+import { NextRequest, NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
 
-export async function POST(req: NextRequest){
-  try{
-    const body = await req.json();
-    const res = await api.post("auth/register", body);
+import { api } from '@/app/api/api'
+import { ApiError, createErrorResponce, setAuthCookiesFromHeaders } from '@/app/api/_utils/utils'
 
-    const cookieStore = await cookies();
+export async function POST(req: NextRequest) {
+    try {
+        const body = await req.json()
+        console.log(body)
 
-    const setCookie = res.headers["set-cookie"];
+        const { data, status, headers } = await api.post('/auth/register', body)
 
-    if(setCookie){
-      const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
+        const cookieStore = await cookies()
+        const setCookie = headers['set-cookie']
 
-     for (const cookieStr of cookieArray){
-      const parsed = parseCookie(cookieStr);
-      
-      const options = {
-        expires: parsed.expires ? new Date(parsed.expires) : undefined,
-        path: parsed.path,
-        maxAge: Number(parsed["maxAge"]),
-      }
+        if (setAuthCookiesFromHeaders(cookieStore, setCookie)) {
+            return NextResponse.json(data, { status })
+        }
 
-      if(parsed.accessToken){
-        cookieStore.set("accessToken", parsed.accessToken, options);
-      }
-      if(parsed.refreshToken){
-        cookieStore.set("refreshToken", parsed.refreshToken, options);
-      }
-     }
-
-     return NextResponse.json(res.data)
-
-    }
-
-    return NextResponse.json({error: "Unautorized"}, {status: 401 })
-  }catch(error){
-    return createErrorResponce(error as ApiError);
-  }
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    } catch (error) {
+        return createErrorResponce(error as ApiError)
+    }
 }

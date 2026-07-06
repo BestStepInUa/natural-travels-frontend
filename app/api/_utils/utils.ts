@@ -56,7 +56,12 @@ export function setAuthCookiesFromHeaders(
     if (parsed.name === 'refreshToken') {
       cookieStore.set(parsed.name, parsed.value, options);
     }
+
+    if(parsed.name === 'sessionId'){
+      cookieStore.set(parsed.name, parsed.value, options);
+    }
   }
+
 
   return true;
 }
