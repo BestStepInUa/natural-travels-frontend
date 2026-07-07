@@ -3,10 +3,10 @@ import { Montserrat } from 'next/font/google';
 import TanStackProvider from '@/components/TanStackProvider';
 import AuthProvider from '@/components/AuthProvider';
 // import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 import 'modern-normalize';
 import './globals.css';
+import LayoutWithFooter from '@/components/LayoutFooter/LayoutFooter';
 
 const montserratFont = Montserrat({
   variable: '--font-montserrat',
@@ -42,14 +42,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="uk" className={montserratFont.variable}>
       <body>
         <TanStackProvider>
           <AuthProvider>
+          <LayoutWithFooter>
           {/* <Header /> */}
           <main>{children}</main>
-          <Footer />
+          </LayoutWithFooter>
           </AuthProvider>
         </TanStackProvider>
       </body>

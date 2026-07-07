@@ -99,3 +99,11 @@
 .inputError {
   border-color: var(--color-red) !important;
 }
+.errorAfterForm{
+  text-align: center;
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-red);
+}

@@ -1,6 +1,5 @@
 'use client';
 
-import { ApiError, createErrorResponce } from '@/app/api/_utils/utils';
 import { register } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -45,11 +44,11 @@ export default function Register() {
         setUser(user)
         formikHelpers.resetForm();
         router.push('/');
-      } else {
-        setError('Invalid email or password');
       }
-    } catch (error) {
-      createErrorResponce(error as ApiError);
+    } catch (err) {
+      const serverMessage ="Сталася помилка";
+      setError(serverMessage);
+      formikHelpers.setFieldError("email", "Email не валідний або вже використовується, спробуй ще раз");
     }
   };
   return (
@@ -115,7 +114,7 @@ export default function Register() {
           </Form>
         )}
       </Formik>
-      {error && <p>{error}</p>}
+      {error && <p className={css.errorAfterForm}>{error}</p>}
     </div>
   );
 }
