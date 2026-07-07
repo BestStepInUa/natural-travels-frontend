@@ -6,7 +6,7 @@ export type CheckSessionResponse = {
 };
 
 export type RegisterRequest = {
-  userName: string;
+  name: string;
   email: string;
   password: string;
 };
