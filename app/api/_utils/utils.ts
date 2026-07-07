@@ -57,10 +57,11 @@ export function setAuthCookiesFromHeaders(
       cookieStore.set(parsed.name, parsed.value, options);
     }
 
-    if (parsed.name === 'sessionId') {
+    if(parsed.name === 'sessionId'){
       cookieStore.set(parsed.name, parsed.value, options);
     }
   }
+
 
   return true;
 }
