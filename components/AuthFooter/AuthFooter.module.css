@@ -9,9 +9,13 @@
   justify-content: center;
 }
 .text {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 12px;
   color: #000;
   text-align: center;
+}
+
+@media only screen and (min-width: 1440px) {
+.text {
+  font-size: 16px;
+}
 }
