@@ -12,7 +12,7 @@ export type RegisterRequest = {
 };
 
 export const register = async (data: RegisterRequest) => {
-  const res = await nextServer.post<User>('auth/register', data);
+  const res = await nextServer.post<User>('/auth/register', data);
   return res.data;
 };
 
@@ -22,6 +22,16 @@ export type LoginRequest = {
 };
 
 export const login = async (data: LoginRequest) => {
-  const res = await nextServer.post<User>('auth/login', data);
+  const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
+};
+
+export const checkSession = async (): Promise<boolean> => {
+  const { data } = await nextServer.get<CheckSessionResponse>('/auth/session');
+  return data.success;
+};
+
+export const getMe = async (): Promise<User> => {
+  const { data } = await nextServer.get<User>('/auth/me');
+  return data;
 };

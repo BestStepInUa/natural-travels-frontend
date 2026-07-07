@@ -13,11 +13,11 @@ export default function MessageNoStories({
   linkTo,
 }: MessageNoStoriesProps) {
   return (
-    <section className={css.wrapper}>
+    <div className={css.wrapper}>
       <p className={css.text}>{text}</p>
       <Link href={linkTo} className={css.button}>
         {buttonText}
       </Link>
-    </section>
+    </div>
   );
 }
