@@ -8,9 +8,8 @@ import { Formik, Form, Field, FormikHelpers, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import css from './LoginForm.module.css';
-import { ApiError, createErrorResponce } from '@/app/api/_utils/utils';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
-
+import { isAxiosError } from 'axios';
 
 const ValidationSchemaLogin = Yup.object().shape({
   email: Yup.string()
@@ -46,8 +45,17 @@ export default function LoginForm() {
         setError('Invalid email or password');
       }
     } catch (error) {
-      createErrorResponce(error as ApiError);
+  if (isAxiosError(error)) {
+    const serverMessage = error.response?.data?.response?.message;
+  if (serverMessage === "invalid credentials") {
+      setError("Неправильний email або пароль");
+      formikHelpers.setFieldError("email", "Перевірте дані для входу");
+    } else {
+      setError(serverMessage);
+      formikHelpers.setFieldError("email", serverMessage);
     }
+  }
+}
   };
   return (
     <div className="container">
@@ -90,7 +98,7 @@ export default function LoginForm() {
     </Form>
   )}
 </Formik>
-      {error && <p>{error}</p>}
+      {error && <p className={css.errorAfterForm}>{error}</p>}
     </div>
   );
 }
