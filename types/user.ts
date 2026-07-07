@@ -1,8 +1,8 @@
 export type User = {
   email: string;
-  userName: string;
-  password?: string;
-  avatar?: string;
+  name: string;
+  password: string;
+  avatarUrl: string;
   articlesAmount?: number;
   savedArticles?: string[];
   createAt: Date;

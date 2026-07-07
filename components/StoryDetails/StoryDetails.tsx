@@ -4,7 +4,7 @@ import { MdArrowBack } from 'react-icons/md';
 import { PageTitle } from '../PageTitle/PageTitle';
 import styles from './StoryDetails.module.css';
 import { User } from '@/types/user';
-import { Category } from '@/types/categories';
+import { Category } from '@/types/category';
 
 interface StoryDetailsProps {
   img: string;
@@ -37,7 +37,7 @@ export default function StoryDetails({
           <div className={styles.meta}>
             <p className={styles.metaItem}>
               <span className={styles.label}>Автор статті</span>
-              {user.userName}
+              {user.name}
             </p>
             <p className={styles.metaItem}>
               <span className={styles.label}>Опубліковано</span>

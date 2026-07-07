@@ -1,5 +1,5 @@
 import StoryDetails from '@/components/StoryDetails';
-// import StoryPageClient from './StoryPageClient';
+import StoryPageClient from './StoryPageClient';
 import { getStoryById } from '@/lib/api/storiesApi';
 
 interface StoryPageProps {
@@ -24,7 +24,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
         user={story.user}
       />
 
-      {/* <StoryPageClient storyId={story._id} /> */}
+      <StoryPageClient storyId={story._id} />
     </main>
   );
 }
