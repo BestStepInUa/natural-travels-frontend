@@ -3,18 +3,7 @@ import { NextResponse } from 'next/server';
 import { parseSetCookie } from 'cookie';
 import { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 
-export interface ErrorResponseData {
-  statusCode?: number;
-  error?: string;
-  message?: string;
-  validation?: {
-    source: string;
-    keys: string[];
-  };
-}
-
-export type ApiError = AxiosError<ErrorResponseData>;
-
+export type ApiError = AxiosError<{ error: string }>;
 
 export function logErrorResponse(errorObj: unknown): void {
   const green = '\x1b[32m';

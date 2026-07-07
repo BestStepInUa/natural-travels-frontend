@@ -46,6 +46,7 @@ export default function Register() {
         router.push('/');
       }
     } catch (err) {
+      console.error('Registration error:', err);
       const serverMessage ="Сталася помилка";
       setError(serverMessage);
       formikHelpers.setFieldError("email", "Email не валідний або вже використовується, спробуй ще раз");
