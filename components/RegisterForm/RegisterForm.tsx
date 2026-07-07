@@ -63,7 +63,9 @@ export default function Register() {
   return (
     <div className="container">
       <h1 className={css.registerH1}>Реєстрація</h1>
-      <p className={css.textRegisterForm}>Раді вас бачити у спільноті мандрівників!</p>
+      <p className={css.textRegisterForm}>
+        Раді вас бачити у спільноті мандрівників!
+      </p>
       <Formik
         validationSchema={ValidationSchemaRegister}
         initialValues={initialValues}
@@ -71,55 +73,73 @@ export default function Register() {
       >
         {({ errors, touched, dirty, isValid }) => (
           <Form className={css.formRegister}>
+            {/* Ім'я */}
             <label className={css.labelRegisterForm}>
-              Ім`я та прізвище*
+              Імʼя та Прізвище*
               <Field
                 type="text"
                 name="name"
                 className={`${css.inputRegisterForm} ${
-            errors.password && touched.password ? css.inputError : ""
-          }`}
+                  errors.name && touched.name ? css.inputError : ''
+                }`}
                 placeholder="Ваше ім'я та прізвище"
               />
-              <ErrorMessage
-                name="name"
-                component="span"
-                className={css.error}
-              />
+              <div className={css.errorWrapper}>
+                <ErrorMessage
+                  name="name"
+                  component="span"
+                  className={css.error}
+                />
+              </div>
             </label>
+
+            {/* Пошта */}
             <label className={css.labelRegisterForm}>
               Пошта*
               <Field
                 type="email"
                 name="email"
                 className={`${css.inputRegisterForm} ${
-            errors.password && touched.password ? css.inputError : ""
-          }`}
+                  errors.email && touched.email ? css.inputError : ''
+                }`}
                 placeholder="hello@podorozhnyky.ua"
               />
-              <ErrorMessage
-                name="email"
-                component="span"
-                className={css.error}
-              />
+              <div className={css.errorWrapper}>
+                <ErrorMessage
+                  name="email"
+                  component="span"
+                  className={css.error}
+                />
+              </div>
             </label>
+
+            {/* Пароль */}
             <label className={css.labelRegisterForm}>
               Пароль*
               <Field
                 type="password"
                 name="password"
                 className={`${css.inputRegisterForm} ${
-            errors.password && touched.password ? css.inputError : ""
-          }`}
+                  errors.password && touched.password ? css.inputError : ''
+                }`}
                 placeholder="********"
               />
-              <ErrorMessage
-                name="password"
-                component="span"
-                className={css.error}
-              />
+              <div className={css.errorWrapper}>
+                <ErrorMessage
+                  name="password"
+                  component="span"
+                  className={css.error}
+                />
+              </div>
             </label>
-            <button className={css.button} type="submit" disabled={!(isValid && dirty)}>Зареєструватись</button>
+
+            <button
+              className={css.button}
+              type="submit"
+              disabled={!(isValid && dirty)}
+            >
+              Зареєструватись
+            </button>
           </Form>
         )}
       </Formik>
