@@ -3,18 +3,8 @@ import Link from 'next/link';
 import { MdArrowBack } from 'react-icons/md';
 import { PageTitle } from '../PageTitle/PageTitle';
 import styles from './StoryDetails.module.css';
-
-interface Category {
-  _id: string;
-  category: string;
-}
-
-interface User {
-  _id: string;
-  name: string;
-  avatarUrl: string;
-  articlesAmount: number;
-}
+import { User } from '@/types/user';
+import { Category } from '@/types/categories';
 
 interface StoryDetailsProps {
   img: string;
@@ -25,14 +15,14 @@ interface StoryDetailsProps {
   user: User;
 }
 
-export const StoryDetails = ({
+export default function StoryDetails({
   img,
   title,
   article,
   category,
   date,
   user,
-}: StoryDetailsProps) => {
+}: StoryDetailsProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.topSection}>
@@ -47,7 +37,7 @@ export const StoryDetails = ({
           <div className={styles.meta}>
             <p className={styles.metaItem}>
               <span className={styles.label}>Автор статті</span>
-              {user.name}
+              {user.userName}
             </p>
             <p className={styles.metaItem}>
               <span className={styles.label}>Опубліковано</span>
@@ -71,4 +61,4 @@ export const StoryDetails = ({
       <p className={styles.article}>{article}</p>
     </div>
   );
-};
+}
