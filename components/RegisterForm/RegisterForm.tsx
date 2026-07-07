@@ -12,7 +12,7 @@ import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { isAxiosError } from 'axios';
 
 const ValidationSchemaRegister = Yup.object().shape({
-  userName: Yup.string().required("Введіть ім'я користувача").min(10, "Ім'я користувача повинно містити не менше 10 символів"),
+  name: Yup.string().required("Введіть ім'я користувача").min(10, "Ім'я користувача повинно містити не менше 10 символів"),
   email: Yup.string()
     .email('Введіть коректний email')
     .required('Введіть email для реєстрації'),
@@ -20,13 +20,13 @@ const ValidationSchemaRegister = Yup.object().shape({
 });
 
 interface RegisterValues {
-  userName: string;
+  name: string;
   email: string;
   password: string;
 }
 
 const initialValues: RegisterValues = {
-  userName: '',
+  name: '',
   email: '',
   password: '',
 };
@@ -49,16 +49,13 @@ export default function Register() {
     } catch (error) {
       if (isAxiosError(error)) {
         const serverMessage = error.response?.data?.response?.message;
-      if (serverMessage === "Email in use") {
-          setError("Email вже використовується");
-          formikHelpers.setFieldError("email", "Email вже використовується");
-        }if(serverMessage === '"email" must be a valid email') {
+        if(serverMessage === '"email" must be a valid email') {
           setError("Email не валідний");
           formikHelpers.setFieldError("email", "Email не валідний");
         }
         else {
-          setError(serverMessage);
-          formikHelpers.setFieldError("email", serverMessage);
+                    setError("Email вже використовується");
+          formikHelpers.setFieldError("email", "Email вже використовується");
         }
       }
     }
@@ -78,14 +75,14 @@ export default function Register() {
               Ім`я та прізвище*
               <Field
                 type="text"
-                name="userName"
+                name="name"
                 className={`${css.inputRegisterForm} ${
             errors.password && touched.password ? css.inputError : ""
           }`}
                 placeholder="Ваше ім'я та прізвище"
               />
               <ErrorMessage
-                name="userName"
+                name="name"
                 component="span"
                 className={css.error}
               />
