@@ -1,29 +1,47 @@
+/* --- Base Styles --- */
 .footer {
   background-color: var(--color-scheme-2-foreground);
-  padding-top: 48px !important;
-  padding-bottom: 48px !important;
+  padding: 48px 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+}
+
+.footer_wrapper {
+  padding: 0 20px;
+  width: 100%;
 }
 
 .logo {
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 1;
-  letter-spacing: -0.01em;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 3px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 40px;
+}
+
+.logo_and_social_wrapper {
   margin-bottom: 40px;
 }
 
 .socialList {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 16px;
-  margin-bottom: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.socialItem {
+  display: flex;
+  padding: 4px;
 }
 
 .socialList a {
@@ -40,28 +58,25 @@
 }
 
 .socialIcon {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
 }
 
 .nav {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   gap: 16px;
   font-size: 16px;
-  padding-bottom: 24px;
 }
 
 .nav a {
+  padding: 8px 0;
+  background-color: transparent;
   border: 1px solid transparent;
   border-radius: 6px;
-  padding: 0px 8px;
-  background-color: transparent;
-  transition:
-    border var(--main-transition),
-    background-color var(--main-transition);
+  transition: border var(--main-transition), background-color var(--main-transition);
 }
 
 .nav a:hover,
@@ -69,33 +84,40 @@
   border: 1px solid var(--color-scheme-1-text);
 }
 
-.nav a:focus-visible {
-  background-color: var(--color-neutral-lighter);
-}
-
+.nav a:focus-visible,
 .nav a:active {
   background-color: var(--color-neutral-lighter);
 }
 
 .copyright {
+  position: relative;
   width: 100%;
-  text-align: center;
-  padding-top: 32px;
-  border-top: 1px solid var(--color-scheme-2-border);
+  margin-top: 56px;
   font-size: 12px;
+  text-align: center;
 }
 
-/* Tablet styles */
+.copyright::before {
+  content: '';
+  position: absolute;
+  top: -32px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-scheme-2-border);
+}
+
+/* --- Tablet styles (min-width: 768px) --- */
 @media only screen and (min-width: 768px) {
+  .footer_wrapper {
+    padding: 0 32px;
+  }
+
   .logo {
     margin-bottom: 0;
   }
 
-  .footer_wrapper {
-    width: 100%;
-  }
   .logo_and_social_wrapper {
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -104,11 +126,6 @@
 
   .socialList {
     gap: 12px;
-    margin-bottom: 0;
-  }
-  .socialIcon {
-    width: 24px;
-    height: 24px;
   }
 
   .nav {
@@ -117,23 +134,38 @@
   }
 }
 
-/* Desktop styles */
+/* --- Desktop styles (min-width: 1440px) --- */
 @media only screen and (min-width: 1440px) {
   .footer_wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0 64px;
   }
 
   .logo_and_social_wrapper {
+    display: contents;
     margin-bottom: 0;
   }
-  .nav {
-    font-size: 18px;
-    padding-bottom: 0;
+
+  .logo {
+    grid-column: 1 / 2;
+    justify-self: start;
+    margin-bottom: 0;
   }
+
+  .socialList {
+    grid-column: 2 / 3;
+    justify-self: center;
+  }
+
+  .nav {
+    grid-column: 3 / 4;
+    justify-self: end;
+    font-size: 18px;
+  }
+
   .copyright {
+    grid-column: 1 / -1;
     font-size: 16px;
   }
 }

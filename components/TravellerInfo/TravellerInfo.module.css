@@ -1,0 +1,50 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: fit-content;
+  padding-top: 32px;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 113px;
+  height: 113px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0;
+  color: var(--color-mantis-darkest);
+}
+
+.articles {
+  font-size: 16px;
+  color: var(--color-mantis-darkest);
+}
+
+/* Tablet styles */
+@media only screen and (min-width: 768px) {
+  .avatar {
+    width: 145px;
+    height: 145px;
+  }
+}
+
+/* Desktop styles */
+@media only screen and (min-width: 1440px) {
+  .name {
+    font-size: 32px;
+  }
+
+  .articles {
+    font-size: 20px;
+  }
+}

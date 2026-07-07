@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import css from './AuthHeader.module.css';
 
 export default function AuthHeader() {
@@ -5,7 +6,8 @@ export default function AuthHeader() {
     <header className={css.header}>
       <div className="container">
         <div className={css.content}>
-          <img src="" alt="icon" />
+          <Image src="/icons/logo.svg" alt="icon"   width={100}   // указываем ширину
+      height={100}/>
           <p className={css.textAuthHeader}>Прирордні мандри</p>
         </div>
       </div>

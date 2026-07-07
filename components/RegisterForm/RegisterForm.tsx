@@ -11,7 +11,7 @@ import * as Yup from 'yup';
 import css from './RegisterForm.module.css';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 
-const ValidationShemaRegister = Yup.object().shape({
+const ValidationSchemaRegister = Yup.object().shape({
   userName: Yup.string().required("Введіть ім'я користувача"),
   email: Yup.string()
     .email('Введіть коректний email')
@@ -57,7 +57,7 @@ export default function Register() {
       <h1 className={css.registerH1}>Реєстрація</h1>
       <p className={css.textRegisterForm}>Раді вас бачити у спільноті мандрівників!</p>
       <Formik
-        validationSchema={ValidationShemaRegister}
+        validationSchema={ValidationSchemaRegister}
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
@@ -111,7 +111,7 @@ export default function Register() {
                 className={css.error}
               />
             </label>
-            <button className={css.button} disabled={!(isValid && dirty)}>Зареєструватись</button>
+            <button className={css.button} type="submit" disabled={!(isValid && dirty)}>Зареєструватись</button>
           </Form>
         )}
       </Formik>
