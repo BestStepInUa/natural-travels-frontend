@@ -1,12 +1,5 @@
-// // import css from './page.module.css';
-import About from "../components/About/About"
-
+// import css from './page.module.css';
 
 export default function Home() {
-  return (
-    <div className="container">
-      Home page
-      <About />
-    </div>
-  );
+  return <div className="container">Home page</div>;
 }

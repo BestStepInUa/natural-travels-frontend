@@ -1,6 +1,5 @@
 'use client';
 
-import { ApiError, createErrorResponce } from '@/app/api/_utils/utils';
 import { register } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -10,23 +9,24 @@ import * as Yup from 'yup';
 
 import css from './RegisterForm.module.css';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
+import { isAxiosError } from 'axios';
 
 const ValidationSchemaRegister = Yup.object().shape({
-  userName: Yup.string().required("Введіть ім'я користувача"),
+  name: Yup.string().required("Введіть ім'я користувача").min(10, "Ім'я користувача повинно містити не менше 10 символів"),
   email: Yup.string()
     .email('Введіть коректний email')
     .required('Введіть email для реєстрації'),
-  password: Yup.string().required('Введіть пароль'),
+  password: Yup.string().required('Введіть пароль').min(10, 'Пароль повинен містити не менше 10 символів'),
 });
 
 interface RegisterValues {
-  userName: string;
+  name: string;
   email: string;
   password: string;
 }
 
 const initialValues: RegisterValues = {
-  userName: '',
+  name: '',
   email: '',
   password: '',
 };
@@ -45,11 +45,19 @@ export default function Register() {
         setUser(user)
         formikHelpers.resetForm();
         router.push('/');
-      } else {
-        setError('Invalid email or password');
       }
     } catch (error) {
-      createErrorResponce(error as ApiError);
+      if (isAxiosError(error)) {
+        const serverMessage = error.response?.data?.response?.message;
+        if(serverMessage === '"email" must be a valid email') {
+          setError("Email не валідний");
+          formikHelpers.setFieldError("email", "Email не валідний");
+        }
+        else {
+                    setError("Email вже використовується");
+          formikHelpers.setFieldError("email", "Email вже використовується");
+        }
+      }
     }
   };
   return (
@@ -67,14 +75,14 @@ export default function Register() {
               Ім`я та прізвище*
               <Field
                 type="text"
-                name="userName"
+                name="name"
                 className={`${css.inputRegisterForm} ${
             errors.password && touched.password ? css.inputError : ""
           }`}
                 placeholder="Ваше ім'я та прізвище"
               />
               <ErrorMessage
-                name="userName"
+                name="name"
                 component="span"
                 className={css.error}
               />
@@ -115,7 +123,7 @@ export default function Register() {
           </Form>
         )}
       </Formik>
-      {error && <p>{error}</p>}
+      {error && <p className={css.errorAfterForm}>{error}</p>}
     </div>
   );
 }
