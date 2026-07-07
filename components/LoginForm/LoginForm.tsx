@@ -8,7 +8,6 @@ import { Formik, Form, Field, FormikHelpers, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import css from './LoginForm.module.css';
-import { ApiError, createErrorResponce } from '@/app/api/_utils/utils';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 
 
@@ -46,7 +45,10 @@ export default function LoginForm() {
         setError('Invalid email or password');
       }
     } catch (error) {
-      createErrorResponce(error as ApiError);
+      console.error('Login error:', error);
+      const serverMessage ="Сталася помилка";
+      setError(serverMessage);
+      formikHelpers.setFieldError("email", "Email не валідний або вже використовується, спробуй ще раз");
     }
   };
   return (
@@ -90,7 +92,7 @@ export default function LoginForm() {
     </Form>
   )}
 </Formik>
-      {error && <p>{error}</p>}
+      {error && <p className={css.errorAfterForm}>{error}</p>}
     </div>
   );
 }
