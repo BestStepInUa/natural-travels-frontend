@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 
 import css from './LoginForm.module.css';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
-
+import { isAxiosError } from 'axios';
 
 const ValidationSchemaLogin = Yup.object().shape({
   email: Yup.string()
@@ -45,11 +45,17 @@ export default function LoginForm() {
         setError('Invalid email or password');
       }
     } catch (error) {
-      console.error('Login error:', error);
-      const serverMessage ="Сталася помилка";
+  if (isAxiosError(error)) {
+    const serverMessage = error.response?.data?.response?.message;
+  if (serverMessage === "invalid credentials") {
+      setError("Неправильний email або пароль");
+      formikHelpers.setFieldError("email", "Перевірте дані для входу");
+    } else {
       setError(serverMessage);
-      formikHelpers.setFieldError("email", "Email не валідний або вже використовується, спробуй ще раз");
+      formikHelpers.setFieldError("email", serverMessage);
     }
+  }
+}
   };
   return (
     <div className="container">
