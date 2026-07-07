@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Traveller } from "./TravellersPage";
 import { TravellerCard } from "@/components/TravellerCard/TravellerCard";
 import css from './page.module.css';
@@ -11,7 +11,7 @@ interface TravellersListProps {
   hasMore: boolean;
 }
 
-export const TravellersList: React.FC<TravellersListProps> = ({ travellers, onLoadMore, hasMore }) => {
+export default function TravellersList({ travellers, onLoadMore, hasMore }: TravellersListProps) {
   const listTopRef = useRef<HTMLDivElement>(null);
 
   const handleLoadMore = () => {
@@ -26,7 +26,8 @@ export const TravellersList: React.FC<TravellersListProps> = ({ travellers, onLo
       <div className={css.flexContainer}>
         {travellers.map((traveller) => (
           <div key={traveller.id} className={css.cardWrapper}>
-          <TravellerCard
+            <TravellerCard
+              id={traveller.id.toString()}
             name={traveller.name}
             articlesCount={traveller.articlesCount}
             photoUrl={traveller.photoUrl}

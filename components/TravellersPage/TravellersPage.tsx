@@ -12,7 +12,7 @@ export interface Traveller {
   photoUrl: string;
 }
 
-export const TravellersPage = () => {
+export default function TravellersPage() {
   const [travellers, setTravellers] = useState<Traveller[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
