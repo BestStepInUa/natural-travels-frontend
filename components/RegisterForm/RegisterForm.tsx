@@ -1,6 +1,5 @@
 'use client';
 
-import { ApiError, createErrorResponce } from '@/app/api/_utils/utils';
 import { register } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -10,13 +9,14 @@ import * as Yup from 'yup';
 
 import css from './RegisterForm.module.css';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
+import { isAxiosError } from 'axios';
 
 const ValidationSchemaRegister = Yup.object().shape({
-  userName: Yup.string().required("Введіть ім'я користувача"),
+  userName: Yup.string().required("Введіть ім'я користувача").min(10, "Ім'я користувача повинно містити не менше 10 символів"),
   email: Yup.string()
     .email('Введіть коректний email')
     .required('Введіть email для реєстрації'),
-  password: Yup.string().required('Введіть пароль'),
+  password: Yup.string().required('Введіть пароль').min(10, 'Пароль повинен містити не менше 10 символів'),
 });
 
 interface RegisterValues {
@@ -45,11 +45,22 @@ export default function Register() {
         setUser(user)
         formikHelpers.resetForm();
         router.push('/');
-      } else {
-        setError('Invalid email or password');
       }
     } catch (error) {
-      createErrorResponce(error as ApiError);
+      if (isAxiosError(error)) {
+        const serverMessage = error.response?.data?.response?.message;
+      if (serverMessage === "Email in use") {
+          setError("Email вже використовується");
+          formikHelpers.setFieldError("email", "Email вже використовується");
+        }if(serverMessage === '"email" must be a valid email') {
+          setError("Email не валідний");
+          formikHelpers.setFieldError("email", "Email не валідний");
+        }
+        else {
+          setError(serverMessage);
+          formikHelpers.setFieldError("email", serverMessage);
+        }
+      }
     }
   };
   return (
@@ -115,7 +126,7 @@ export default function Register() {
           </Form>
         )}
       </Formik>
-      {error && <p>{error}</p>}
+      {error && <p className={css.errorAfterForm}>{error}</p>}
     </div>
   );
 }
