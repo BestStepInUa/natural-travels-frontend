@@ -39,6 +39,9 @@ export default function AddStoryForm() {
     };
   }, [dropdownRef, setIsDropdownOpen]);
 
+
+
+
   return (
     <>
       <ToastAlert message={toastMessage} />
@@ -60,14 +63,7 @@ export default function AddStoryForm() {
             resetForm,
           } = formikProps;
 
-          const textarea = textareaRef.current;
-          if (textarea) {
-            textarea.style.height = 'auto';
-            textarea.style.height = `${textarea.scrollHeight}px`;
-          }
 
-
-          
 
           const handleCategorySelect = (id: string) => {
             setFieldValue('category', id);

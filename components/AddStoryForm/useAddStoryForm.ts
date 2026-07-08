@@ -49,6 +49,14 @@ export default function useAddStoryForm() {
     fetchCategories();
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (imagePreview && imagePreview.startsWith('blob:')) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
+
 
 
   const handleImageChange = (
@@ -60,12 +68,21 @@ export default function useAddStoryForm() {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setFieldValue('coverImage', file);
+      if (imagePreview && imagePreview.startsWith('blob:')) {
+        URL.revokeObjectURL(imagePreview);
+      }
+
       setImagePreview(URL.createObjectURL(file));
     }
   };
 
   const handleCancel = (resetForm: () => void) => {
     resetForm();
+
+    if (imagePreview && imagePreview.startsWith('blob:')) {
+      URL.revokeObjectURL(imagePreview);
+    }
+
     setImagePreview(null);
     const fileInput = document.getElementById('cover-image') as HTMLInputElement;
     if (fileInput) {
