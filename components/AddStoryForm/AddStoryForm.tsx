@@ -9,7 +9,6 @@ import CategorySelect from './CategorySelect';
 import AutoResizingTextarea from './AutoResizingTextarea';
 import FormActions from './FormActions';
 import useAddStoryForm from './useAddStoryForm';
-import { CATEGORIES } from './constants';
 import { initialValues, validationSchema } from './validation';
 
 export default function AddStoryForm() {
@@ -18,12 +17,27 @@ export default function AddStoryForm() {
     setIsDropdownOpen,
     imagePreview,
     toastMessage,
+    categories,
+    isLoadingCategories,
     dropdownRef,
     textareaRef,
     handleImageChange,
     handleCancel,
     handleSubmit,
   } = useAddStoryForm();
+
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef, setIsDropdownOpen]);
 
   return (
     <>
@@ -34,40 +48,26 @@ export default function AddStoryForm() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({
-          values,
-          errors,
-          touched,
-          isValid,
-          isSubmitting,
-          setFieldValue,
-          setFieldTouched,
-          resetForm,
-        }) => {
+        {(formikProps) => {
+          const {
+            values,
+            errors,
+            touched,
+            isValid,
+            isSubmitting,
+            setFieldValue,
+            setFieldTouched,
+            resetForm,
+          } = formikProps;
 
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          useEffect(() => {
-            const textarea = textareaRef.current;
-            if (textarea) {
-              textarea.style.height = 'auto';
-              textarea.style.height = `${textarea.scrollHeight}px`;
-            }
-          }, [values.text]);
+          const textarea = textareaRef.current;
+          if (textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = `${textarea.scrollHeight}px`;
+          }
 
 
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          useEffect(() => {
-            function handleClickOutside(event: MouseEvent) {
-              if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                setIsDropdownOpen(false);
-                setFieldTouched('category', true);
-              }
-            }
-            document.addEventListener('mousedown', handleClickOutside);
-            return () => {
-              document.removeEventListener('mousedown', handleClickOutside);
-            };
-          }, [setFieldTouched]);
+          
 
           const handleCategorySelect = (id: string) => {
             setFieldValue('category', id);
@@ -81,7 +81,7 @@ export default function AddStoryForm() {
             !values.category ||
             !values.coverImage;
 
-          const isSaveDisabled = isSubmitting || !isValid || hasEmptyFields;
+          const isSaveDisabled = isSubmitting || !isValid || hasEmptyFields || isLoadingCategories;
 
           return (
             <Form className={css.form}>
@@ -105,7 +105,7 @@ export default function AddStoryForm() {
 
 
               <CategorySelect
-                categories={CATEGORIES}
+                categories={categories}
                 selectedValue={values.category}
                 error={errors.category}
                 touched={touched.category}

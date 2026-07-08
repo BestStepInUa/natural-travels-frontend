@@ -28,7 +28,7 @@ export const validationSchema = Yup.object().shape({
   category: Yup.string()
     .required('Вибір категорії є обов’язковим')
     .matches(
-      /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
+      /^[0-9a-fA-F]{24}$/,
       'Категорія має містити валідний унікальний ідентифікатор (UUID)'
     ),
   coverImage: Yup.mixed()

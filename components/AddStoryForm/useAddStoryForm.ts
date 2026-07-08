@@ -4,12 +4,23 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { nextServer } from '@/lib/api/api';
 import { StoryFormValues } from './validation';
+import { getCategories, BackendCategory } from '@/lib/api/storiesApi';
+import { useEffect } from 'react';
+interface SelectCategory {
+  id: string;
+  label: string;
+}
+
 
 export default function useAddStoryForm() {
   const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const [categories, setCategories] = useState<SelectCategory[]>([]);
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -17,6 +28,28 @@ export default function useAddStoryForm() {
     setToastMessage(message);
     setTimeout(() => setToastMessage(null), 5000);
   };
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const data = await getCategories();
+        const mappedCategories = data.map((cat: BackendCategory) => ({
+          id: cat._id,
+          label: cat.title,
+        }));
+        setCategories(mappedCategories);
+      } catch (error) {
+        console.error('Помилка завантаження категорій:', error);
+        showToast('Не вдалося завантажити категорії з сервера.');
+      } finally {
+        setIsLoadingCategories(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+
 
   const handleImageChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -78,6 +111,8 @@ export default function useAddStoryForm() {
     setImagePreview,
     toastMessage,
     showToast,
+    categories,
+    isLoadingCategories,
     dropdownRef,
     textareaRef,
     handleImageChange,

@@ -22,14 +22,14 @@ export async function POST(req: NextRequest) {
       .join('; ');
 
 
-    const res = await api.post('/api/stories', formData, {
+    const res = await api.post('/stories', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Cookie: cookieHeader,
       },
     });
 
-    
+
     return NextResponse.json(res.data, { status: 201 });
   } catch (error) {
     return createErrorResponce(error as ApiError);
