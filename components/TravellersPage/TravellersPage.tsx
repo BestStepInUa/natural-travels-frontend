@@ -1,7 +1,7 @@
 'use client';
 
 import  { useState, useEffect } from 'react';
-import { TravellersList } from './TravellersList';
+import  TravellersList from './TravellersList';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import css from './page.module.css';
 
