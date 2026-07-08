@@ -35,7 +35,7 @@ export default function useAddStoryForm() {
         const data = await getCategories();
         const mappedCategories = data.map((cat: BackendCategory) => ({
           id: cat._id,
-          label: cat.title,
+          label: cat.category,
         }));
         setCategories(mappedCategories);
       } catch (error) {
@@ -83,14 +83,16 @@ export default function useAddStoryForm() {
         formData.append('img', values.coverImage);
       }
 
-      const res = await nextServer.post<{ id: string }>('/stories', formData, {
+      const res = await nextServer.post<{ id?: string; _id?: string }>('/stories', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      if (res.data && res.data.id) {
-        router.push(`/stories/${res.data.id}`);
+      const storyId = res.data.id || res.data._id;
+
+      if (storyId) {
+        router.push(`/stories/${storyId}`);
       } else {
         router.push('/');
       }

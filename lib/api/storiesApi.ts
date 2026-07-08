@@ -2,7 +2,7 @@ import { nextServer } from './api';
 
 export interface BackendCategory {
   _id: string;
-  title: string;
+  category: string;
 }
 
 // Отримати одну історію

@@ -4,7 +4,14 @@ import axios from 'axios';
 
 export async function GET() {
   try {
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const backendUrl = process.env.NEXT_BACKEND_API_URL?.replace(/\/$/, '');
+
+    if (!backendUrl) {
+      return NextResponse.json(
+        { message: 'NEXT_BACKEND_API_URL is not configured' },
+        { status: 500 }
+      );
+    }
 
     const response = await axios.get(`${backendUrl}/api/categories`);
 
