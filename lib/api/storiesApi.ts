@@ -1,5 +1,10 @@
 import { nextServer } from './api';
 
+export interface BackendCategory {
+  _id: string;
+  category: string;
+}
+
 export const getStoryById = async (storyId: string) => {
   const res = await nextServer.get(`/stories/${storyId}`);
   return res.data;
@@ -22,4 +27,9 @@ export const getPopularStories = async (page: number, perPage: number) => {
     },
   });
   return res.data.stories;
+};
+
+export const getCategories = async () => {
+  const response = await nextServer.get<BackendCategory[]>('/categories');
+  return response.data;
 };
