@@ -12,7 +12,7 @@ import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { isAxiosError } from 'axios';
 
 const ValidationSchemaRegister = Yup.object().shape({
-  name: Yup.string().required("Введіть ім'я користувача").min(10, "Ім'я користувача повинно містити не менше 10 символів"),
+  name: Yup.string().required("Введіть ім'я користувача").min(10, "Імʼя повинно містити не менше 10 символів"),
   email: Yup.string()
     .email('Введіть коректний email')
     .required('Введіть email для реєстрації'),

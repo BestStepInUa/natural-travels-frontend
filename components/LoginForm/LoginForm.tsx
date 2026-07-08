@@ -15,7 +15,7 @@ const ValidationSchemaLogin = Yup.object().shape({
   email: Yup.string()
     .email('Введіть коректний email')
     .required('Введіть email для реєстрації'),
-  password: Yup.string().required('Введіть пароль'),
+  password: Yup.string().required('Введіть пароль').min(10, 'Пароль повинен містити не менше 10 символів'),
 });
 interface LoginValues {
   email: string;
