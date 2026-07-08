@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    
+
     return NextResponse.json(res.data, { status: 201 });
   } catch (error) {
     return createErrorResponce(error as ApiError);
