@@ -8,7 +8,6 @@ const Join = () => {
   return (
     <section className={css.joinSection}>
       <div className={css.joinWrapper}>
-        <div className={css.content}>
           <h2 className={css.title}>
             Приєднуйся до спільноти свідомих мандрівників
           </h2>
@@ -23,7 +22,6 @@ const Join = () => {
           >
             {isAuthenticated ? 'Мій профіль' : 'Зареєструватися'}
           </Link>
-        </div>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ export interface BackendCategory {
   category: string;
 }
 
+// Отримати одну історію
 export const getStoryById = async (storyId: string) => {
   const res = await nextServer.get(`/stories/${storyId}`);
   return res.data;
