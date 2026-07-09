@@ -1,3 +1,4 @@
+import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 
@@ -30,7 +31,7 @@ export default function MainLayout({
 }>) {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <main>{children}</main>
       <Footer />
     </>
