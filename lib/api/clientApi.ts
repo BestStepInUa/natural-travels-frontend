@@ -16,6 +16,10 @@ export const register = async (data: RegisterRequest) => {
   return res.data;
 };
 
+export const logout = async (): Promise<void> => {
+  await nextServer.post('/auth/logout');
+};
+
 export type LoginRequest = {
   email: string;
   password: string;
