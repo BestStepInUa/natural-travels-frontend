@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,46 +17,64 @@ import css from './OurTravellers.module.css';
 
 const TOTAL_TRAVELLERS = 12;
 
-// Візуальна розкладка Grid для Swiper
+const GRID_CONFIG = {
+  mobile: { cols: 1, rows: 3, slidesPerGroup: 1, spaceBetween: 16 },
+  tablet: { cols: 2, rows: 2, slidesPerGroup: 1, spaceBetween: 24 },
+  desktop: { cols: 4, rows: 1, slidesPerGroup: 4, spaceBetween: 24 },
+} as const;
+
 const breakpoints: { [width: number]: SwiperOptions } = {
-  // Мобільна: 1 колонка × 3 рядки, крок = вся колонка (3 картки)
   320: {
-    slidesPerView: 1,
-    slidesPerGroup: 1,
-    spaceBetween: 16,
-    grid: { rows: 3, fill: 'row' },
+    slidesPerView: GRID_CONFIG.mobile.cols,
+    slidesPerGroup: GRID_CONFIG.mobile.slidesPerGroup,
+    spaceBetween: GRID_CONFIG.mobile.spaceBetween,
+    grid: { rows: GRID_CONFIG.mobile.rows, fill: 'row' },
   },
-  // Планшет: 2 колонки × 2 рядки видно, крок = 1 колонка (2 картки)
   768: {
-    slidesPerView: 2,
-    slidesPerGroup: 1,
-    spaceBetween: 24,
-    grid: { rows: 2, fill: 'row' },
+    slidesPerView: GRID_CONFIG.tablet.cols,
+    slidesPerGroup: GRID_CONFIG.tablet.slidesPerGroup,
+    spaceBetween: GRID_CONFIG.tablet.spaceBetween,
+    grid: { rows: GRID_CONFIG.tablet.rows, fill: 'row' },
   },
-  // Десктоп: 4 колонки × 1 рядок, крок = всі 4 колонки
   1440: {
-    slidesPerView: 4,
-    slidesPerGroup: 4,
-    spaceBetween: 24,
-    grid: { rows: 1 },
+    slidesPerView: GRID_CONFIG.desktop.cols,
+    slidesPerGroup: GRID_CONFIG.desktop.slidesPerGroup,
+    spaceBetween: GRID_CONFIG.desktop.spaceBetween,
+    grid: { rows: GRID_CONFIG.desktop.rows },
   },
 };
 
 export const OurTravellers = () => {
   const width = useWindowSize();
   const swiperRef = useRef<SwiperType | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  const pendingAdvanceRef = useRef(false);
+  const [fetchIndex, setFetchIndex] = useState(0);
   const [allTravellers, setAllTravellers] = useState<BackendTraveller[]>([]);
-  const [reachedEnd, setReachedEnd] = useState(false);
 
-  // мобільна — крок = ціла колонка (3), планшет — одна колонка з двох (2), десктоп — весь ряд (4)
-  const perPage = width >= 1440 ? 4 : width >= 768 ? 2 : 3;
-  const totalPages = Math.ceil(TOTAL_TRAVELLERS / perPage);
+  const config =
+    width >= 1440
+      ? GRID_CONFIG.desktop
+      : width >= 768
+      ? GRID_CONFIG.tablet
+      : GRID_CONFIG.mobile;
+
+  const step = config.slidesPerGroup * config.rows;
+  const visibleCount = config.cols * config.rows;
+
+  const limit = fetchIndex === 0 ? visibleCount : step;
+  const skip = fetchIndex === 0 ? 0 : visibleCount + step * (fetchIndex - 1);
+
+  const remainingAfterFirst = TOTAL_TRAVELLERS - visibleCount;
+  const totalFetches =
+    remainingAfterFirst <= 0 ? 1 : 1 + Math.ceil(remainingAfterFirst / step);
+
+  const allLoaded = fetchIndex + 1 >= totalFetches;
 
   const { isFetching } = useQuery({
-    queryKey: ['our-travellers', currentPage, perPage],
+    queryKey: ['our-travellers', skip, limit],
     queryFn: async () => {
-      const travellers = await getTravellers(currentPage, perPage);
+      const page = skip / limit + 1;
+      const travellers = await getTravellers(page, limit);
       setAllTravellers((prev) => {
         const newTravellers = travellers.filter(
           (t) => !prev.find((p) => p._id === t._id)
@@ -66,32 +84,37 @@ export const OurTravellers = () => {
       return travellers;
     },
     staleTime: Infinity,
-    enabled: !reachedEnd,
   });
 
+  useEffect(() => {
+    if (pendingAdvanceRef.current) {
+      pendingAdvanceRef.current = false;
+      swiperRef.current?.slideNext();
+    }
+  }, [allTravellers]);
+
   const handleNext = () => {
-    if (allTravellers.length >= TOTAL_TRAVELLERS) {
-      setReachedEnd(true);
-      swiperRef.current?.slideTo(0);
+    if (!allLoaded) {
+      pendingAdvanceRef.current = true;
+      setFetchIndex((prev) => prev + 1);
       return;
     }
-    if (currentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
+
+    if (swiperRef.current?.isEnd) {
+      swiperRef.current?.slideTo(0);
+    } else {
+      swiperRef.current?.slideNext();
     }
-    swiperRef.current?.slideNext();
   };
 
   const handlePrev = () => {
-    if (reachedEnd) {
-      setReachedEnd(false);
-    }
     swiperRef.current?.slidePrev();
   };
 
   return (
     <section className={css.section}>
       <div className={css.header}>
-        <PageTitle variant="title">Наші Мандрівники</PageTitle>
+        <PageTitle variant="traveller">Наші Мандрівники</PageTitle>
         <Link
           href="/travellers"
           className={`${css.allTravellersBtn} ${css.allTravellersBtnDesktop}`}
