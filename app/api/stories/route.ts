@@ -35,3 +35,24 @@ export async function POST(req: NextRequest) {
     return createErrorResponce(error as ApiError);
   }
 }
+
+export async function GET(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const type = searchParams.get('type');
+    const page = searchParams.get('page');
+    const perPage = searchParams.get('perPage');
+    const category = searchParams.get('category');
+
+    const params: Record<string, string> = {};
+    if (type) params.type = type;
+    if (page) params.page = page;
+    if (perPage) params.perPage = perPage;
+    if (category) params.category = category;
+
+    const res = await api.get('/stories', { params });
+    return NextResponse.json(res.data);
+  } catch (error) {
+    return createErrorResponce(error as ApiError);
+  }
+}

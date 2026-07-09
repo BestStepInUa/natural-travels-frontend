@@ -1,5 +1,6 @@
 import { nextServer } from './api';
 import { User } from '@/types/user';
+export type { User };
 
 export type CheckSessionResponse = {
   success: boolean;
