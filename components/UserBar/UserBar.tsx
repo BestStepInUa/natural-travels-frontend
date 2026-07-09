@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { useAuthStore } from '@/lib/store/authStore/authStore';
+import { selectUser, useAuthStore } from '@/lib/store/authStore/authStore';
 import { ConfirmModal } from '@/components/ConfirmModal/ConfirmModal';
 import { logout } from '@/lib/api/clientApi';
-import { RxExit } from "react-icons/rx";
+import { RxExit } from 'react-icons/rx';
 import css from './UserBar.module.css';
 
 export const UserBar = () => {
-  const user = useAuthStore((state) => state.user);
+  const user = useAuthStore(selectUser)!;
   const clearIsAuth = useAuthStore((state) => state.clearIsAuth);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -27,13 +27,13 @@ export const UserBar = () => {
   return (
     <div className={css.userBar}>
       <Image
-        src={user.avatarUrl || '/default-avatar.png'}
+        src={user.avatarUrl}
         alt={user.name}
         width={32}
         height={32}
         className={css.avatar}
       />
-      <span className={css.userName}>{user.name || "Ім'я"}</span>
+      <span className={css.userName}>{user.name}</span>
       <span className={css.divider} />
 
       <button
@@ -42,7 +42,7 @@ export const UserBar = () => {
         aria-label="Вийти з системи"
         onClick={() => setIsModalOpen(true)}
       >
-        <RxExit  size={20} />
+        <RxExit size={20} />
       </button>
 
       <ConfirmModal
