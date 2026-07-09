@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -30,12 +30,18 @@ const TOTAL_POPULAR = 10;
 export const PopularStories = () => {
   const width = useWindowSize();
   const swiperRef = useRef<SwiperType | null>(null);
+  const pendingAdvanceRef = useRef(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [allStories, setAllStories] = useState<Story[]>([]);
-  const [reachedEnd, setReachedEnd] = useState(false);
 
   const perPage = width >= 1440 ? 3 : width >= 768 ? 2 : 1;
   const totalPages = Math.ceil(TOTAL_POPULAR / perPage);
+
+  // allLoaded — усі сторінки з бекенду вже підвантажені в кеш (allStories).
+  // Це відрізняється від "Swiper дійшов до останнього слайду":
+  // allLoaded керує тим, чи потрібні НОВІ запити до бекенду,
+  // а положення в Swiper — це вже суто візуальна навігація по кешу.
+  const allLoaded = currentPage >= totalPages;
 
   const { isFetching } = useQuery({
     queryKey: ['popular-stories', currentPage, perPage],
@@ -50,25 +56,34 @@ export const PopularStories = () => {
       return stories;
     },
     staleTime: Infinity,
-    enabled: !reachedEnd,
+    enabled: !allLoaded,
   });
 
+  useEffect(() => {
+    if (pendingAdvanceRef.current) {
+      pendingAdvanceRef.current = false;
+      swiperRef.current?.slideNext();
+    }
+  }, [allStories]);
+
   const handleNext = () => {
-    if (allStories.length >= TOTAL_POPULAR) {
-      setReachedEnd(true);
-      swiperRef.current?.slideTo(0);
+    if (!allLoaded) {
+      // Ще є що довантажувати з бекенду
+      pendingAdvanceRef.current = true;
+      setCurrentPage((prev) => prev + 1);
       return;
     }
-    if (currentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
+
+    // Усі дані вже в кеші — просто гортаємо по вже завантажених слайдах.
+    // Swiper сам знає, чи це останній слайд (isEnd)
+    if (swiperRef.current?.isEnd) {
+      swiperRef.current?.slideTo(0);
+    } else {
+      swiperRef.current?.slideNext();
     }
-    swiperRef.current?.slideNext();
   };
 
   const handlePrev = () => {
-    if (reachedEnd) {
-      setReachedEnd(false);
-    }
     swiperRef.current?.slidePrev();
   };
 
