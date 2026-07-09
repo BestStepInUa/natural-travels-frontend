@@ -37,10 +37,6 @@ export const PopularStories = () => {
   const perPage = width >= 1440 ? 3 : width >= 768 ? 2 : 1;
   const totalPages = Math.ceil(TOTAL_POPULAR / perPage);
 
-  // allLoaded — усі сторінки з бекенду вже підвантажені в кеш (allStories).
-  // Це відрізняється від "Swiper дійшов до останнього слайду":
-  // allLoaded керує тим, чи потрібні НОВІ запити до бекенду,
-  // а положення в Swiper — це вже суто візуальна навігація по кешу.
   const allLoaded = currentPage >= totalPages;
 
   const { isFetching } = useQuery({
@@ -68,14 +64,11 @@ export const PopularStories = () => {
 
   const handleNext = () => {
     if (!allLoaded) {
-      // Ще є що довантажувати з бекенду
       pendingAdvanceRef.current = true;
       setCurrentPage((prev) => prev + 1);
       return;
     }
 
-    // Усі дані вже в кеші — просто гортаємо по вже завантажених слайдах.
-    // Swiper сам знає, чи це останній слайд (isEnd)
     if (swiperRef.current?.isEnd) {
       swiperRef.current?.slideTo(0);
     } else {
