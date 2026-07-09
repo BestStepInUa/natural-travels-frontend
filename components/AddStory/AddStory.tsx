@@ -23,7 +23,7 @@ export default function AddStory() {
   }
 
   return (
-    <div className={css.wrapper}>
+    <div className={`${css.wrapper} container`}>
       <PageTitle variant="title" color="scheme2">
         Створити нову історію
       </PageTitle>
