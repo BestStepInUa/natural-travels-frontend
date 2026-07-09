@@ -25,9 +25,11 @@
   color: var(--color-white);
   padding: 6px 12px;
   border-radius: 6px;
+  height: 48px;
   text-decoration: none;
   font-weight: 500;
   font-size: 16px;
+  white-space: nowrap;
 }
 
 .allTravellersBtn:hover {
@@ -68,7 +70,7 @@
 
 .allTravellersBtnDesktop {
   display: none;
-  min-width: 120px;
+  min-width: 166px;
   text-align: center;
 }
 
