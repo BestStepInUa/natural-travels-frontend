@@ -4,6 +4,7 @@ import { Hero } from '@/components/Hero/Hero';
 import Join from '@/components/Join';
 import About from '@/components/About/About';
 import { PopularStories } from '@/components/PopularStories/PopularStories';
+import { OurTravellers } from '@/components/OurTravellers/OurTravellers';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <PopularStories/>
       <About />
+      <OurTravellers />
       <Join />
     </div>
   );
