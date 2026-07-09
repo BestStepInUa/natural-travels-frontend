@@ -28,7 +28,7 @@ export const UserBar = () => {
     <div className={css.userBar}>
       <Image
         src={user.avatarUrl || '/default-avatar.png'}
-        alt={user.name}
+        alt={user.name ? `Аватар користувача ${user.name}` : 'Аватар користувача'}
         width={32}
         height={32}
         className={css.avatar}
