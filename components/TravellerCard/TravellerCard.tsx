@@ -18,7 +18,7 @@ export const TravellerCard = ({
   return (
     <div className={css.card}>
       <Image
-        src={photoUrl || '/default-avatar.png'}
+        src={photoUrl && photoUrl.length > 0 ? photoUrl : '/default-avatar.png'}
         alt={name}
         className={css.photo}
         width={130}

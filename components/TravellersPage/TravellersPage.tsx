@@ -1,7 +1,7 @@
 'use client';
 
-import  { useState, useEffect } from 'react';
-import { TravellersList } from './TravellersList';
+import { useState, useEffect } from 'react';
+import TravellersList from './TravellersList';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import css from './page.module.css';
 
@@ -28,28 +28,27 @@ export default function TravellersPage() {
         { id: 4, name: 'Олександр Шевченко', articlesCount: 5, photoUrl: '' },
         { id: 5, name: 'Максим Кравченко', articlesCount: 8, photoUrl: '' },
         { id: 6, name: 'Юлія Ткаченко', articlesCount: 15, photoUrl: '' },
-        { id: 7, name: 'Артем Мороз', articlesCount: 22, photoUrl: '' },
-        { id: 8, name: 'Олена Лисенко', articlesCount: 41, photoUrl: '' },
-        { id: 9, name: 'Дмитро Романенко', articlesCount: 3, photoUrl: '' },
-        { id: 10, name: 'Анна Петренко', articlesCount: 17, photoUrl: '' },
-        { id: 11, name: 'Ігор Клименко', articlesCount: 29, photoUrl: '' },
-        { id: 12, name: 'Наталія Козак', articlesCount: 14, photoUrl: '' },
+        { id: 7, name: 'Андрій Литвиненко', articlesCount: 22, photoUrl: '' },
+        { id: 8, name: 'Вікторія Коваль', articlesCount: 10, photoUrl: '' },
+        { id: 9, name: 'Іванна Гончаренко', articlesCount: 7, photoUrl: '' },
+        { id: 10, name: 'Олег Петров', articlesCount: 18, photoUrl: '' },
+        { id: 11, name: 'Наталія Романенко', articlesCount: 14, photoUrl: '' },
+        { id: 12, name: 'Дмитро Козак', articlesCount: 9, photoUrl: '' },
       ];
 
-      const paginatedData = fakeData.map(item => ({
+      const paginatedData = fakeData.map((item) => ({
         ...item,
         id: item.id + (pageNumber - 1) * 12,
-        name: item.name
+        name: item.name,
       }));
 
       if (pageNumber === 1) {
         setTravellers(paginatedData);
       } else {
-        setTravellers(prev => [...prev, ...paginatedData]);
+        setTravellers((prev) => [...prev, ...paginatedData]);
       }
 
       if (pageNumber >= 3) setHasMore(false);
-
     } catch (error) {
       console.error('Помилка при завантаженні даних з БД', error);
     } finally {
@@ -58,11 +57,10 @@ export default function TravellersPage() {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      fetchTravellers(1);
-    }, 0);
-
-    return () => clearTimeout(timer);
+    const init = async () => {
+      await fetchTravellers(1);
+    };
+    init();
   }, []);
 
   const loadMoreData = () => {
@@ -73,19 +71,31 @@ export default function TravellersPage() {
 
   return (
     <section className={`${css.mainSection} container`}>
-      <PageTitle  align="center" marginBottom={24}>Мандрівники</PageTitle>
+      <PageTitle align="center" marginBottom={24}>
+        Мандрівники
+      </PageTitle>
 
       {loading && travellers.length === 0 ? (
         <div className={css.loaderContainer}>
           <div className={css.loader}></div>
         </div>
       ) : (
-        <TravellersList
-          travellers={travellers}
-          onLoadMore={loadMoreData}
-          hasMore={hasMore}
-        />
+        <>
+          <TravellersList travellers={travellers} />
+
+          {hasMore && (
+            <div className={css.paginationContainer}>
+              <button
+                type="button"
+                onClick={loadMoreData}
+                className={css.loadMoreBtn}
+              >
+                Показати ще
+              </button>
+            </div>
+          )}
+        </>
       )}
     </section>
   );
-};
+}

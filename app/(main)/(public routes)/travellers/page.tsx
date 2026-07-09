@@ -1,4 +1,4 @@
-import { TravellersPage } from "@/components/TravellersPage/TravellersPage";
+import TravellersPage from "@/components/TravellersPage/TravellersPage";
 
 export default function Page() {
   return <TravellersPage />;
