@@ -4,7 +4,8 @@ import { checkServerSession } from './lib/api/serverApi';
 import { setAuthCookiesFromHeaders } from '@/app/api/_utils/utils';
 
 const PRIVATE_ROUTES = ['/logout', '/session', '/auth/me'];
-const PUBLIC_ROUTES = ['/login', '/register', '/stories'];
+const PUBLIC_ROUTES = ['/login', '/register'];
+const SHARED_ROUTES = ['/stories'];
 
 export async function proxy(request: NextRequest) {
   const cookieStore = await cookies();
@@ -18,6 +19,9 @@ export async function proxy(request: NextRequest) {
   const isPublicRoute = PUBLIC_ROUTES.some((route) =>
     pathname.startsWith(route)
   );
+  const isSharedRoute = SHARED_ROUTES.some((route) =>
+    pathname.startsWith(route)
+  );
 
   if (!accessToken) {
     if (refreshToken) {
@@ -25,22 +29,28 @@ export async function proxy(request: NextRequest) {
       const setCookie = headers['set-cookie'];
 
       if (setAuthCookiesFromHeaders(cookieStore, setCookie)) {
+        if (isSharedRoute) {
+          return NextResponse.next({
+            headers: { Cookie: cookieStore.toString() },
+          });
+        }
+
         if (isPublicRoute) {
           return NextResponse.redirect(new URL('/', request.url), {
-            headers: {
-              Cookie: cookieStore.toString(),
-            },
+            headers: { Cookie: cookieStore.toString() },
           });
         }
 
         if (isPrivateRoute) {
           return NextResponse.next({
-            headers: {
-              Cookie: cookieStore.toString(),
-            },
+            headers: { Cookie: cookieStore.toString() },
           });
         }
       }
+    }
+
+    if (isSharedRoute) {
+      return NextResponse.next();
     }
 
     if (isPublicRoute) {
@@ -50,6 +60,10 @@ export async function proxy(request: NextRequest) {
     if (isPrivateRoute) {
       return NextResponse.redirect(new URL('/sign-in', request.url));
     }
+  }
+
+  if (isSharedRoute) {
+    return NextResponse.next();
   }
 
   if (isPublicRoute) {
