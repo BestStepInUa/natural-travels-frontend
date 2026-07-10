@@ -7,8 +7,8 @@
   margin-left: auto;
   margin-right: 20px;
 
-  --light-bg: var(--color-scheme-2-background);
-  --dark-bg: var(--color-scheme-2-text);
+  --light-bg:  #eef8ee;
+  --dark-bg: #1b391b;
   --accent-color: #02060a;
 }
 

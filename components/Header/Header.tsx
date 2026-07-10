@@ -47,6 +47,30 @@ export default function Header() {
     return () => resizeObserver.disconnect();
   }, []);
 
+  // Ініціалізуємо стан значенням з localStorage одразу
+  const [isDark, setIsDark] = useState(() => {
+    // Ця функція виконається лише один раз при першому рендері
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return false;
+  });
+
+  // useEffect тепер відповідає ТІЛЬКИ за синхронізацію з DOM
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]); // Тепер ми відслідковуємо зміни isDark
+
+  const handleToggle = () => {
+    const newTheme = !isDark;
+    setIsDark(newTheme);
+    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+  };
+
   return (
     <header ref={headerRef} className={css.header}>
       <div className={`container ${css.content}`}>
@@ -61,7 +85,12 @@ export default function Header() {
 
         <div className={darkcss['toggle-switch']}>
           <label className={darkcss['switch-label']}>
-            <input type="checkbox" className={darkcss.checkbox} />
+            <input
+              type="checkbox"
+              className={darkcss.checkbox}
+              checked={isDark}
+              onChange={handleToggle}
+            />
             <span className={darkcss.slider}>
               <BiLeaf className={darkcss.leafIcon} />
             </span>
