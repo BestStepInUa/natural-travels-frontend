@@ -1,38 +1,74 @@
+'use client';
 import css from '@/components/StoriesList/StoriesList.module.css';
-import Image from 'next/image';
-import stories from './green-tourism.articles.json';
-import SaveIcon from './SaveIcon';
+import { type Story } from '@/types/story';
+import StoryCard from '@/components/StoryCard/StoryCard';
+import { useState } from 'react';
+import { getStoriesClient } from '@/lib/api/clientApi';
 
-export default function StoriesList() {
+interface StoriesListProps {
+  stories: Story[];
+  totalPages: number;
+}
+
+export default function StoriesList({ stories, totalPages }: StoriesListProps) {
+  const [storiesList, setStoriesList] = useState(stories);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loadMoreData = async () => {
+    if (page >= totalPages || isLoading) return;
+
+    try {
+      setIsLoading(true);
+
+      const nextPage = page + 1;
+
+      const response = await getStoriesClient({
+        page: nextPage,
+        perPage: 9,
+      });
+
+      setStoriesList((prevStories) => {
+        const merged = [...prevStories, ...response.stories];
+
+        return merged.filter(
+          (story, index, self) =>
+            index === self.findIndex((item) => item._id === story._id)
+        );
+      });
+
+      setPage(nextPage);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className={css.storiesList}>
-      {stories.map((story) => (
-        <div key={story._id.$oid} className={css.storyCard}>
-          <Image
-            className={css.storyCardImage}
-            src={story.img}
-            alt={story.title}
-            width={340}
-            height={340}
+    <div className={css.storiesListContainer}>
+      <div className={css.storiesList}>
+        {storiesList.map((story) => (
+          <StoryCard
+            key={story._id}
+            _id={story._id}
+            img={story.img}
+            title={story.title}
+            rate={story.rate}
+            ownerId={story.ownerId}
           />
-          <div className={css.storyCardContent}>
-            <div className={css.storyCardAuthorContainer}>
-              <p className={css.storyCardAuthor}>{story.ownerId.$oid}</p>•
-              <p className={css.storyCardSaves}>{story.rate}</p>
-              <SaveIcon width={16} height={16} />
-            </div>
-            <h3 className={css.storyCardTitle}>{story.title}</h3>
-            <div className={css.storyCardButtonWrapper}>
-              <button className={css.storyCardButton}>
-                Переглянути статтю
-              </button>
-              <button className={css.storyCardSaveButton}>
-                <SaveIcon width={24} height={24} />
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
+
+      {page < totalPages && (
+        <button
+          className={css.storiesLoadMore}
+          onClick={loadMoreData}
+          disabled={page >= totalPages}
+        >
+          {isLoading ? 'Завантаження...' : 'Показати ще'}
+        </button>
+      )}
     </div>
   );
 }
