@@ -8,11 +8,11 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-   <div style={{ backgroundColor: "#fff", minHeight: "100vh" }}>
-    <AuthHeader />
-    <MainAuthNav />
-    {children}
-    <AuthFooter />
-   </div>
+    <main style={{ backgroundColor: '#fff', minHeight: '100vh', paddingTop: 0 }}>
+        <AuthHeader />
+        <MainAuthNav />
+        {children}
+        <AuthFooter />
+    </main>
   );
 }

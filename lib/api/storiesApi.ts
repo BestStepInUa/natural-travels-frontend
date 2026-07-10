@@ -11,14 +11,23 @@ export const getStoryById = async (storyId: string) => {
   return res.data;
 };
 
-// Зберегти історію
 export const saveStory = async (storyId: string): Promise<void> => {
   await nextServer.post(`/stories/saved/${storyId}`);
 };
 
-// Видалити зі збережених
 export const unsaveStory = async (storyId: string): Promise<void> => {
   await nextServer.delete(`/stories/saved/${storyId}`);
+};
+
+export const getPopularStories = async (page: number, perPage: number) => {
+  const res = await nextServer.get('/stories', {
+    params: {
+      type: 'popular',
+      perPage,
+      page,
+    },
+  });
+  return res.data.stories;
 };
 
 export const getCategories = async () => {

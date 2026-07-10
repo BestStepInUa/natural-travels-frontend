@@ -1,0 +1,43 @@
+.userBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 32px;
+  height: 32px;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--color-scheme-2-text);
+  opacity: 0.2;
+}
+
+.userName {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: var(--color-scheme-2-text);
+}
+
+.logoutButton {
+  display: inline-flex;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-scheme-2-text);
+  transform: scale(1);
+  transition: transform var(--main-transition);
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+  transform: scale(1.2);
+  outline: none;
+}

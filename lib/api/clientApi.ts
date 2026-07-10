@@ -1,5 +1,6 @@
 import { nextServer } from './api';
 import { User } from '@/types/user';
+export type { User };
 
 export type CheckSessionResponse = {
   success: boolean;
@@ -14,6 +15,10 @@ export type RegisterRequest = {
 export const register = async (data: RegisterRequest) => {
   const res = await nextServer.post<User>('/auth/register', data);
   return res.data;
+};
+
+export const logout = async (): Promise<void> => {
+  await nextServer.post('/auth/logout');
 };
 
 export type LoginRequest = {
