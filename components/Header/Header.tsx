@@ -63,7 +63,7 @@ export default function Header() {
           <label className={darkcss['switch-label']}>
             <input type="checkbox" className={darkcss.checkbox} />
             <span className={darkcss.slider}>
-              <BiLeaf className={css.leafIcon} fill="currentColor" />
+              <BiLeaf className={darkcss.leafIcon} />
             </span>
           </label>
         </div>
