@@ -48,7 +48,9 @@
   --main-transition: 333ms ease-in-out;
 
   --header-height: 72px;
+  --icon-color: var(--color-scheme-2-background);
 }
+
 
 .visually-hidden {
   position: absolute;
@@ -156,4 +158,29 @@ span {
     max-width: 1440px;
     padding: 0 64px;
   }
+}
+
+.dark {
+  --color-white: #000;
+  --color-black: #fff;
+
+  --color-neutral-darkest: #f2f2f2;
+  --color-neutral-lighter: #191919;
+  --color-neutral-lightest: #191919;
+
+  /* Інверсія мантіс-палітри */
+  --color-mantis-lightest: #1b391b;
+  --color-mantis-lighter: #254c24;
+  --color-mantis-darker: #def2de;
+  --color-mantis-darkest: #eef8ee;
+
+  --color-scheme-1-background: #121212;
+  --color-scheme-1-text: #f2f2f2;
+  --color-scheme-1-foreground: #1e1e1e;
+
+  --color-scheme-2-text: var(--color-mantis-darker);
+  --color-scheme-2-background: #1e1e1e;
+  --color-scheme-2-foreground: #2d2d2d;
+  --color-scheme-2-border: rgba(255, 255, 255, 0.1);
+   --icon-color: var(--color-scheme-2-text);
 }

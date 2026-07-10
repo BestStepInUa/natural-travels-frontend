@@ -9,6 +9,8 @@ import { UserBar } from '@/components/UserBar/UserBar';
 import { BurgerMenu } from '@/components/BurgerMenu/BurgerMenu';
 import css from './Header.module.css';
 import { RxHamburgerMenu } from "react-icons/rx";
+import darkcss from './Dark.module.css'
+import { BiLeaf } from 'react-icons/bi';
 
 const navLinks = [
   { href: '/', label: 'Головна' },
@@ -21,6 +23,7 @@ const privateNavLinks = [{ href: '/profile', label: 'Мій Профіль' }];
 export default function Header() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const headerRef = useRef<HTMLElement>(null);
 
   const links = isAuthenticated ? [...navLinks, ...privateNavLinks] : navLinks;
@@ -56,6 +59,15 @@ export default function Header() {
           </span>
         </Link>
 
+        <div className={darkcss['toggle-switch']}>
+          <label className={darkcss['switch-label']}>
+            <input type="checkbox" className={darkcss.checkbox} />
+            <span className={darkcss.slider}>
+              <BiLeaf className={css.leafIcon} fill="currentColor" />
+            </span>
+          </label>
+        </div>
+
         <div className={css.rightGroup}>
           <nav className={css.nav} aria-label="Навігація">
             {links.map((link) => (
@@ -90,7 +102,7 @@ export default function Header() {
               aria-label="Відкрити меню"
               onClick={() => setIsMenuOpen(true)}
             >
-            <RxHamburgerMenu size={24}/>
+              <RxHamburgerMenu size={24} />
             </button>
           </div>
         </div>
