@@ -11,7 +11,7 @@ export default async function Stories() {
   return (
     <>
       <Categories />
-      <StoriesList stories={res.stories} />
+      <StoriesList stories={res.stories} totalPages={res.totalPages} />
     </>
   );
 }

@@ -1,16 +1,54 @@
+'use client';
 import css from '@/components/StoriesList/StoriesList.module.css';
 import { type Story } from '@/types/story';
 import StoryCard from '@/components/StoryCard/StoryCard';
+import { useState } from 'react';
+import { getStoriesClient } from '@/lib/api/clientApi';
 
 interface StoriesListProps {
   stories: Story[];
+  totalPages: number;
 }
 
-export default function StoriesList({ stories }: StoriesListProps) {
+export default function StoriesList({ stories, totalPages }: StoriesListProps) {
+  const [storiesList, setStoriesList] = useState(stories);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loadMoreData = async () => {
+    if (page >= totalPages || isLoading) return;
+
+    try {
+      setIsLoading(true);
+
+      const nextPage = page + 1;
+
+      const response = await getStoriesClient({
+        page: nextPage,
+        perPage: 9,
+      });
+
+      setStoriesList((prevStories) => {
+        const merged = [...prevStories, ...response.stories];
+
+        return merged.filter(
+          (story, index, self) =>
+            index === self.findIndex((item) => item._id === story._id)
+        );
+      });
+
+      setPage(nextPage);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className={css.storiesListContainer}>
       <div className={css.storiesList}>
-        {stories.map((story) => (
+        {storiesList.map((story) => (
           <StoryCard
             key={story._id}
             _id={story._id}
@@ -21,7 +59,17 @@ export default function StoriesList({ stories }: StoriesListProps) {
           />
         ))}
       </div>
-      <button className={css.storiesLoadMore}>Показати ще</button>
+      <button
+        className={css.storiesLoadMore}
+        onClick={loadMoreData}
+        disabled={isLoading || page >= totalPages}
+      >
+        {isLoading
+          ? 'Завантаження...'
+          : page >= totalPages
+            ? 'Більше історій немає'
+            : 'Показати ще'}
+      </button>
     </div>
   );
 }
