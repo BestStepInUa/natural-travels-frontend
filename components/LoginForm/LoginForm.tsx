@@ -8,15 +8,14 @@ import { Formik, Form, Field, FormikHelpers, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import css from './LoginForm.module.css';
-import { ApiError, createErrorResponce } from '@/app/api/_utils/utils';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
-
+import { isAxiosError } from 'axios';
 
 const ValidationSchemaLogin = Yup.object().shape({
   email: Yup.string()
     .email('Введіть коректний email')
     .required('Введіть email для реєстрації'),
-  password: Yup.string().required('Введіть пароль'),
+  password: Yup.string().required('Введіть пароль').min(10, 'Пароль повинен містити не менше 10 символів'),
 });
 interface LoginValues {
   email: string;
@@ -46,51 +45,82 @@ export default function LoginForm() {
         setError('Invalid email or password');
       }
     } catch (error) {
-      createErrorResponce(error as ApiError);
+  if (isAxiosError(error)) {
+    const serverMessage = error.response?.data?.response?.message;
+  if (serverMessage === "invalid credentials") {
+      setError("Неправильний email або пароль");
+      formikHelpers.setFieldError("email", "Перевірте дані для входу");
+    } else {
+      setError(serverMessage);
+      formikHelpers.setFieldError("email", serverMessage);
     }
+  }
+}
   };
   return (
-    <div className={css.container}>
-      <h1 className={css.register}>Вхід</h1>
-      <p className={css.p}>Вітаємо знову у спільноту мандрівників!</p>
+    <div className="container">
+      <h1 className={css.LoginH1}>Вхід</h1>
+      <p className={css.textLoginForm}>
+        Вітаємо знову у спільноту мандрівників!
+      </p>
       <Formik
-  validationSchema={ValidationSchemaLogin}
-  initialValues={initialValues}
-  onSubmit={handleSubmit}
->
-  {({ errors, touched, dirty, isValid }) => (
-    <Form className={css.form}>
-      <label className={css.label}>
-        Пошта*
-        <Field
-          className={`${css.input} ${
-            errors.email && touched.email ? css.inputError : ""
-          }`}
-          type="email"
-          name="email"
-          placeholder="hello@podorozhnyky.ua"
-        />
-        <ErrorMessage name="email" component="span" className={css.error} />
-      </label>
+        validationSchema={ValidationSchemaLogin}
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched, dirty, isValid }) => (
+          <Form className={css.form}>
+            {/* Пошта */}
+            <label className={css.label}>
+              Пошта*
+              <Field
+                className={`${css.input} ${
+                  errors.email && touched.email ? css.inputError : ''
+                }`}
+                type="email"
+                name="email"
+                placeholder="hello@podorozhnyky.ua"
+              />
+              <div className={css.errorWrapper}>
+                <ErrorMessage
+                  name="email"
+                  component="span"
+                  className={css.error}
+                />
+              </div>
+            </label>
 
-      <label className={css.label}>
-        Пароль*
-        <Field
-          className={`${css.input} ${
-            errors.password && touched.password ? css.inputError : ""
-          }`}
-          type="password"
-          name="password"
-          placeholder="********"
-        />
-        <ErrorMessage name="password" component="span" className={css.error} />
-      </label>
+            {/* Пароль */}
+            <label className={css.label}>
+              Пароль*
+              <Field
+                className={`${css.input} ${
+                  errors.password && touched.password ? css.inputError : ''
+                }`}
+                type="password"
+                name="password"
+                placeholder="********"
+              />
+              <div className={css.errorWrapper}>
+                <ErrorMessage
+                  name="password"
+                  component="span"
+                  className={css.error}
+                />
+              </div>
+            </label>
 
-      <button type="submit" className={css.button} disabled={!(isValid && dirty)}>Увійти</button>
-    </Form>
-  )}
-</Formik>
-      {error && <p>{error}</p>}
+            <button
+              type="submit"
+              className={css.button}
+              disabled={!(isValid && dirty)}
+            >
+              Увійти
+            </button>
+          </Form>
+        )}
+      </Formik>
+      {error && <p className={css.errorAfterForm}>{error}</p>}
     </div>
   );
 }

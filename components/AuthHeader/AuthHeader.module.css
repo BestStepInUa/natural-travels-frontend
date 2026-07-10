@@ -4,23 +4,23 @@
   margin-bottom: 24px;
   padding: 18px 0px;
 }
-
-.container {
-  width: 100%;
-  padding: 0 64px;
+.logo {
+  width: 24px;
+  height: 24px; /* обязательно */
 }
+
 .content{
+display: flex;
+justify-content: center;
+align-items: center;
 width: 121px;
 height: 35px;
-background-color: blue;
 }
-@media(max-width: 768px) {
-  .container {
-  padding: 0 32px;
-}
-}
-@media(max-width: 375px) {
-  .container {
-  padding: 0 20px;
-}
+.textAuthHeader{
+font-weight: 500;
+font-size: 17px;
+line-height: 1;
+letter-spacing: -0.01em;
+color: var(--color-mantis-darkest);
+margin-left: 3px;
 }

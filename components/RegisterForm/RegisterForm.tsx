@@ -1,6 +1,5 @@
 'use client';
 
-import { ApiError, createErrorResponce } from '@/app/api/_utils/utils';
 import { register } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -10,23 +9,24 @@ import * as Yup from 'yup';
 
 import css from './RegisterForm.module.css';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
+import { isAxiosError } from 'axios';
 
-const ValidationShemaRegister = Yup.object().shape({
-  userName: Yup.string().required("Введіть ім'я користувача"),
+const ValidationSchemaRegister = Yup.object().shape({
+  name: Yup.string().required("Введіть ім'я користувача").min(10, "Імʼя повинно містити не менше 10 символів"),
   email: Yup.string()
     .email('Введіть коректний email')
     .required('Введіть email для реєстрації'),
-  password: Yup.string().required('Введіть пароль'),
+  password: Yup.string().required('Введіть пароль').min(10, 'Пароль повинен містити не менше 10 символів'),
 });
 
 interface RegisterValues {
-  userName: string;
+  name: string;
   email: string;
   password: string;
 }
 
 const initialValues: RegisterValues = {
-  userName: '',
+  name: '',
   email: '',
   password: '',
 };
@@ -45,77 +45,105 @@ export default function Register() {
         setUser(user)
         formikHelpers.resetForm();
         router.push('/');
-      } else {
-        setError('Invalid email or password');
       }
     } catch (error) {
-      createErrorResponce(error as ApiError);
+      if (isAxiosError(error)) {
+        const serverMessage = error.response?.data?.response?.message;
+        if(serverMessage === '"email" must be a valid email') {
+          setError("Email не валідний");
+          formikHelpers.setFieldError("email", "Email не валідний");
+        }
+        else {
+                    setError("Email вже використовується");
+          formikHelpers.setFieldError("email", "Email вже використовується");
+        }
+      }
     }
   };
   return (
-    <div className={css.container}>
-      <h1 className={css.register}>Реєстрація</h1>
-      <p className={css.p}>Раді вас бачити у спільноті мандрівників!</p>
+    <div className="container">
+      <h1 className={css.registerH1}>Реєстрація</h1>
+      <p className={css.textRegisterForm}>
+        Раді вас бачити у спільноті мандрівників!
+      </p>
       <Formik
-        validationSchema={ValidationShemaRegister}
+        validationSchema={ValidationSchemaRegister}
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
         {({ errors, touched, dirty, isValid }) => (
-          <Form className={css.form}>
-            <label className={css.label}>
-              Ім`я та прізвище*
+          <Form className={css.formRegister}>
+            {/* Ім'я */}
+            <label className={css.labelRegisterForm}>
+              Імʼя та Прізвище*
               <Field
                 type="text"
-                name="userName"
-                className={`${css.input} ${
-            errors.password && touched.password ? css.inputError : ""
-          }`}
+                name="name"
+                className={`${css.inputRegisterForm} ${
+                  errors.name && touched.name ? css.inputError : ''
+                }`}
                 placeholder="Ваше ім'я та прізвище"
               />
-              <ErrorMessage
-                name="userName"
-                component="span"
-                className={css.error}
-              />
+              <div className={css.errorWrapper}>
+                <ErrorMessage
+                  name="name"
+                  component="span"
+                  className={css.error}
+                />
+              </div>
             </label>
-            <label className={css.label}>
+
+            {/* Пошта */}
+            <label className={css.labelRegisterForm}>
               Пошта*
               <Field
                 type="email"
                 name="email"
-                className={`${css.input} ${
-            errors.password && touched.password ? css.inputError : ""
-          }`}
+                className={`${css.inputRegisterForm} ${
+                  errors.email && touched.email ? css.inputError : ''
+                }`}
                 placeholder="hello@podorozhnyky.ua"
               />
-              <ErrorMessage
-                name="email"
-                component="span"
-                className={css.error}
-              />
+              <div className={css.errorWrapper}>
+                <ErrorMessage
+                  name="email"
+                  component="span"
+                  className={css.error}
+                />
+              </div>
             </label>
-            <label className={css.label}>
+
+            {/* Пароль */}
+            <label className={css.labelRegisterForm}>
               Пароль*
               <Field
                 type="password"
                 name="password"
-                className={`${css.input} ${
-            errors.password && touched.password ? css.inputError : ""
-          }`}
+                className={`${css.inputRegisterForm} ${
+                  errors.password && touched.password ? css.inputError : ''
+                }`}
                 placeholder="********"
               />
-              <ErrorMessage
-                name="password"
-                component="span"
-                className={css.error}
-              />
+              <div className={css.errorWrapper}>
+                <ErrorMessage
+                  name="password"
+                  component="span"
+                  className={css.error}
+                />
+              </div>
             </label>
-            <button className={css.button} disabled={!(isValid && dirty)}>Зареєструватись</button>
+
+            <button
+              className={css.button}
+              type="submit"
+              disabled={!(isValid && dirty)}
+            >
+              Зареєструватись
+            </button>
           </Form>
         )}
       </Formik>
-      {error && <p>{error}</p>}
+      {error && <p className={css.errorAfterForm}>{error}</p>}
     </div>
   );
 }
