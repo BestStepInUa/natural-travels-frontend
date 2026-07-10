@@ -5,7 +5,7 @@ import Categories from '@/components/Categories/Categories';
 export default async function Stories() {
   const res = await getAllStories({
     page: 1,
-    perPage: 10,
+    perPage: 9,
   });
 
   return (

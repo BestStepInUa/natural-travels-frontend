@@ -23,6 +23,7 @@ export const getServerMe = async (): Promise<User> => {
   return data;
 };
 
+import { type StoriesResponse } from '@/types/story';
 export type StoriesQueryParams = {
   category?: string;
   page?: number;
@@ -30,10 +31,8 @@ export type StoriesQueryParams = {
   type?: 'popular';
 };
 
-import { type StoriesResponse } from '@/types/story';
-
 export async function getAllStories(
-  params: StoriesQueryParams
+  params: StoriesQueryParams = {}
 ): Promise<StoriesResponse> {
   const { category, page = 1, perPage, type } = params;
 

@@ -59,17 +59,16 @@ export default function StoriesList({ stories, totalPages }: StoriesListProps) {
           />
         ))}
       </div>
-      <button
-        className={css.storiesLoadMore}
-        onClick={loadMoreData}
-        disabled={isLoading || page >= totalPages}
-      >
-        {isLoading
-          ? 'Завантаження...'
-          : page >= totalPages
-            ? 'Більше історій немає'
-            : 'Показати ще'}
-      </button>
+
+      {page < totalPages && (
+        <button
+          className={css.storiesLoadMore}
+          onClick={loadMoreData}
+          disabled={page >= totalPages}
+        >
+          {isLoading ? 'Завантаження...' : 'Показати ще'}
+        </button>
+      )}
     </div>
   );
 }
