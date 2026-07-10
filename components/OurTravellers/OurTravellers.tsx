@@ -76,12 +76,13 @@ export const OurTravellers = () => {
       const page = skip / limit + 1;
       const travellers = await getTravellers(page, limit);
       setAllTravellers((prev) => {
+        if (!travellers) return prev;
         const newTravellers = travellers.filter(
           (t) => !prev.find((p) => p._id === t._id)
         );
         return [...prev, ...newTravellers];
       });
-      return travellers;
+      return travellers || [];
     },
     staleTime: Infinity,
   });
