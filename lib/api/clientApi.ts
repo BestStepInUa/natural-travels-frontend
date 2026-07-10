@@ -1,4 +1,4 @@
-import { nextServer } from './api';
+import { nextServer } from '@/lib/api/api';
 import { User } from '@/types/user';
 export type { User };
 
@@ -40,3 +40,29 @@ export const getMe = async (): Promise<User> => {
   const { data } = await nextServer.get<User>('/auth/me');
   return data;
 };
+
+export type StoriesQueryParams = {
+  category?: string;
+  page?: number;
+  perPage?: number;
+  type?: 'popular';
+};
+
+import { type StoriesResponse } from '@/types/story';
+
+export async function getStoriesClient(
+  params: StoriesQueryParams
+): Promise<StoriesResponse> {
+  const { category, page = 1, perPage, type } = params;
+
+  const { data } = await nextServer.get<StoriesResponse>('/stories', {
+    params: {
+      category,
+      page,
+      perPage,
+      type,
+    },
+  });
+
+  return data;
+}

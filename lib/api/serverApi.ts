@@ -22,3 +22,28 @@ export const getServerMe = async (): Promise<User> => {
   });
   return data;
 };
+
+import { type StoriesResponse } from '@/types/story';
+export type StoriesQueryParams = {
+  category?: string;
+  page?: number;
+  perPage?: number;
+  type?: 'popular';
+};
+
+export async function getAllStories(
+  params: StoriesQueryParams = {}
+): Promise<StoriesResponse> {
+  const { category, page = 1, perPage, type } = params;
+
+  const { data } = await nextServer.get<StoriesResponse>('/stories', {
+    params: {
+      category,
+      page,
+      perPage,
+      type,
+    },
+  });
+
+  return data;
+}

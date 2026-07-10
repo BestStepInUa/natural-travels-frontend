@@ -7,7 +7,7 @@ interface StoryCardProps {
   _id: string;
   img: string;
   title: string;
-  rate: number;
+  rate?: number;
   ownerId: {
     _id: string;
     name: string;
