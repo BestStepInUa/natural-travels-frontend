@@ -4,13 +4,15 @@ import { useState, useEffect } from 'react';
 import TravellersList from './TravellersList';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import css from './page.module.css';
+import { getTravellersClient } from '@/lib/api/clientApi';
+import { Traveller } from '@/types/travellers';
 
-export interface Traveller {
-  id: number;
-  name: string;
-  articlesCount: number;
-  photoUrl: string;
-}
+// export interface Traveller {
+//   id: number;
+//   name: string;
+//   articlesCount: number;
+//   photoUrl: string;
+// }
 
 export default function TravellersPage() {
   const [travellers, setTravellers] = useState<Traveller[]>([]);
@@ -20,37 +22,28 @@ export default function TravellersPage() {
 
   const fetchTravellers = async (pageNumber: number) => {
     setLoading(true);
-    try {
-      const fakeData: Traveller[] = [
-        { id: 1, name: 'Олександра Бондар', articlesCount: 32, photoUrl: '' },
-        { id: 2, name: 'Софія Мельник', articlesCount: 12, photoUrl: '' },
-        { id: 3, name: 'Дарина Ковальчук', articlesCount: 19, photoUrl: '' },
-        { id: 4, name: 'Олександр Шевченко', articlesCount: 5, photoUrl: '' },
-        { id: 5, name: 'Максим Кравченко', articlesCount: 8, photoUrl: '' },
-        { id: 6, name: 'Юлія Ткаченко', articlesCount: 15, photoUrl: '' },
-        { id: 7, name: 'Андрій Литвиненко', articlesCount: 22, photoUrl: '' },
-        { id: 8, name: 'Вікторія Коваль', articlesCount: 10, photoUrl: '' },
-        { id: 9, name: 'Іванна Гончаренко', articlesCount: 7, photoUrl: '' },
-        { id: 10, name: 'Олег Петров', articlesCount: 18, photoUrl: '' },
-        { id: 11, name: 'Наталія Романенко', articlesCount: 14, photoUrl: '' },
-        { id: 12, name: 'Дмитро Козак', articlesCount: 9, photoUrl: '' },
-      ];
 
-      const paginatedData = fakeData.map((item) => ({
-        ...item,
-        id: item.id + (pageNumber - 1) * 12,
-        name: item.name,
-      }));
+    try {
+      const data = await getTravellersClient(pageNumber);
 
       if (pageNumber === 1) {
-        setTravellers(paginatedData);
+        setTravellers(data.users);
       } else {
-        setTravellers((prev) => [...prev, ...paginatedData]);
+        setTravellers((prev) => [...prev, ...data.users]);
       }
 
-      if (pageNumber >= 3) setHasMore(false);
+      setTravellers((prev) => {
+        const merged = [...prev, ...data.users];
+
+        return merged.filter(
+          (user, index, arr) =>
+            arr.findIndex((u) => u._id === user._id) === index
+        );
+      });
+
+      setHasMore(pageNumber < data.totalPages);
     } catch (error) {
-      console.error('Помилка при завантаженні даних з БД', error);
+      console.error('Помилка при завантаженні даних', error);
     } finally {
       setLoading(false);
     }
