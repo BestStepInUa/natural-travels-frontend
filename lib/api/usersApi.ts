@@ -1,5 +1,9 @@
 import { nextServer } from './api';
 
+// Перевизначаємо baseURL для кожного запиту тут — прибираємо /api,
+// не чіпаючи спільний api.ts
+const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
 export interface BackendTraveller {
   _id: string;
   name: string;
@@ -12,6 +16,7 @@ export const getTravellers = async (
   perPage: number
 ): Promise<BackendTraveller[]> => {
   const res = await nextServer.get('/users', {
+    baseURL,
     params: { page, perPage },
   });
 

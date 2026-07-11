@@ -26,34 +26,51 @@ interface Story {
 }
 
 const TOTAL_POPULAR = 10;
+const MAX_EXTRA_ATTEMPTS = 3;
 
-export const PopularStories = () => {
+export default function PopularStories() {
   const width = useWindowSize();
   const swiperRef = useRef<SwiperType | null>(null);
   const pendingAdvanceRef = useRef(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [fetchPage, setFetchPage] = useState(1);
   const [allStories, setAllStories] = useState<Story[]>([]);
 
   const perPage = width >= 1440 ? 3 : width >= 768 ? 2 : 1;
   const totalPages = Math.ceil(TOTAL_POPULAR / perPage);
-
-  const allLoaded = currentPage >= totalPages;
+  const normalPagesExhausted = fetchPage >= totalPages;
 
   const { isFetching } = useQuery({
-    queryKey: ['popular-stories', currentPage, perPage],
+    queryKey: ['popular-stories', fetchPage, perPage],
     queryFn: async () => {
-      const stories = await getPopularStories(currentPage, perPage);
-      setAllStories((prev) => {
-        if (!stories) return prev;
+      let collected = allStories;
+
+      const fetchAndMerge = async (page: number) => {
+        const stories: Story[] = await getPopularStories(page, perPage);
         const newStories = stories.filter(
-          (s: Story) => !prev.find((p: Story) => p._id === s._id)
+          (s) => !collected.find((p) => p._id === s._id)
         );
-        return [...prev, ...newStories];
-      });
-      return stories || [];
+        collected = [...collected, ...newStories];
+      };
+
+      await fetchAndMerge(fetchPage);
+      if (fetchPage >= totalPages) {
+        let extraPage = fetchPage;
+        let attempts = 0;
+        while (
+          collected.length < TOTAL_POPULAR &&
+          attempts < MAX_EXTRA_ATTEMPTS
+        ) {
+          extraPage += 1;
+          attempts += 1;
+          await fetchAndMerge(extraPage);
+        }
+      }
+
+      setAllStories(collected);
+      return collected;
     },
     staleTime: Infinity,
-    enabled: !allLoaded,
+    enabled: allStories.length < TOTAL_POPULAR,
   });
 
   useEffect(() => {
@@ -64,9 +81,9 @@ export const PopularStories = () => {
   }, [allStories]);
 
   const handleNext = () => {
-    if (!allLoaded) {
+    if (!normalPagesExhausted && allStories.length < TOTAL_POPULAR) {
       pendingAdvanceRef.current = true;
-      setCurrentPage((prev) => prev + 1);
+      setFetchPage((prev) => prev + 1);
       return;
     }
 
@@ -143,4 +160,4 @@ export const PopularStories = () => {
       </Link>
     </section>
   );
-};
+}

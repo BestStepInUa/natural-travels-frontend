@@ -44,7 +44,7 @@ const breakpoints: { [width: number]: SwiperOptions } = {
   },
 };
 
-export const OurTravellers = () => {
+export default function OurTravellers() {
   const width = useWindowSize();
   const swiperRef = useRef<SwiperType | null>(null);
   const pendingAdvanceRef = useRef(false);
@@ -174,4 +174,4 @@ export const OurTravellers = () => {
       </Link>
     </section>
   );
-};
+}
