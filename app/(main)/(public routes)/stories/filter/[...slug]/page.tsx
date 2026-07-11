@@ -1,11 +1,6 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
+import Categories from '@/components/Categories/Categories';
+import StoriesList from '@/components/StoriesList/StoriesList';
 import { getAllStories } from '@/lib/api/serverApi';
-import CategoriesClient from './Categories.client';
-// import { TbCategoryFilled } from 'react-icons/tb';
 
 const categories = [
   { label: 'Всі статті', slug: 'all' },
@@ -30,28 +25,35 @@ const categories = [
   { label: 'Полісся', slug: 'polissia', id: '6966a5cdbc1b90f344c2e0c1' },
 ];
 
-type CategoriesProps = {
-  params?: Promise<{ slug: string[] }>;
+type Props = {
+  params: Promise<{
+    slug: string;
+  }>;
 };
 
-export default async function Categories({ params }: CategoriesProps) {
-  const queryClient = new QueryClient();
+export default async function Stories({ params }: Props) {
+  const { slug } = await params;
 
-  let categoryId: string | undefined;
+  const categoryId = categories.find((c) => c.slug === slug[0])?.id;
 
-  if (params) {
-    const { slug } = await params;
-    categoryId = categories.find((c) => c.slug === slug[0])?.id;
-  }
+  console.log({ slug, categoryId });
 
-  await queryClient.prefetchQuery({
-    queryKey: ['stories', categoryId, 1],
-    queryFn: () => getAllStories({ page: 1, perPage: 9, categoryId }),
+  const res = await getAllStories({
+    page: 1,
+    perPage: 9,
+    categoryId,
+  });
+
+  res.stories.forEach((story) => {
+    if (!story.ownerId) {
+      console.log('❌ Немає ownerId:', story);
+    }
   });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <CategoriesClient />
-    </HydrationBoundary>
+    <>
+      <Categories />
+      <StoriesList stories={res.stories} totalPages={res.totalPages} />
+    </>
   );
 }

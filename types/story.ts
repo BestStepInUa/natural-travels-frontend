@@ -24,7 +24,7 @@ export type StoriesResponse = {
 };
 
 export type StoriesQueryParams = {
-  category?: string;
+  categoryId?: string;
   page?: number;
   perPage?: number;
   type?: 'popular';

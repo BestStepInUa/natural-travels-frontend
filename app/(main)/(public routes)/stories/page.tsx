@@ -1,8 +1,8 @@
 import { getAllStories } from '@/lib/api/serverApi';
-import StoriesList from '@/components/StoriesList/StoriesList';
 import Categories from '@/components/Categories/Categories';
+import StoriesList from '@/components/StoriesList/StoriesList';
 
-export default async function Stories() {
+export default async function StoriesPage() {
   const res = await getAllStories({
     page: 1,
     perPage: 9,

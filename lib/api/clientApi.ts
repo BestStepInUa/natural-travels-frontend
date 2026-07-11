@@ -43,7 +43,7 @@ export const getMe = async (): Promise<User> => {
 };
 
 export type StoriesQueryParams = {
-  category?: string;
+  categoryId?: string;
   page?: number;
   perPage?: number;
   type?: 'popular';
@@ -54,11 +54,11 @@ import { type StoriesResponse } from '@/types/story';
 export async function getStoriesClient(
   params: StoriesQueryParams
 ): Promise<StoriesResponse> {
-  const { category, page = 1, perPage, type } = params;
+  const { categoryId, page = 1, perPage, type } = params;
 
   const { data } = await nextServer.get<StoriesResponse>('/stories', {
     params: {
-      category,
+      categoryId,
       page,
       perPage,
       type,
