@@ -1,6 +1,7 @@
 import { nextServer } from '@/lib/api/api';
 import { User } from '@/types/user';
 export type { User };
+import { type TravellersResponse } from '@/types/travellers';
 
 export type CheckSessionResponse = {
   success: boolean;
@@ -61,6 +62,17 @@ export async function getStoriesClient(
       page,
       perPage,
       type,
+    },
+  });
+
+  return data;
+}
+
+export async function getTravellersClient(page = 1) {
+  const { data } = await nextServer.get<TravellersResponse>('/users', {
+    params: {
+      page,
+      perPage: 12,
     },
   });
 
