@@ -1,6 +1,7 @@
 import { Montserrat } from 'next/font/google';
 import TanStackProvider from '@/components/TanStackProvider';
 import AuthProvider from '@/components/AuthProvider';
+import Cursor from '@/components/Cursor';
 
 import 'modern-normalize';
 import './globals.css';
@@ -17,12 +18,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="uk" className={montserratFont.variable}>
       <body>
         <TanStackProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <Cursor />
+            {children}
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>
