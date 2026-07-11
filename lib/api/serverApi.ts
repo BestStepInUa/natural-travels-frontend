@@ -29,11 +29,11 @@ export const getServerMe = async (): Promise<User> => {
 export async function getAllStories(
   params: StoriesQueryParams = {}
 ): Promise<StoriesResponse> {
-  const { category, page = 1, perPage, type } = params;
+  const { categoryId, page = 1, perPage, type = 'popular' } = params;
 
   const { data } = await nextServer.get<StoriesResponse>('/stories', {
     params: {
-      category,
+      categoryId,
       page,
       perPage,
       type,
