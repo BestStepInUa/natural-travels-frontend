@@ -11,6 +11,7 @@ import css from './Header.module.css';
 import { RxHamburgerMenu } from "react-icons/rx";
 import darkcss from './Dark.module.css'
 import { BiLeaf } from 'react-icons/bi';
+import { useTheme } from '@/components/ThemeContext/ThemeContext';
 
 const navLinks = [
   { href: '/', label: 'Головна' },
@@ -47,29 +48,7 @@ export default function Header() {
     return () => resizeObserver.disconnect();
   }, []);
 
-  // Ініціалізуємо стан значенням з localStorage одразу
-  const [isDark, setIsDark] = useState(() => {
-    // Ця функція виконається лише один раз при першому рендері
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') === 'dark';
-    }
-    return false;
-  });
-
-  // useEffect тепер відповідає ТІЛЬКИ за синхронізацію з DOM
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]); // Тепер ми відслідковуємо зміни isDark
-
-  const handleToggle = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-  };
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <header ref={headerRef} className={css.header}>
@@ -89,7 +68,7 @@ export default function Header() {
               type="checkbox"
               className={darkcss.checkbox}
               checked={isDark}
-              onChange={handleToggle}
+              onChange={toggleTheme}
             />
             <span className={darkcss.slider}>
               <BiLeaf className={darkcss.leafIcon} />

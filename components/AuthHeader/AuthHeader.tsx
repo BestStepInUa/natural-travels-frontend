@@ -6,10 +6,13 @@ export default function AuthHeader() {
   return (
     <header className={css.header}>
       <div className="container">
-        <Link href="/" className={css.content}>
-          <Image src="/icons/logo.svg" alt="icon" width={24}   // указываем ширину
-      height={24}  className={css.logo}/>
-          <p className={css.textAuthHeader}>Прирордні мандри</p>
+        <Link href="/" className={css.logo} aria-label="Перейти на головну">
+          <Image src="/icons/logo.svg" alt="" width={24} height={24} />
+          <span>
+            Природні
+            <br />
+            Мандри
+          </span>
         </Link>
       </div>
     </header>

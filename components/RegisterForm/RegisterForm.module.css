@@ -26,7 +26,7 @@
 /* --- Поля вводу та лейбли --- */
 .labelRegisterForm {
   font-size: 18px;
-  color: #000;
+  color: var(--color-scheme-1-text);
 }
 
 .inputRegisterForm {

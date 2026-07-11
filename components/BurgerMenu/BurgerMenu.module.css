@@ -43,6 +43,14 @@
   letter-spacing: -0.01em;
 }
 
+.logo img {
+  transition: filter 0.4s ease;
+}
+
+:global(.dark) .logo img {
+  filter: invert(1) brightness(2);
+}
+
 .topBarActions {
   display: flex;
   align-items: center;

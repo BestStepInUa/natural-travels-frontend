@@ -2,6 +2,7 @@ import { Montserrat } from 'next/font/google';
 import TanStackProvider from '@/components/TanStackProvider';
 import AuthProvider from '@/components/AuthProvider';
 import Cursor from '@/components/Cursor';
+import { ThemeProvider } from '@/components/ThemeContext/ThemeContext';
 
 import 'modern-normalize';
 import './globals.css';
@@ -23,8 +24,10 @@ export default function RootLayout({
       <body>
         <TanStackProvider>
           <AuthProvider>
-            <Cursor />
-            {children}
+            <ThemeProvider>
+              <Cursor />
+              {children}
+            </ThemeProvider>
           </AuthProvider>
         </TanStackProvider>
       </body>
