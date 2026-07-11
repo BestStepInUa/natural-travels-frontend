@@ -25,6 +25,15 @@
   color: var(--color-scheme-2-text);
 }
 
+.logo img {
+  transition: filter 0.4s ease;
+}
+
+:global(.dark) .logo img {
+  filter: invert(1) brightness(2);
+}
+
+
 .logo span {
   font-weight: 500;
   font-size: 17px;

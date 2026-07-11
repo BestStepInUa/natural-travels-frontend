@@ -2,6 +2,9 @@ import { cookies } from 'next/headers';
 import { nextServer } from './api';
 import { type CheckSessionResponse } from './clientApi';
 import { type User } from '@/types/user';
+import { type StoriesResponse } from '@/types/story';
+import { type StoriesQueryParams } from '@/types/story';
+import { type TravellersResponse } from '@/types/travellers';
 
 export const checkServerSession = async () => {
   const cookieStore = await cookies();
@@ -23,14 +26,6 @@ export const getServerMe = async (): Promise<User> => {
   return data;
 };
 
-import { type StoriesResponse } from '@/types/story';
-export type StoriesQueryParams = {
-  category?: string;
-  page?: number;
-  perPage?: number;
-  type?: 'popular';
-};
-
 export async function getAllStories(
   params: StoriesQueryParams = {}
 ): Promise<StoriesResponse> {
@@ -42,6 +37,17 @@ export async function getAllStories(
       page,
       perPage,
       type,
+    },
+  });
+
+  return data;
+}
+
+export async function getTravellers(page = 1) {
+  const { data } = await nextServer.get<TravellersResponse>('/users', {
+    params: {
+      page,
+      perPage: 12,
     },
   });
 

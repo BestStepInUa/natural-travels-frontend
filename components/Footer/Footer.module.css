@@ -25,6 +25,14 @@
   margin-bottom: 40px;
 }
 
+.logo img {
+  transition: filter 0.4s ease;
+}
+
+:global(.dark) .logo img {
+  filter: invert(1) brightness(2);
+}
+
 .logo_and_social_wrapper {
   margin-bottom: 40px;
 }
@@ -81,7 +89,7 @@
 
 .nav a:hover,
 .nav a:focus {
-  border: 1px solid var(--color-scheme-1-text);
+  border: 1px solid var(--color-scheme-2-text);
 }
 
 .nav a:focus-visible,
