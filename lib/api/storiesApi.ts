@@ -1,4 +1,5 @@
 import { nextServer } from './api';
+import { ProfileStoriesResponse } from '@/types/story';
 
 export interface BackendCategory {
   _id: string;
@@ -33,4 +34,38 @@ export const getPopularStories = async (page: number, perPage: number) => {
 export const getCategories = async () => {
   const response = await nextServer.get<BackendCategory[]>('/categories');
   return response.data;
+};
+
+export const getSavedStories = async (
+  page = 1,
+  perPage = 6,
+): Promise<ProfileStoriesResponse> => {
+  const { data } = await nextServer.get<ProfileStoriesResponse>(
+    '/stories/saved-stories',
+    {
+      params: {
+        page,
+        perPage,
+      },
+    },
+  );
+
+  return data;
+};
+
+export const getMyStories = async (
+  page = 1,
+  perPage = 6,
+): Promise<ProfileStoriesResponse> => {
+  const { data } = await nextServer.get<ProfileStoriesResponse>(
+    '/stories/my-stories',
+    {
+      params: {
+        page,
+        perPage,
+      },
+    },
+  );
+
+  return data;
 };
