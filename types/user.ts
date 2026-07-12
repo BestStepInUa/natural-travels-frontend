@@ -1,3 +1,5 @@
+import { Story } from './story';
+
 export type User = {
   email: string;
   name: string;
@@ -7,4 +9,15 @@ export type User = {
   savedArticles?: string[];
   createAt: Date;
   updateAt: Date;
+};
+
+export type PublicTravellerProfileResponse = {
+  user: User;
+  stories: {
+    data: Story[];
+    page: number;
+    perPage: number;
+    totalItems: number;
+    totalPages: number;
+  };
 };
