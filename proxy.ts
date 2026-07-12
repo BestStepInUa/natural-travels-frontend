@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { checkServerSession } from './lib/api/serverApi';
 import { setAuthCookiesFromHeaders } from '@/app/api/_utils/utils';
 
-const PRIVATE_ROUTES = ['/logout', '/session', '/auth/me'];
-const PUBLIC_ROUTES = ['/login', '/register', '/stories'];
+const PRIVATE_ROUTES = ['/logout', '/session', '/auth/me', '/stories/new'];
+const PUBLIC_ROUTES = ['/login', '/register'];
 
 export async function proxy(request: NextRequest) {
   const cookieStore = await cookies();
@@ -48,7 +48,7 @@ export async function proxy(request: NextRequest) {
     }
 
     if (isPrivateRoute) {
-      return NextResponse.redirect(new URL('/sign-in', request.url));
+      return NextResponse.redirect(new URL('/login', request.url));
     }
   }
 
@@ -64,7 +64,7 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     '/profile/:path*',
-    '/stories/:path*',
+    '/stories/new',
     '/login',
     '/register/',
     '/auth/me',
