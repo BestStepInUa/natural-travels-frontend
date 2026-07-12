@@ -64,7 +64,7 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     '/profile/:path*',
-    '/stories/:path*',
+    '/stories/new',
     '/login',
     '/register/',
     '/auth/me',
