@@ -2,28 +2,10 @@ import { cookies } from 'next/headers';
 import { nextServer } from './api';
 import { type CheckSessionResponse } from './clientApi';
 import { type User } from '@/types/user';
-
-type PublicTravellerProfileResponse = {
-  user: User;
-  stories: {
-    data: unknown[];
-    page: number;
-    perPage: number;
-    totalItems: number;
-    totalPages: number;
-  };
-};
-export const getPublicTravellerProfile = async (
-  travellerId: string,
-  page = 1,
-  perPage = 6
-): Promise<PublicTravellerProfileResponse> => {
-  const { data } = await nextServer.get<PublicTravellerProfileResponse>(
-    `/users/${travellerId}/public?page=${page}&perPage=${perPage}`
-  );
-
-  return data;
-};
+import { type StoriesResponse } from '@/types/story';
+import { type StoriesQueryParams } from '@/types/story';
+import { type TravellersResponse } from '@/types/travellers';
+import { type PublicTravellerProfileResponse } from '@/types/user';
 
 export const checkServerSession = async () => {
   const cookieStore = await cookies();
@@ -45,22 +27,14 @@ export const getServerMe = async (): Promise<User> => {
   return data;
 };
 
-import { type StoriesResponse } from '@/types/story';
-export type StoriesQueryParams = {
-  category?: string;
-  page?: number;
-  perPage?: number;
-  type?: 'popular';
-};
-
 export async function getAllStories(
   params: StoriesQueryParams = {}
 ): Promise<StoriesResponse> {
-  const { category, page = 1, perPage, type } = params;
+  const { categoryId, page = 1, perPage, type = 'popular' } = params;
 
   const { data } = await nextServer.get<StoriesResponse>('/stories', {
     params: {
-      category,
+      categoryId,
       page,
       perPage,
       type,
@@ -69,3 +43,26 @@ export async function getAllStories(
 
   return data;
 }
+
+export async function getTravellers(page = 1) {
+  const { data } = await nextServer.get<TravellersResponse>('/users', {
+    params: {
+      page,
+      perPage: 12,
+    },
+  });
+
+  return data;
+}
+
+export const getPublicTravellerProfile = async (
+  travellerId: string,
+  page = 1,
+  perPage = 6
+): Promise<PublicTravellerProfileResponse> => {
+  const { data } = await nextServer.get<PublicTravellerProfileResponse>(
+    `/users/${travellerId}/public?page=${page}&perPage=${perPage}`
+  );
+
+  return data;
+};

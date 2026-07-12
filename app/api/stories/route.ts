@@ -3,16 +3,13 @@ import { api } from '../api';
 import { cookies } from 'next/headers';
 import { ApiError, createErrorResponce } from '../_utils/utils';
 
-
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
 
-
     const cookieStore = await cookies();
     const accessToken = cookieStore.get('accessToken')?.value;
     const sessionId = cookieStore.get('sessionId')?.value;
-
 
     const cookieHeader = [
       accessToken ? `accessToken=${accessToken}` : '',
@@ -21,14 +18,12 @@ export async function POST(req: NextRequest) {
       .filter(Boolean)
       .join('; ');
 
-
     const res = await api.post('/api/stories', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Cookie: cookieHeader,
       },
     });
-
 
     return NextResponse.json(res.data, { status: 201 });
   } catch (error) {
@@ -42,13 +37,13 @@ export async function GET(req: NextRequest) {
     const type = searchParams.get('type');
     const page = searchParams.get('page');
     const perPage = searchParams.get('perPage');
-    const category = searchParams.get('category');
+    const categoryId = searchParams.get('categoryId');
 
     const params: Record<string, string> = {};
     if (type) params.type = type;
     if (page) params.page = page;
     if (perPage) params.perPage = perPage;
-    if (category) params.category = category;
+    if (categoryId) params.categoryId = categoryId;
 
     const res = await api.get('/stories', { params });
     return NextResponse.json(res.data);

@@ -17,7 +17,7 @@ export async function GET(req: NextRequest, { params }: Params) {
     const perPage = searchParams.get('perPage') || '6';
 
     const res = await api.get(
-      `/api/users/${id}/public?page=${page}&perPage=${perPage}`
+      `/users/${id}/public?page=${page}&perPage=${perPage}`
     );
 
     return NextResponse.json(res.data);

@@ -1,7 +1,10 @@
 import { TravellerInfo } from '@/components/TravellerInfo/TravellerInfo';
 import { getPublicTravellerProfile } from '@/lib/api/serverApi';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
+import TravellerNotFound from '@/components/TravellerNotFound/TravellerNotFound';
 import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
+import StoriesList from '@/components/StoriesList/StoriesList';
+import css from './TravellerPage.module.css';
 
 type TravellerPageProps = { params: Promise<{ travellerId: string }> };
 
@@ -13,20 +16,14 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
   try {
     travellerProfile = await getPublicTravellerProfile(travellerId);
   } catch {
-    return (
-      <main>
-        <div className="container">
-          <p>Такий користувач відсутній</p>
-        </div>
-      </main>
-    );
+    return <TravellerNotFound />;
   }
 
   const traveller = travellerProfile.user;
   const stories = travellerProfile.stories?.data ?? [];
-  console.log('travellerProfile:', travellerProfile);
+
   return (
-    <main>
+    <main className={css.main}>
       <div className="container">
         <TravellerInfo
           name={traveller.name}
@@ -39,7 +36,10 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
         </PageTitle>
 
         {stories.length > 0 ? (
-          <p>TravellersStories</p>
+          <StoriesList
+            stories={stories}
+            totalPages={travellerProfile.stories.totalPages}
+          />
         ) : (
           <MessageNoStories
             text="Цей користувач ще не публікував історій"
