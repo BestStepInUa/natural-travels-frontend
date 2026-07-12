@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MdArrowBack } from 'react-icons/md';
 import { PageTitle } from '../PageTitle/PageTitle';
-import styles from './StoryDetails.module.css';
+import css from './StoryDetails.module.css';
 import { User } from '@/types/user';
 import { Category } from '@/types/category';
 
@@ -24,27 +24,27 @@ export default function StoryDetails({
   user,
 }: StoryDetailsProps) {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.topSection}>
-        <div className={styles.leftColumn}>
-          <Link href="/stories" className={styles.backLink}>
+    <div className={`${css.container}`}>
+      <div className={css.topSection}>
+        <div className={css.leftColumn}>
+          <Link href="/stories" className={css.backLink}>
             <MdArrowBack />
             Всі статті
           </Link>
 
           <PageTitle variant="title">{title}</PageTitle>
 
-          <div className={styles.meta}>
-            <p className={styles.metaItem}>
-              <span className={styles.label}>Автор статті</span>
+          <div className={css.meta}>
+            <p className={css.metaItem}>
+              <span className={css.label}>Автор статті</span>
               {user.name}
             </p>
-            <p className={styles.metaItem}>
-              <span className={styles.label}>Опубліковано</span>
+            <p className={css.metaItem}>
+              <span className={css.label}>Опубліковано</span>
               {date}
             </p>
-            <p className={styles.metaItem}>
-              <span className={styles.category}>{category.category}</span>
+            <p className={css.metaItem}>
+              <span className={css.category}>{category.category}</span>
             </p>
           </div>
         </div>
@@ -54,11 +54,11 @@ export default function StoryDetails({
           alt={title}
           width={755}
           height={502}
-          className={styles.image}
+          className={css.image}
         />
       </div>
 
-      <p className={styles.article}>{article}</p>
+      <p className={css.article}>{article}</p>
     </div>
   );
 }
