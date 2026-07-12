@@ -21,7 +21,6 @@ export default function StoryCard({
   rate,
   ownerId,
 }: StoryCardProps) {
-  console.log('ownerId:', ownerId);
   return (
     <div className={css.storyCard}>
       <Image
