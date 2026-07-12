@@ -1,5 +1,6 @@
 import { nextServer } from '@/lib/api/api';
-import { User } from '@/types/user';
+import type { User } from '@/types/user';
+import type { Category } from '@/types/category';
 export type { User };
 import { type TravellersResponse } from '@/types/travellers';
 
@@ -75,6 +76,12 @@ export async function getTravellersClient(page = 1) {
       perPage: 12,
     },
   });
+
+  return data;
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const { data } = await nextServer.get('/categories');
 
   return data;
 }
