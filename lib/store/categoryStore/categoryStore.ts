@@ -13,12 +13,21 @@ export const useCategoryStore = create<CategoryStore>((set, get) => ({
   isLoading: false,
 
   fetchCategories: async () => {
-    if (get().categories.length > 0 || get().isLoading) return;
+    console.log('Attempting to fetch categories...');
+    if (get().categories.length > 0) {
+      console.log('Categories already in store, retrieving from store.');
+      return;
+    }
+    if (get().isLoading) {
+      console.log('Categories are already loading.');
+      return;
+    }
 
     set({ isLoading: true });
     try {
       const categories = await getCategories();
       set({ categories });
+      console.log('Categories fetched from API.');
     } catch (error) {
       console.error('Помилка завантаження категорій:', error);
     } finally {
