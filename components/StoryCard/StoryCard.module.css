@@ -157,6 +157,16 @@
   transition: background-color 300ms ease;
 }
 
+:global(.dark) .storyCardSaveButton svg {
+  filter: invert(1) brightness(2);
+  transition: filter 300ms ease;
+}
+
+:global(.dark) .storyCardSaveButton:hover svg {
+  filter: none; 
+}
+
+
 .storyCardSaveButton:hover {
   border: 1px solid var(--opacity-transparent);
   color: var(--color-white);

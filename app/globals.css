@@ -160,12 +160,15 @@ span {
 }
 
 .dark {
---color-scheme-2-text: var(--color-mantis-lightest);
+--color-scheme-2-text: #eef8ee;
   --color-scheme-2-background:#254c24;
   --color-scheme-2-foreground: #1b391b;
   --color-scheme-2-border:  #def2de;
   --opacity-neutral-darkest-5:#254c24;
-  --color-scheme-1-text: var(--color-mantis-lightest);
+  --color-scheme-1-text: #eef8ee;
   --color-scheme-1-border:  #def2de;
-  --color-mantis-darkest:var(--color-mantis-lightest);
+  --color-mantis-darkest:#eef8ee;
+  --color-mantis-lighter: #1b391b;
+  --color-neutral-darkest:#eef8ee;
+  --opacity-neutral-darkest-5: #1b391b;
 }

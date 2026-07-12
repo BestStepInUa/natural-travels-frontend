@@ -43,6 +43,7 @@ background-color: var(--opacity-neutral-darkest-5);
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+  margin-top: 40px;
 }
 
 .prevBtn,
@@ -64,6 +65,15 @@ background-color: var(--opacity-neutral-darkest-5);
 .nextBtn:hover {
   background-color: var(--color-neutral-lightest);
 
+}
+
+:global(.dark) .navigation button svg {
+  filter: invert(1) brightness(2);
+  transition: filter 300ms ease;
+}
+
+:global(.dark) .navigation button:hover svg {
+  filter: brightness(0) saturate(100%);
 }
 
 .allStoriesBtnMobile {

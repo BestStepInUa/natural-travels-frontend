@@ -2,7 +2,7 @@
   padding: 0 0 64px;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1440px) {
   .storiesListContainer {
       padding: 0 0 72px;
     }
@@ -15,39 +15,44 @@
 }
 
 .storiesLoadMore {
-  display: block;
-  margin: 0 auto;
-  border: 1px solid var(--color-mantis-dark);
-  border-radius: 6px;
-  padding: 6px 12px;
+  margin: 40px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
   width: 100%;
-  max-width: 335px;
-  height: 48px;
-  background-color: var(--color-mantis-dark);
-  margin-top: 40px;
+  border-radius: 6px;
+  border: 1px solid transparent;
   font-weight: 500;
   font-size: 16px;
+  background-color: var(--color-mantis-dark);
   color: var(--color-white);
-  transition: background-color 300ms ease;
+  transition:
+    background-color var(--main-transition),
+    transform var(--main-transition),
+    border-color var(--main-transition);
+}
+
+.storiesLoadMore:hover,
+.storiesLoadMore:focus {
+  cursor: pointer;
+  color: var(--color-scheme-2-text);
+  background-color: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
 }
 
 @media only screen and (min-width: 768px) {
-  .storiesLoadMore {
-    width: 135px;
-  }
+.storiesLoadMore {
+  padding: 12px;
+  width: auto;
+}
 }
 
 @media only screen and (min-width: 1440px) {
-  .storiesLoadMore {
-    width: 160px;
-  }
+.storiesLoadMore {
+  padding: 9px 12px;
+  font-size: 20px;
 }
-
-.storiesLoadMore:hover {
-  background-color: var(--opacity-neutral-darkest-5);
-  color: var(--color-scheme-2-text);
-  border: 1px solid var(--color-scheme-2-border);
-
 }
 
 .storiesLoadMore:disabled {
