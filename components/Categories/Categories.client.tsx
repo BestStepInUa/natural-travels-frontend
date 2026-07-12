@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import css from './Categories.module.css';
 import { Category } from '@/types/category';
+import { PageTitle } from '@/components/PageTitle/PageTitle';
 
 type Props = {
   categories: Category[];
@@ -14,7 +15,9 @@ export default function CategoriesClient({ categories, currentSlug }: Props) {
 
   return (
     <div className={css.stories}>
-      <h2 className={css.storiesListTitle}>Статті</h2>
+      <PageTitle variant="title" color="scheme1" marginBottom={40} align="center">
+        Статті
+      </PageTitle>
       <select
         className={css.categoryListSelect}
         value={currentSlug}

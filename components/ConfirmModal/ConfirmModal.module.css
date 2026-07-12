@@ -46,6 +46,11 @@
   justify-content: center;
 }
 
+:global(.dark) .closeButton svg {
+  filter: invert(1) brightness(2);
+  transition: filter 300ms ease;
+}
+
 .description {
 font-size: 16px;
 text-align: center;

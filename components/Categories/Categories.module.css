@@ -1,34 +1,5 @@
-.storiesListTitle {
-
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  text-align: center;
-  color: var(--color-scheme-1-text);
-  margin-bottom: 30px;
-}
-
-@media (min-width: 768px) {
-  .storiesListTitle {
-    font-size: 48px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .storiesListTitle {
-    font-size: 56px;
-  }
-}
-
 .stories {
   padding: 32px 0 0;
-}
-
-@media (min-width: 768px) {
-  .stories {
-    padding: 48px 0 0;
-  }
 }
 
 @media (min-width: 1440px) {
