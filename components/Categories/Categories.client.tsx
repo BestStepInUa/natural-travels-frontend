@@ -2,15 +2,23 @@
 
 import { useRouter } from 'next/navigation';
 import css from './Categories.module.css';
-import { Category } from '@/types/category';
+import { useEffect } from 'react';
+import { useCategoryStore } from '@/lib/store/categoryStore/categoryStore';
 
 type Props = {
-  categories: Category[];
   currentSlug: string;
 };
 
-export default function CategoriesClient({ categories, currentSlug }: Props) {
+export default function CategoriesClient({ currentSlug }: Props) {
   const router = useRouter();
+  const { categories, isLoading, fetchCategories } = useCategoryStore();
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  if (isLoading && categories.length === 0)
+    return <div>Завантаження категорій...</div>;
 
   return (
     <div className={css.stories}>
