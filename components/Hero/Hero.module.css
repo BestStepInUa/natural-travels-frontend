@@ -36,18 +36,21 @@
   align-self: flex-start;
   background: var(--color-mantis-dark);
   color: var(--color-white);
+   border: 1px solid transparent;
   font-weight: 500;
   font-size: 16px;
   line-height: 150%;
   border-radius: 6px;
   padding: 7.5px 0;
   width: 100%;
-  transition: background var(--main-transition);
+    transition: background-color var(--main-transition), border var(--main-transition), color var(--main-transition);
 }
 
 .button:hover,
 .button:focus {
-  background: var(--color-mantis-darker);
+  background-color: var(--opacity-neutral-darkest-5);
+  border: 1px solid var(--color-scheme-2-border);
+  color: var(--color-scheme-2-text);
 }
 
 @media only screen and (min-width: 768px) {

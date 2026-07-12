@@ -28,7 +28,7 @@
 /* --- Поля вводу та лейбли --- */
 .label {
   font-size: 18px;
-  color: #000;
+  color: var(--color-scheme-1-text);
 }
 
 .input {

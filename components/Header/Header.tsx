@@ -9,6 +9,9 @@ import { UserBar } from '@/components/UserBar/UserBar';
 import { BurgerMenu } from '@/components/BurgerMenu/BurgerMenu';
 import css from './Header.module.css';
 import { RxHamburgerMenu } from "react-icons/rx";
+import darkcss from './Dark.module.css'
+import { BiLeaf } from 'react-icons/bi';
+import { useTheme } from '@/components/ThemeContext/ThemeContext';
 
 const navLinks = [
   { href: '/', label: 'Головна' },
@@ -21,6 +24,7 @@ const privateNavLinks = [{ href: '/profile', label: 'Мій Профіль' }];
 export default function Header() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const headerRef = useRef<HTMLElement>(null);
 
   const links = isAuthenticated ? [...navLinks, ...privateNavLinks] : navLinks;
@@ -44,6 +48,8 @@ export default function Header() {
     return () => resizeObserver.disconnect();
   }, []);
 
+  const { isDark, toggleTheme } = useTheme();
+
   return (
     <header ref={headerRef} className={css.header}>
       <div className={`container ${css.content}`}>
@@ -55,6 +61,20 @@ export default function Header() {
             Мандри
           </span>
         </Link>
+
+        <div className={darkcss['toggle-switch']}>
+          <label className={darkcss['switch-label']}>
+            <input
+              type="checkbox"
+              className={darkcss.checkbox}
+              checked={isDark}
+              onChange={toggleTheme}
+            />
+            <span className={darkcss.slider}>
+              <BiLeaf className={darkcss.leafIcon} />
+            </span>
+          </label>
+        </div>
 
         <div className={css.rightGroup}>
           <nav className={css.nav} aria-label="Навігація">
@@ -90,7 +110,7 @@ export default function Header() {
               aria-label="Відкрити меню"
               onClick={() => setIsMenuOpen(true)}
             >
-            <RxHamburgerMenu size={24}/>
+              <RxHamburgerMenu size={24} />
             </button>
           </div>
         </div>

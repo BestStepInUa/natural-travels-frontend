@@ -22,6 +22,10 @@
   height: 100%;
 }
 
+:global(.dark) .cursor img {
+  filter: invert(1) brightness(2);
+}
+
 .cursor.is-hidden-on-logo {
   opacity: 0;
 }

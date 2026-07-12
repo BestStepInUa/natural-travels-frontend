@@ -23,6 +23,7 @@
   height: 48px;
   background-color: var(--color-mantis-dark);
   color: var(--color-white);
+    border: 1px solid transparent;
   padding: 6px 12px;
   border-radius: 6px;
   height: 48px;
@@ -30,16 +31,21 @@
   font-weight: 500;
   font-size: 16px;
   white-space: nowrap;
+   transition: background-color var(--main-transition), border var(--main-transition), color var(--main-transition);
 }
 
-.allTravellersBtn:hover {
-  background-color: var(--color-mantis-lighter);
+.allTravellersBtn:hover,
+.allTravellersBtn:focus {
+  background-color: var(--opacity-neutral-darkest-5);
+  border: 1px solid var(--color-scheme-2-border);
+  color: var(--color-scheme-2-text);
 }
 
 .navigation {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+  margin-top: 48px;
 }
 
 .prevBtn,
