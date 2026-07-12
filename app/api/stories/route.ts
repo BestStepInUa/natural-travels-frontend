@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
       .filter(Boolean)
       .join('; ');
 
-    const res = await api.post('/api/stories', formData, {
+    const res = await api.post('/stories', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Cookie: cookieHeader,
