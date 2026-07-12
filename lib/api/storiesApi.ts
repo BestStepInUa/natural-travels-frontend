@@ -1,5 +1,5 @@
 import { nextServer } from './api';
-import { ProfileStoriesResponse } from '@/types/story';
+import { ProfileStoriesResponse, Story } from '@/types/story';
 
 const baseURL = process.env.NEXT_BACKEND_API_URL;
 
@@ -42,7 +42,7 @@ export const getCategories = async () => {
 
 export const getSavedStories = async (
   page = 1,
-  perPage = 6,
+  perPage = 6
 ): Promise<ProfileStoriesResponse> => {
   const { data } = await nextServer.get<ProfileStoriesResponse>(
     '/stories/saved-stories',
@@ -51,7 +51,7 @@ export const getSavedStories = async (
         page,
         perPage,
       },
-    },
+    }
   );
 
   return data;
@@ -59,7 +59,7 @@ export const getSavedStories = async (
 
 export const getMyStories = async (
   page = 1,
-  perPage = 6,
+  perPage = 6
 ): Promise<ProfileStoriesResponse> => {
   const { data } = await nextServer.get<ProfileStoriesResponse>(
     '/stories/my-stories',
@@ -68,8 +68,23 @@ export const getMyStories = async (
         page,
         perPage,
       },
-    },
+    }
   );
 
   return data;
+};
+
+export const getStoriesByCategory = async (
+  categoryId: string,
+  perPage: number
+): Promise<Story[]> => {
+  const res = await nextServer.get('/stories', {
+    baseURL,
+    params: {
+      categoryId,
+      perPage,
+      page: 1,
+    },
+  });
+  return res.data.stories;
 };
