@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { checkServerSession } from './lib/api/serverApi';
 import { setAuthCookiesFromHeaders } from '@/app/api/_utils/utils';
 
-const PRIVATE_ROUTES = ['/logout', '/session', '/auth/me'];
-const PUBLIC_ROUTES = ['/login', '/register', '/stories'];
+const PRIVATE_ROUTES = ['/logout', '/session', '/auth/me', '/stories/new'];
+const PUBLIC_ROUTES = ['/login', '/register'];
 
 export async function proxy(request: NextRequest) {
   const cookieStore = await cookies();
