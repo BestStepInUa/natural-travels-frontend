@@ -86,7 +86,7 @@ export const PopularStories = () => {
       <div className={css.header}>
         <PageTitle variant="title">Популярні статті</PageTitle>
         <Link
-          href="/stories"
+          href="/stories/filter/all"
           className={`${css.allStoriesBtn} ${css.allStoriesBtnDesktop}`}
         >
           Всі статті
