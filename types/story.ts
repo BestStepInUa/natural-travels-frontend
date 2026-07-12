@@ -29,3 +29,11 @@ export type StoriesQueryParams = {
   perPage?: number;
   type?: 'popular';
 };
+
+export interface ProfileStoriesResponse {
+  data: Story[];
+  page: number;
+  perPage: number;
+  totalItems: number;
+  totalPages: number;
+}
