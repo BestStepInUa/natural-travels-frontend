@@ -44,12 +44,13 @@ export const PopularStories = () => {
     queryFn: async () => {
       const stories = await getPopularStories(currentPage, perPage);
       setAllStories((prev) => {
+        if (!stories) return prev;
         const newStories = stories.filter(
           (s: Story) => !prev.find((p: Story) => p._id === s._id)
         );
         return [...prev, ...newStories];
       });
-      return stories;
+      return stories || [];
     },
     staleTime: Infinity,
     enabled: !allLoaded,

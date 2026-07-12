@@ -1,6 +1,5 @@
-import css from '@/components/Stories/Stories.module.css';
+import css from '@/components/Categories/Categories.module.css';
 import Link from 'next/link';
-import StoriesList from '@/components/StoriesList/StoriesList';
 
 const categories = [
   { label: 'Всі статті', slug: 'all' },
@@ -13,9 +12,9 @@ const categories = [
   { label: 'Полісся', slug: 'polissia' },
 ];
 
-export default function Stories() {
+export default function Categories() {
   return (
-    <section className={css.stories}>
+    <div className={css.stories}>
       <h2 className={css.storiesListTitle}>Статті</h2>
       <select className={css.categoryListSelect}>
         {categories.map((category) => (
@@ -37,8 +36,6 @@ export default function Stories() {
           </li>
         ))}
       </ul>
-      <StoriesList />
-      <button className={css.storiesLoadMore}>Показати ще</button>
-    </section>
+    </div>
   );
 }

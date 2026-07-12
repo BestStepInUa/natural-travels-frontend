@@ -1,3 +1,13 @@
+.storiesListContainer {
+  padding: 0 0 64px;
+}
+
+@media only screen and (min-width: 768px) {
+  .storiesListContainer {
+      padding: 0 0 72px;
+    }
+}
+
 .storyCard {
   flex: 1 1 100%;
   width: 100%;
@@ -161,4 +171,45 @@
   color: var(--color-white);
   border-radius: 6px;
   background-color: var(--color-mantis-dark);
+}
+
+.storiesLoadMore {
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--color-mantis-dark);
+  border-radius: 6px;
+  padding: 6px 12px;
+  width: 100%;
+  max-width: 335px;
+  height: 48px;
+  background-color: var(--color-mantis-dark);
+
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--color-white);
+  transition: background-color 300ms ease;
+}
+
+@media only screen and (min-width: 768px) {
+  .storiesLoadMore {
+    width: 135px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .storiesLoadMore {
+    width: 160px;
+  }
+}
+
+.storiesLoadMore:hover {
+  background-color: var(--opacity-neutral-darkest-5);
+  color: var(--color-scheme-2-text);
+  border: 1px solid var(--color-scheme-2-border);
+
+}
+
+.storiesLoadMore:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
