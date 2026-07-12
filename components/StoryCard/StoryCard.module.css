@@ -1,4 +1,4 @@
-.storyCard {
+/* .storyCard {
   flex: 1 1 100%;
   width: 100%;
   margin-bottom: 40px;
@@ -14,7 +14,7 @@
   .storyCard {
     flex: 1 1 calc(33.333% - 16px);
   }
-}
+} */
 
 .storyCardImage {
   width: 100%;

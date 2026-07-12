@@ -1,55 +1,35 @@
 'use client';
 
-import css from '@/components/Categories/Categories.module.css';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import css from './Categories.module.css';
+import { Category } from '@/types/category';
 
-const categories = [
-  { label: 'Всі статті', slug: 'all' },
-  {
-    label: 'Еко-ферми та гастротури',
-    slug: 'eco-farms',
-    id: '6966a5cdbc1b90f344c2e0bb',
-  },
-  {
-    label: 'Традиції та культура',
-    slug: 'traditions',
-    id: '6966a5cdbc1b90f344c2e0bc',
-  },
-  { label: 'Карпати', slug: 'carpathians', id: '6966a5cdbc1b90f344c2e0bd' },
-  {
-    label: 'Національні парки',
-    slug: 'national-parks',
-    id: '6966a5cdbc1b90f344c2e0be',
-  },
-  { label: 'Поділля', slug: 'podillia', id: '6966a5cdbc1b90f344c2e0bf' },
-  { label: 'Озера та річки', slug: 'lakes', id: '6966a5cdbc1b90f344c2e0c0' },
-  { label: 'Полісся', slug: 'polissia', id: '6966a5cdbc1b90f344c2e0c1' },
-];
+type Props = {
+  categories: Category[];
+  currentSlug: string;
+};
 
-export default function CategoriesClient() {
+export default function CategoriesClient({ categories, currentSlug }: Props) {
+  const router = useRouter();
+
   return (
     <div className={css.stories}>
       <h2 className={css.storiesListTitle}>Статті</h2>
-      <select className={css.categoryListSelect}>
+      <select
+        className={css.categoryListSelect}
+        value={currentSlug}
+        onChange={(e) => {
+          router.push(`/stories/filter/${e.target.value}`);
+        }}
+      >
+        <option value="all">Всі статті</option>
+
         {categories.map((category) => (
-          <option key={category.slug} value={category.slug}>
-            {category.label}
+          <option key={category._id} value={category.slug}>
+            {category.category}
           </option>
         ))}
       </select>
-
-      <ul className={css.categoryList}>
-        {categories.map((category) => (
-          <li className={css.categoryItem} key={category.slug}>
-            <Link
-              href={`/stories/filter/${category.slug}`}
-              className={css.categoryItemLink}
-            >
-              {category.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
