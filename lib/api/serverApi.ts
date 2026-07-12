@@ -5,6 +5,7 @@ import { type User } from '@/types/user';
 import { type StoriesResponse } from '@/types/story';
 import { type StoriesQueryParams } from '@/types/story';
 import { type TravellersResponse } from '@/types/travellers';
+import { Category } from '@/types/category';
 
 export const checkServerSession = async () => {
   const cookieStore = await cookies();
@@ -50,6 +51,12 @@ export async function getTravellers(page = 1) {
       perPage: 12,
     },
   });
+
+  return data;
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const { data } = await nextServer.get('/categories');
 
   return data;
 }

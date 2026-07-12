@@ -8,169 +8,10 @@
     }
 }
 
-.storyCard {
-  flex: 1 1 100%;
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .storyCard {
-    flex: 1 1 calc(50% - 12px);
-  }
-}
-
-@media (min-width: 1440px) {
-  .storyCard {
-    flex: 1 1 calc(33.333% - 16px);
-  }
-}
-
 .storiesList {
   display: flex;
-  gap: 24px;
   flex-wrap: wrap;
-}
-
-.storyCardImage {
-  width: 100%;
-  max-width: 335px;
-  height: 335px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-}
-@media only screen and (min-width: 768px) {
-  .storyCardImage {
-    max-width: 340px;
-    height: 340px;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .storyCardImage {
-    max-width: 421px;
-    height: 421px;
-  }
-}
-
-.storyCardContent {
-  padding: 16px;
-  max-width: 335px;
-  background-color: var(--color-scheme-2-foreground);
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
-
-@media only screen and (min-width: 768px) {
-  .storyCardContent {
-    max-width: 340px;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .storyCardContent {
-    max-width: 421px;
-  }
-}
-
-.storyCardAuthorContainer {
-  display: flex;
-  gap: 0 8px;
-  margin-bottom: 12px;
-  align-items: center;
-}
-
-.storyCardAuthor{
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--color-scheme-2-text);
-}
-
-.storyCardSaves{
-  font-size: 12px;
-  color: var(--color-scheme-2-text);
-}
-
-.storyCardTitle{
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--color-scheme-2-text);
-  margin-bottom: 12px;
-
-
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  width: 100%;
-
-  overflow: hidden;
-}
-
-@media only screen and (min-width: 1440px) {
-  .storyCardTitle {
-    height: 78px;
-  }
-}
-@media only screen and (min-width: 1440px) {
-  .storyCardTitle {
-    font-size: 26px;
-  }
-}
-
-.storyCardButtonWrapper{
-  display: flex;
-}
-
-.storyCardButton{
-  background-color: var(--opacity-neutral-darkest-5);
-  border: 1px solid var(--color-scheme-2-border);
-  border-radius: 6px;
-  padding: 6px 12px;
-  width: 239px;
-  height: 48px;
-  margin-right: 16px;
-  font-weight: 500;
-  font-size: 16px;
-  color: var(--color-scheme-2-text);
-  transition: background-color 300ms ease;
-}
-
-.storyCardButton:hover {
-  border: 1px solid var(--opacity-transparent);
-  color: var(--color-white);
-  border-radius: 6px;
-  background-color: var(--color-mantis-dark);
-}
-
-@media only screen and (min-width: 768px) {
-  .storyCardButton {
-    width: 244px;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .storyCardButton {
-    width: 325px;
-    font-size: 20px;
-  }
-}
-
-.storyCardSaveButton{
-  background-color: var(--opacity-neutral-darkest-5);
-  border: 1px solid var(--color-scheme-2-border);
-  border-radius: 6px;
-  padding: 6px;
-  width: 48px;
-  height: 48px;
-  transition: background-color 300ms ease;
-}
-
-.storyCardSaveButton:hover {
-  border: 1px solid var(--opacity-transparent);
-  color: var(--color-white);
-  border-radius: 6px;
-  background-color: var(--color-mantis-dark);
+  gap: 24px;
 }
 
 .storiesLoadMore {
@@ -183,7 +24,7 @@
   max-width: 335px;
   height: 48px;
   background-color: var(--color-mantis-dark);
-
+  margin-top: 40px;
   font-weight: 500;
   font-size: 16px;
   color: var(--color-white);

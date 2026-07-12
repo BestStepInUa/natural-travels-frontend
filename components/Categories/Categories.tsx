@@ -3,46 +3,29 @@ import {
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { getAllStories } from '@/lib/api/serverApi';
+import { getAllStories, getCategories } from '@/lib/api/serverApi';
 import CategoriesClient from './Categories.client';
-// import { TbCategoryFilled } from 'react-icons/tb';
-
-const categories = [
-  { label: 'Всі статті', slug: 'all' },
-  {
-    label: 'Еко-ферми та гастротури',
-    slug: 'eco-farms',
-    id: '6966a5cdbc1b90f344c2e0bb',
-  },
-  {
-    label: 'Традиції та культура',
-    slug: 'traditions',
-    id: '6966a5cdbc1b90f344c2e0bc',
-  },
-  { label: 'Карпати', slug: 'carpathians', id: '6966a5cdbc1b90f344c2e0bd' },
-  {
-    label: 'Національні парки',
-    slug: 'national-parks',
-    id: '6966a5cdbc1b90f344c2e0be',
-  },
-  { label: 'Поділля', slug: 'podillia', id: '6966a5cdbc1b90f344c2e0bf' },
-  { label: 'Озера та річки', slug: 'lakes', id: '6966a5cdbc1b90f344c2e0c0' },
-  { label: 'Полісся', slug: 'polissia', id: '6966a5cdbc1b90f344c2e0c1' },
-];
+import Link from 'next/link';
+import css from './Categories.module.css';
 
 type CategoriesProps = {
-  params?: Promise<{ slug: string[] }>;
+  params: Promise<{
+    slug?: string[];
+  }>;
 };
 
 export default async function Categories({ params }: CategoriesProps) {
   const queryClient = new QueryClient();
 
-  let categoryId: string | undefined;
+  const categories = await getCategories();
 
-  if (params) {
-    const { slug } = await params;
-    categoryId = categories.find((c) => c.slug === slug[0])?.id;
-  }
+  const resolvedParams = params ? await params : undefined;
+  const currentSlug = resolvedParams?.slug?.[0] ?? 'all';
+
+  const categoryId =
+    currentSlug === 'all'
+      ? undefined
+      : categories.find((c) => c.slug === currentSlug)?._id;
 
   await queryClient.prefetchQuery({
     queryKey: ['stories', categoryId, 1],
@@ -51,7 +34,24 @@ export default async function Categories({ params }: CategoriesProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CategoriesClient />
+      <CategoriesClient categories={categories} currentSlug={currentSlug} />
+      <ul className={css.categoryList}>
+        <li className={css.categoryItem}>
+          <Link href="/stories/filter/all" className={css.menuLink}>
+            Всі статті
+          </Link>
+        </li>
+        {categories.map((category) => (
+          <li className={css.categoryItem} key={category._id}>
+            <Link
+              href={`/stories/filter/${category.slug}`}
+              className={css.categoryItemLink}
+            >
+              {category.category}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </HydrationBoundary>
   );
 }
