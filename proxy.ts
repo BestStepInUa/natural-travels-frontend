@@ -48,7 +48,7 @@ export async function proxy(request: NextRequest) {
     }
 
     if (isPrivateRoute) {
-      return NextResponse.redirect(new URL('/sign-in', request.url));
+      return NextResponse.redirect(new URL('/login', request.url));
     }
   }
 
