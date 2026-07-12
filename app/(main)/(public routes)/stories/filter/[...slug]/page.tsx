@@ -22,7 +22,7 @@ export default async function Stories({ params }: Props) {
     perPage: 9,
     categoryId,
   });
-
+  //Консоль для визначення історій без юзера
   res.stories.forEach((story) => {
     if (!story.ownerId) {
       console.log('❌ Немає ownerId:', story);
