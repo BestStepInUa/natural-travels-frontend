@@ -8,9 +8,14 @@ import { getStoriesClient } from '@/lib/api/clientApi';
 interface StoriesListProps {
   stories: Story[];
   totalPages: number;
+  categoryId?: string;
 }
 
-export default function StoriesList({ stories, totalPages }: StoriesListProps) {
+export default function StoriesList({
+  stories,
+  totalPages,
+  categoryId,
+}: StoriesListProps) {
   const [storiesList, setStoriesList] = useState(stories);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +31,7 @@ export default function StoriesList({ stories, totalPages }: StoriesListProps) {
       const response = await getStoriesClient({
         page: nextPage,
         perPage: 9,
+        categoryId,
       });
 
       setStoriesList((prevStories) => {
