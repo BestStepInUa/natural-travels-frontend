@@ -1,10 +1,10 @@
-import { cacheLife } from 'next/cache';
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from '@tanstack/react-query';
-import { getAllStories, getCategories } from '@/lib/api/serverApi';
+import { getAllStories } from '@/lib/api/serverApi';
+import { getCachedCategories } from '@/lib/api/cached';
 import CategoriesClient from './Categories.client';
 import Link from 'next/link';
 import css from './Categories.module.css';
@@ -17,14 +17,6 @@ type CategoriesProps = {
 
 export default async function Categories({ params }: CategoriesProps) {
   const queryClient = new QueryClient();
-
-  async function getCachedCategories() {
-    'use cache';
-
-    cacheLife('max');
-
-    return getCategories();
-  }
 
   const categories = await getCachedCategories();
 
@@ -39,19 +31,25 @@ export default async function Categories({ params }: CategoriesProps) {
   await queryClient.prefetchInfiniteQuery({
     queryKey: ['stories', categoryId],
     queryFn: ({ pageParam = 1 }) =>
-      getAllStories({ page: pageParam, perPage: 9, categoryId }),
+      getAllStories({
+        page: pageParam,
+        perPage: 9,
+        categoryId,
+      }),
     initialPageParam: 1,
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <CategoriesClient currentSlug={currentSlug} />
+
       <ul className={css.categoryList}>
         <li className={css.categoryItem}>
           <Link href="/stories/filter/all" className={css.menuLink}>
             Всі статті
           </Link>
         </li>
+
         {categories.map((category) => (
           <li className={css.categoryItem} key={category._id}>
             <Link

@@ -8,8 +8,7 @@ import {
 } from 'react-icons/fa6';
 import css from './Footer.module.css';
 
-export default async function Footer() {
-  'use cache';
+export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
