@@ -5,6 +5,7 @@
 .fieldWrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .label {
@@ -74,6 +75,7 @@
   margin-bottom: 24px;
   outline: none;
   transition: border-color var(--main-transition);
+  position: relative;
 }
 
 .input::placeholder {
@@ -105,7 +107,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--color-scheme-2-text);
+  color: var(--opacity-neutral-darkest-60);
   cursor: pointer;
   box-sizing: border-box;
   text-align: left;
@@ -297,10 +299,11 @@
 
 .error {
   display: block;
-height: 24px;
+  position: absolute;
   font-family: var(--font-family);
   font-size: 12px;
   color: #b00101;
+  bottom: 5px;
 }
 
 .inputError {
