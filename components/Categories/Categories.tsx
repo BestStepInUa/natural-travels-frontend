@@ -36,7 +36,7 @@ export default async function Categories({ params }: CategoriesProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CategoriesClient categories={categories} currentSlug={currentSlug} />
+      <CategoriesClient currentSlug={currentSlug} />
       <ul className={css.categoryList}>
         <li className={css.categoryItem}>
           <Link href="/stories/filter/all" className={css.menuLink}>
