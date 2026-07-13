@@ -157,6 +157,11 @@
   border: 1px solid #1b391b;
   color: #eef8ee;
 }
+@media only screen and (min-width: 768px) {
+  .hidden {
+    display: none;
+  }
+}
 
 .optionItem {
   padding: 8px 12px;
