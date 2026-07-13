@@ -27,14 +27,16 @@ export default async function Categories({ params }: CategoriesProps) {
       ? undefined
       : categories.find((c) => c.slug === currentSlug)?._id;
 
-  await queryClient.prefetchQuery({
-    queryKey: ['stories', categoryId, 1],
-    queryFn: () => getAllStories({ page: 1, perPage: 9, categoryId }),
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ['stories', categoryId],
+    queryFn: ({ pageParam = 1 }) =>
+      getAllStories({ page: pageParam, perPage: 9, categoryId }),
+    initialPageParam: 1,
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CategoriesClient categories={categories} currentSlug={currentSlug} />
+      <CategoriesClient currentSlug={currentSlug} />
       <ul className={css.categoryList}>
         <li className={css.categoryItem}>
           <Link href="/stories/filter/all" className={css.menuLink}>

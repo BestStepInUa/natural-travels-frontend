@@ -55,7 +55,7 @@ import { type StoriesResponse } from '@/types/story';
 export async function getStoriesClient(
   params: StoriesQueryParams
 ): Promise<StoriesResponse> {
-  const { categoryId, page = 1, perPage, type } = params;
+  const { categoryId, page = 1, perPage, type = 'popular' } = params;
 
   const { data } = await nextServer.get<StoriesResponse>('/stories', {
     params: {
