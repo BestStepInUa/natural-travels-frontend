@@ -1,3 +1,4 @@
+import { cacheLife } from 'next/cache';
 import {
   dehydrate,
   HydrationBoundary,
@@ -17,7 +18,15 @@ type CategoriesProps = {
 export default async function Categories({ params }: CategoriesProps) {
   const queryClient = new QueryClient();
 
-  const categories = await getCategories();
+  async function getCachedCategories() {
+    'use cache';
+
+    cacheLife('max');
+
+    return getCategories();
+  }
+
+  const categories = await getCachedCategories();
 
   const resolvedParams = params ? await params : undefined;
   const currentSlug = resolvedParams?.slug?.[0] ?? 'all';
