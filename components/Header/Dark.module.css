@@ -1,20 +1,24 @@
 /* --- Контейнер --- */
 .toggle-switch {
-  display: none;
   position: relative;
   width: 65px;
   height: 35px;
   margin-left: auto;
-  margin-right: 28px;
+  margin-right: 14px;
 
   --light-bg:  #eef8ee;
   --dark-bg: #254c24;
-  --accent-color: #02060a;
+}
+
+@media screen and (min-width: 768px) {
+  .toggle-switch {
+    margin-right: 16px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
   .toggle-switch {
-    display: block;
+    margin-right: 26px;
   }
 }
 
