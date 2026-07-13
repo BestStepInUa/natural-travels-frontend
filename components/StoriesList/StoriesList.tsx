@@ -1,78 +1,69 @@
 'use client';
 import css from '@/components/StoriesList/StoriesList.module.css';
-import { type Story } from '@/types/story';
 import StoryCard from '@/components/StoryCard/StoryCard';
-import { useState } from 'react';
 import { getStoriesClient } from '@/lib/api/clientApi';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { useCategoryStore } from '@/lib/store/categoryStore/categoryStore';
 
-interface StoriesListProps {
-  stories: Story[];
-  totalPages: number;
-  categoryId?: string;
-}
+export default function StoriesList() {
+  const params = useParams();
+  const { categories } = useCategoryStore();
 
-export default function StoriesList({
-  stories,
-  totalPages,
-  categoryId,
-}: StoriesListProps) {
-  const [storiesList, setStoriesList] = useState(stories);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
+  const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug ?? 'all';
 
-  const loadMoreData = async () => {
-    if (page >= totalPages || isLoading) return;
+  const categoryId =
+    slug === 'all'
+      ? undefined
+      : categories.find((c) => c.slug === slug)?._id;
 
-    try {
-      setIsLoading(true);
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ['stories', categoryId],
+    queryFn: ({ pageParam = 1 }) =>
+      getStoriesClient({ page: pageParam, perPage: 9, categoryId }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      if (!lastPage || lastPage.stories.length === 0) {
+        return undefined;
+      }
+      const nextPage = allPages.length + 1;
+      return nextPage > lastPage.totalPages ? undefined : nextPage;
+    },
+  });
 
-      const nextPage = page + 1;
-
-      const response = await getStoriesClient({
-        page: nextPage,
-        perPage: 9,
-        categoryId,
-      });
-
-      setStoriesList((prevStories) => {
-        const merged = [...prevStories, ...response.stories];
-
-        return merged.filter(
-          (story, index, self) =>
-            index === self.findIndex((item) => item._id === story._id)
-        );
-      });
-
-      setPage(nextPage);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  if (status === 'pending') return <p>Завантаження...</p>;
+  if (status === 'error') return <p>Помилка завантаження історій.</p>;
 
   return (
     <div className={css.storiesListContainer}>
       <div className={css.storiesList}>
-        {storiesList.map((story) => (
-          <StoryCard
-            key={story._id}
-            _id={story._id}
-            img={story.img}
-            title={story.title}
-            rate={story.rate}
-            ownerId={story.ownerId}
-          />
-        ))}
+        {data.pages.map((page) =>
+          page.stories.map((story) => (
+            <StoryCard
+              key={story._id}
+              _id={story._id}
+              img={story.img}
+              title={story.title}
+              rate={story.rate}
+              ownerId={story.ownerId}
+            />
+          ))
+        )}
       </div>
 
-      {page < totalPages && (
+      {hasNextPage && (
         <button
           className={css.storiesLoadMore}
-          onClick={loadMoreData}
-          disabled={page >= totalPages}
+          onClick={() => fetchNextPage()}
+          disabled={isFetchingNextPage}
         >
-          {isLoading ? 'Завантаження...' : 'Показати ще'}
+          {isFetchingNextPage ? 'Завантаження...' : 'Показати ще'}
         </button>
       )}
     </div>
