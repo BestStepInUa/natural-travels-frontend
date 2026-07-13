@@ -33,11 +33,13 @@ export const PopularStories = () => {
   const pendingAdvanceRef = useRef(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [allStories, setAllStories] = useState<Story[]>([]);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const perPage = width >= 1440 ? 3 : width >= 768 ? 2 : 1;
   const totalPages = Math.ceil(TOTAL_POPULAR / perPage);
 
-  const allLoaded = currentPage >= totalPages;
+  const displayedStories = allStories.slice(0, TOTAL_POPULAR);
 
   const { isFetching } = useQuery({
     queryKey: ['popular-stories', currentPage, perPage],
@@ -52,8 +54,8 @@ export const PopularStories = () => {
       });
       return stories || [];
     },
-    staleTime: Infinity,
-    enabled: !allLoaded,
+    staleTime: 0,
+    enabled: currentPage <= totalPages,
   });
 
   useEffect(() => {
@@ -61,20 +63,28 @@ export const PopularStories = () => {
       pendingAdvanceRef.current = false;
       swiperRef.current?.slideNext();
     }
-  }, [allStories]);
+
+    if (swiperRef.current) {
+      setIsEnd(swiperRef.current.isEnd);
+      setIsBeginning(swiperRef.current.isBeginning);
+    }
+  }, [displayedStories]);
+
+  const syncNavState = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
+  const isNextDisabled = isFetching || (currentPage >= totalPages && isEnd);
 
   const handleNext = () => {
-    if (!allLoaded) {
+    if (currentPage < totalPages) {
       pendingAdvanceRef.current = true;
       setCurrentPage((prev) => prev + 1);
       return;
     }
 
-    if (swiperRef.current?.isEnd) {
-      swiperRef.current?.slideTo(0);
-    } else {
-      swiperRef.current?.slideNext();
-    }
+    swiperRef.current?.slideNext();
   };
 
   const handlePrev = () => {
@@ -93,43 +103,51 @@ export const PopularStories = () => {
         </Link>
       </div>
 
-      {allStories.length === 0 && isFetching ? (
-        <p>Завантаження...</p>
-      ) : (
-        <Swiper
-          modules={[Navigation]}
-          loop={false}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          breakpoints={{
-            320: { slidesPerView: 1, spaceBetween: 16, slidesPerGroup: 1 },
-            768: { slidesPerView: 2, spaceBetween: 16, slidesPerGroup: 2 },
-            1440: { slidesPerView: 3, spaceBetween: 24, slidesPerGroup: 3 },
-          }}
-        >
-          {allStories.map((story) => (
-            <SwiperSlide key={story._id}>
-              <StoryCard
-                _id={story._id}
-                img={story.img}
-                title={story.title}
-                rate={story.rate}
-                ownerId={story.ownerId}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      )}
+      <div className={css.swiperWrapper}>
+        {displayedStories.length === 0 && isFetching ? (
+          <p>Завантаження...</p>
+        ) : (
+          <Swiper
+            modules={[Navigation]}
+            loop={false}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              syncNavState(swiper);
+            }}
+            onSlideChange={syncNavState}
+            breakpoints={{
+              320: { slidesPerView: 1, spaceBetween: 16, slidesPerGroup: 1 },
+              768: { slidesPerView: 2, spaceBetween: 16, slidesPerGroup: 2 },
+              1440: { slidesPerView: 3, spaceBetween: 24, slidesPerGroup: 3 },
+            }}
+          >
+            {displayedStories.map((story) => (
+              <SwiperSlide key={story._id}>
+                <StoryCard
+                  _id={story._id}
+                  img={story.img}
+                  title={story.title}
+                  rate={story.rate}
+                  ownerId={story.ownerId}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
+      </div>
 
       <div className={css.navigation}>
-        <button className={css.prevBtn} onClick={handlePrev}>
+        <button
+          className={css.prevBtn}
+          onClick={handlePrev}
+          disabled={isBeginning}
+        >
           <FiArrowLeft size={24} />
         </button>
         <button
           className={css.nextBtn}
           onClick={handleNext}
-          disabled={isFetching}
+          disabled={isNextDisabled}
         >
           <FiArrowRight size={24} />
         </button>

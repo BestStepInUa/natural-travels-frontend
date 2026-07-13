@@ -163,7 +163,7 @@
 }
 
 :global(.dark) .storyCardSaveButton:hover svg {
-  filter: none; 
+  filter: none;
 }
 
 
@@ -172,4 +172,18 @@
   color: var(--color-white);
   border-radius: 6px;
   background-color: var(--color-mantis-dark);
+}
+
+.storyCardSaveButtonActive {
+  background-color: var(--color-mantis-dark);
+  border: 1px solid var(--opacity-transparent);
+  color: var(--color-white);
+}
+
+.storyCardSaveButtonActive:hover {
+  background-color: var(--color-mantis-lighter);
+}
+
+:global(.dark) .storyCardSaveButtonActive svg {
+  filter: none;
 }

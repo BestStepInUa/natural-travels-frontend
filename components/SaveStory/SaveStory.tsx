@@ -21,7 +21,9 @@ export default function SaveStory({ storyId, onOpenModal }: SaveStoryProps) {
     [user, storyId]
   );
 
-  const [saved, setSaved] = useState(isSaved);
+  const [manualOverride, setManualOverride] = useState<boolean | null>(null);
+  const saved = manualOverride ?? isSaved;
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSave = async () => {
@@ -34,10 +36,10 @@ export default function SaveStory({ storyId, onOpenModal }: SaveStoryProps) {
     try {
       if (saved) {
         await unsaveStory(storyId);
-        setSaved(false);
+        setManualOverride(false);
       } else {
         await saveStory(storyId);
-        setSaved(true);
+        setManualOverride(true);
       }
     } catch (error: unknown) {
       const message =
@@ -49,6 +51,11 @@ export default function SaveStory({ storyId, onOpenModal }: SaveStoryProps) {
       setIsLoading(false);
     }
   };
+
+  console.log('user:', user);
+  console.log('user.savedArticles:', user?.savedArticles);
+  console.log('storyId:', storyId);
+  console.log('isSaved:', isSaved);
 
   return (
     <div className={styles.wrapper}>

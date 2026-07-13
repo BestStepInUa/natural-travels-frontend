@@ -47,9 +47,16 @@ const breakpoints: { [width: number]: SwiperOptions } = {
 export const OurTravellers = () => {
   const width = useWindowSize();
   const swiperRef = useRef<SwiperType | null>(null);
-  const pendingAdvanceRef = useRef(false);
+  // Запам'ятовуємо, скільки карток було ПЕРЕД довантаженням — щоб
+  // після нього прогорнути точно на цю позицію, а не на фіксований
+  // крок. Критично, бо бекенд іноді повертає дублікати на межі
+  // сторінок, і реальна кількість нових унікальних карток може бути
+  // меншою за очікуваний крок
+  const pendingTargetRef = useRef<number | null>(null);
   const [fetchIndex, setFetchIndex] = useState(0);
   const [allTravellers, setAllTravellers] = useState<BackendTraveller[]>([]);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const config =
     width >= 1440
@@ -84,28 +91,38 @@ export const OurTravellers = () => {
       });
       return travellers || [];
     },
-    staleTime: Infinity,
+    staleTime: 0,
   });
 
   useEffect(() => {
-    if (pendingAdvanceRef.current) {
-      pendingAdvanceRef.current = false;
-      swiperRef.current?.slideNext();
+    if (pendingTargetRef.current !== null && swiperRef.current) {
+      // Swiper Grid сам визначає, до якої колонки належить слайд
+      // з таким індексом — ділити на rows тут НЕ потрібно
+      swiperRef.current.slideTo(pendingTargetRef.current);
+      pendingTargetRef.current = null;
+    }
+
+    if (swiperRef.current) {
+      setIsEnd(swiperRef.current.isEnd);
+      setIsBeginning(swiperRef.current.isBeginning);
     }
   }, [allTravellers]);
 
+  const syncNavState = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
+  const isNextDisabled = isFetching || (allLoaded && isEnd);
+
   const handleNext = () => {
     if (!allLoaded) {
-      pendingAdvanceRef.current = true;
+      pendingTargetRef.current = allTravellers.length;
       setFetchIndex((prev) => prev + 1);
       return;
     }
 
-    if (swiperRef.current?.isEnd) {
-      swiperRef.current?.slideTo(0);
-    } else {
-      swiperRef.current?.slideNext();
-    }
+    swiperRef.current?.slideNext();
   };
 
   const handlePrev = () => {
@@ -124,34 +141,39 @@ export const OurTravellers = () => {
         </Link>
       </div>
 
-      {allTravellers.length === 0 && isFetching ? (
-        <p>Завантаження...</p>
-      ) : (
-        <Swiper
-          modules={[Navigation, Grid]}
-          loop={false}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          breakpoints={breakpoints}
-        >
-          {allTravellers.map((traveller) => (
-            <SwiperSlide key={traveller._id}>
-              <TravellerCard
-                id={traveller._id}
-                name={traveller.name}
-                articlesCount={traveller.articlesAmount}
-                photoUrl={traveller.avatarUrl}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      )}
+      <div className={css.swiperWrapper}>
+        {allTravellers.length === 0 && isFetching ? (
+          <p>Завантаження...</p>
+        ) : (
+          <Swiper
+            modules={[Navigation, Grid]}
+            loop={false}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              syncNavState(swiper);
+            }}
+            onSlideChange={syncNavState}
+            breakpoints={breakpoints}
+          >
+            {allTravellers.map((traveller) => (
+              <SwiperSlide key={traveller._id}>
+                <TravellerCard
+                  id={traveller._id}
+                  name={traveller.name}
+                  articlesCount={traveller.articlesAmount}
+                  photoUrl={traveller.avatarUrl}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
+      </div>
 
       <div className={css.navigation}>
         <button
           className={css.prevBtn}
           onClick={handlePrev}
+          disabled={isBeginning}
           aria-label="Попередні мандрівники"
         >
           <FiArrowLeft size={24} />
@@ -159,7 +181,7 @@ export const OurTravellers = () => {
         <button
           className={css.nextBtn}
           onClick={handleNext}
-          disabled={isFetching}
+          disabled={isNextDisabled}
           aria-label="Наступні мандрівники"
         >
           <FiArrowRight size={24} />
