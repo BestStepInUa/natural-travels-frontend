@@ -21,9 +21,9 @@
   align-items: center;
   text-align: center;
   height: 48px;
- background-color: var(--color-mantis-dark);
+  background-color: var(--color-mantis-dark);
   color: var(--color-white);
-     border: 1px solid transparent;
+  border: 1px solid transparent;
   padding: 6px 12px;
   border-radius: 6px;
   text-decoration: none;
@@ -34,7 +34,7 @@
 
 .allStoriesBtn:hover,
 .allStoriesBtn:focus {
-background-color: var(--opacity-neutral-darkest-5);
+  background-color: var(--opacity-neutral-darkest-5);
   border: 1px solid var(--color-scheme-2-border);
   color: var(--color-scheme-2-text);
 }
@@ -88,14 +88,30 @@ background-color: var(--opacity-neutral-darkest-5);
   text-align: center;
 }
 
+.swiperWrapper {
+  min-height: 335px;
+}
+
+
 @media (min-width: 768px) {
   .allStoriesBtnMobile {
     display: none;
   }
 
+  .swiperWrapper {
+    min-height: 340px;
+  }
+
+
   .allStoriesBtnDesktop {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+}
+
+@media (min-width: 1440px) {
+  .swiperWrapper {
+    min-height: 421px;
   }
 }
