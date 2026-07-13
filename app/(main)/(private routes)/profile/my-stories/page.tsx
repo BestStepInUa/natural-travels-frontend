@@ -1,16 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import { useMyStories } from '@/hooks/useMyStories';
-import StoriesList from '@/components/StoriesList/StoriesList';
 import MessageNoStories from '@/components/MessageNoStories';
 import Loader from '@/components/Loader/Loader';
-import Pagination from '@/components/Pagination';
+import MyStoriesList from '@/components/MyStoriesList/MyStoriesList';
 
 export default function MyStoriesPage() {
-  const [page, setPage] = useState(1);
-
-  const { data, isPending, isError } = useMyStories(page);
+  const { data, isPending, isError } = useMyStories(1);
 
   if (isPending) return <Loader />;
 
@@ -28,19 +24,5 @@ export default function MyStoriesPage() {
     );
   }
 
-  return (
-     <>
-          <StoriesList
-            stories={data.data}
-          totalPages={data.totalPages}/>
-
-          {data.totalPages > 1 && (
-            <Pagination
-      onLoadMore={() => setPage((prev) => prev + 1)}
-      isLoading={isPending}
-      hasMore={data.page < data.totalPages}
-    />
-          )}
-        </>
-      );
+  return <MyStoriesList />;
 }

@@ -32,11 +32,7 @@ export default async function Stories({ params }: Props) {
   return (
     <>
       <Categories params={params} />
-      <StoriesList
-        stories={res.stories}
-        totalPages={res.totalPages}
-        categoryId={categoryId}
-      />
+      <StoriesList />
     </>
   );
 }
