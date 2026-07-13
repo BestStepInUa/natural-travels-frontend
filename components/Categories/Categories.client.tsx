@@ -1,7 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
+import { useEffect } from 'react';
 import { useCategoryStore } from '@/lib/store/categoryStore/categoryStore';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import css from '@/components/AddStoryForm/AddStoryForm.module.css';
@@ -14,27 +15,16 @@ export default function CategoriesClient({ currentSlug }: Props) {
   const router = useRouter();
   const { categories, isLoading, fetchCategories } = useCategoryStore();
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsDropdownOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const selectedCategoryLabel =
-    categories.find((cat) => cat.slug === currentSlug)?.category || 'Всі статті';
+    categories.find((cat) => cat.slug === currentSlug)?.category ||
+    'Всі статті';
 
   if (isLoading && categories.length === 0)
     return <div>Завантаження категорій...</div>;
@@ -49,8 +39,9 @@ export default function CategoriesClient({ currentSlug }: Props) {
       >
         Статті
       </PageTitle>
-
       <div className={`${css.fieldWrapper} ${css.hidden}`} ref={dropdownRef}>
+        <span className={css.label}>Категорія</span>
+
         <div className={css.selectContainer}>
           <button
             type="button"
@@ -78,6 +69,7 @@ export default function CategoriesClient({ currentSlug }: Props) {
 
           {isDropdownOpen && (
             <ul className={css.optionsList}>
+              {/* Опція "Всі статті" */}
               <li
                 className={css.optionItem}
                 onClick={() => {
