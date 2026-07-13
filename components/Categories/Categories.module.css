@@ -28,6 +28,10 @@
   display: none;
 }
 
+.categoryListSelect {
+    outline: var(--color-mantis-dark);
+  }
+
 @media (min-width: 768px) {
   .categoryListSelect {
     display: none;

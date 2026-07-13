@@ -42,7 +42,7 @@
 
 .input::placeholder {
   font-size: 18px;
-  color: var(--opacity-neutral-darkest-60);
+  color:  rgba(0, 0, 0, 0.6);
 }
 
 .input:hover {
