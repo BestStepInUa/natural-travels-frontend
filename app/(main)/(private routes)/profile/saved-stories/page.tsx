@@ -1,16 +1,13 @@
 'use client';
 
-import { useState } from 'react';
 import { useSavedStories } from '@/hooks/useSavedStories';
-import  StoriesList  from '@/components/StoriesList/StoriesList';
-import  MessageNoStories  from '@/components/MessageNoStories';
-import  Loader  from '@/components/Loader/Loader';
-import  Pagination  from '@/components/Pagination';
+
+import MessageNoStories from '@/components/MessageNoStories';
+import Loader from '@/components/Loader/Loader';
+import SaveStoriesList from '@/components/SaveStoriesList/SaveStoriesList';
 
 export default function SavedStoriesPage() {
-  const [page, setPage] = useState(1);
-
-  const { data, isPending, isError } = useSavedStories(page);
+  const { data, isPending, isError } = useSavedStories(1);
 
   if (isPending) return <Loader />;
 
@@ -28,19 +25,5 @@ export default function SavedStoriesPage() {
     );
   }
 
-  return (
-    <>
-      <StoriesList
-        stories={data.data}
-      totalPages={data.totalPages}/>
-
-      {data.totalPages > 1 && (
-        <Pagination
-  onLoadMore={() => setPage((prev) => prev + 1)}
-  isLoading={isPending}
-  hasMore={data.page < data.totalPages}
-/>
-      )}
-    </>
-  );
+  return <SaveStoriesList />;
 }
