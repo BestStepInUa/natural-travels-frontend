@@ -8,6 +8,7 @@ import SaveIcon from '@/components/StoriesList/SaveIcon';
 import ErrorWhileSavingModal from '@/components/ErrorWhileSavingModal';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { saveStory, unsaveStory } from '@/lib/api/storiesApi';
+import { getMe } from '@/lib/api/clientApi';
 import css from './StoryCard.module.css';
 
 interface StoryCardProps {
@@ -28,7 +29,7 @@ export default function StoryCard({
   rate,
   ownerId,
 }: StoryCardProps) {
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated, user, setUser } = useAuthStore();
 
   const isSaved = useMemo(
     () => user?.savedArticles?.includes(_id) ?? false,
@@ -56,6 +57,10 @@ export default function StoryCard({
         await saveStory(_id);
         setManualOverride(true);
       }
+
+      const updatedUser = await getMe();
+    setUser(updatedUser);
+
     } catch (error: unknown) {
       const message =
         error instanceof Error

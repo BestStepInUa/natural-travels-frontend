@@ -6,6 +6,7 @@ export type User = {
   password: string;
   avatarUrl: string;
   articlesAmount?: number;
+  savedArticlesAmount?: number;
   savedArticles?: string[];
   createAt: Date;
   updateAt: Date;
