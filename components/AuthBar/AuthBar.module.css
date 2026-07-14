@@ -47,10 +47,6 @@
   color: var(--color-scheme-2-text);
 }
 
-:global(.dark) .registerButton:hover {
-  color: #254c24;
-}
-
 .authBar.inline {
   flex-direction: row;
   gap: 12px;

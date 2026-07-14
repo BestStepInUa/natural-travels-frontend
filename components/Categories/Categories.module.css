@@ -55,11 +55,14 @@
   border: 1px solid transparent;
 }
 
-
 .categoryItem:hover {
   background-color: var(--color-scheme-1-foreground);
   border-radius: 8px;
   font-size: 16px;
   border: 1px solid var(--opacity-transparent);
   transform: scale(1.05);
+}
+
+:global(.dark) .categoryItem:hover {
+  color: #1b391b;
 }
