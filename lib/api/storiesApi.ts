@@ -14,7 +14,7 @@ export const getStoryById = async (storyId: string) => {
 };
 
 export const saveStory = async (storyId: string): Promise<void> => {
-  await nextServer.post(`/stories/save/${storyId}`, null, { baseURL });
+  await nextServer.post(`/stories/save/${storyId}`, { baseURL });
 };
 
 export const unsaveStory = async (storyId: string): Promise<void> => {
@@ -81,7 +81,7 @@ export const getStoriesByCategory = async (
   const res = await nextServer.get('/stories', {
     baseURL,
     params: {
-      categoryId,
+      category: categoryId,
       perPage,
       page: 1,
     },

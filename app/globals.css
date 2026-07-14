@@ -42,6 +42,7 @@
   --color-scheme-2-accent: var(--color-mantis);
   --color-scheme-2-foreground: var(--color-mantis-lighter);
   --color-red: #b00101;
+  --color-error: #4a9849;
 
   --font-family: 'Montserrat', sans-serif;
 
@@ -171,4 +172,6 @@ span {
   --color-mantis-lighter: #1b391b;
   --color-neutral-darkest:#eef8ee;
   --opacity-neutral-darkest-5: #1b391b;
+  --opacity-neutral-darkest-60: #def2de;
+  --color-error: #ffffff;
 }

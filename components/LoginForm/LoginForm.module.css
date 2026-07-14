@@ -42,7 +42,7 @@
 
 .input::placeholder {
   font-size: 18px;
-  color: var(--opacity-neutral-darkest-60);
+  color:  rgba(0, 0, 0, 0.6);
 }
 
 .input:hover {
@@ -55,7 +55,7 @@
 }
 
 .inputError {
-  border-color: var(--color-red) !important;
+  border-color: var(--color-error) !important;
 }
 
 /* --- Кнопка --- */
@@ -101,14 +101,14 @@
 
 .error {
   font-size: 12px;
-  color: var(--color-red);
+  color: var(--color-error);
 }
 
 .errorAfterForm {
   text-align: center;
   margin-top: 8px;
   font-size: 12px;
-  color: var(--color-red);
+  color: var(--color-error);
 }
 
 /* --- Адаптив --- */

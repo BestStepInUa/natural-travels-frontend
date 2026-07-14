@@ -5,11 +5,11 @@
 .fieldWrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .label {
   display: block;
-  font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
@@ -75,6 +75,7 @@
   margin-bottom: 24px;
   outline: none;
   transition: border-color var(--main-transition);
+  position: relative;
 }
 
 .input::placeholder {
@@ -106,7 +107,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--color-scheme-2-text);
+  color: var(--opacity-neutral-darkest-60);
   cursor: pointer;
   box-sizing: border-box;
   text-align: left;
@@ -150,6 +151,21 @@
   list-style: none;
   z-index: 10;
   box-sizing: border-box;
+}
+
+:global(.dark) .optionsList {
+  background-color: #1b391b;
+  border: 1px solid #1b391b;
+  color: #eef8ee;
+}
+.hidden {
+    margin-bottom: 16px;
+  }
+
+@media only screen and (min-width: 768px) {
+  .hidden {
+    display: none;
+  }
 }
 
 .optionItem {
@@ -283,20 +299,19 @@
 
 .error {
   display: block;
-  margin-top: 8px;
+  position: absolute;
   font-family: var(--font-family);
-  font-weight: 400;
   font-size: 12px;
-  line-height: 1.5;
-  color: #b00101;
+  color: var(--color-error);
+  bottom: 5px;
 }
 
 .inputError {
-  border-color: #b00101 !important;
+  border-color: var(--color-error) !important;
 }
 
 .imagePlaceholderError {
-  outline: 2px solid #b00101;
+  outline: 2px solid var(--color-error);
   outline-offset: -2px;
   border-radius: 12px;
   overflow: hidden;

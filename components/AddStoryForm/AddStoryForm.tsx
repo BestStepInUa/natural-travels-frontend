@@ -50,16 +50,16 @@ export default function AddStoryForm() {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
+        validateOnChange={false}
+        validateOnBlur={false}
       >
         {(formikProps) => {
           const {
             values,
             errors,
             touched,
-            isValid,
             isSubmitting,
             setFieldValue,
-            setFieldTouched,
             resetForm,
           } = formikProps;
 
@@ -68,16 +68,9 @@ export default function AddStoryForm() {
           const handleCategorySelect = (id: string) => {
             setFieldValue('category', id);
             setIsDropdownOpen(false);
-            setFieldTouched('category', true);
           };
 
-          const hasEmptyFields =
-            !values.title.trim() ||
-            !values.text.trim() ||
-            !values.category ||
-            !values.coverImage;
-
-          const isSaveDisabled = isSubmitting || !isValid || hasEmptyFields || isLoadingCategories;
+          const isSaveDisabled = isSubmitting || isLoadingCategories;
 
           return (
             <Form className={css.form}>
@@ -86,7 +79,7 @@ export default function AddStoryForm() {
                 imagePreview={imagePreview}
                 error={errors.coverImage}
                 touched={touched.coverImage}
-                onImageChange={(e) => handleImageChange(e, setFieldValue, setFieldTouched)}
+                onImageChange={(e) => handleImageChange(e, setFieldValue)}
               />
 
 
