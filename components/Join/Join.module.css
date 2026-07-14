@@ -48,10 +48,6 @@
   color: var(--color-scheme-2-text);
 }
 
-:global(.dark) .joinButton:hover {
-  color: #254c24;
-}
-
 @media only screen and (min-width: 768px) {
   .joinWrapper {
     background-image: url('/join/join-tab.png');
