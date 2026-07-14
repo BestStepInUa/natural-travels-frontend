@@ -13,6 +13,11 @@ export default function MyStoriesList() {
       queryFn: ({ pageParam = 1 }) =>
         getMyStories(pageParam),
       initialPageParam: 1,
+
+      staleTime: 0,
+      gcTime: 0,
+
+
       getNextPageParam: (lastPage, allPages) => {
         if (!lastPage || lastPage.data.length === 0) {
           return undefined;
