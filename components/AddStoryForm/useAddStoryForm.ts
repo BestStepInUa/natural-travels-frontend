@@ -61,10 +61,8 @@ export default function useAddStoryForm() {
 
   const handleImageChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    setFieldValue: (field: string, value: unknown, shouldValidate?: boolean) => void,
-    setFieldTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void
+    setFieldValue: (field: string, value: unknown, shouldValidate?: boolean) => void
   ) => {
-    setFieldTouched('coverImage', true);
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setFieldValue('coverImage', file);
