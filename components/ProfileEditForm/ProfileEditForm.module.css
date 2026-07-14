@@ -1,0 +1,169 @@
+.wrapper {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.avatarSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarUploadLabel {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px;
+  background: #f0f7f0;
+  color: #2f7a3f;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.avatarUploadLabel:hover {
+  background: #e0f0e0;
+}
+
+.avatarInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.input {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #4ade80;
+}
+
+.inputError {
+  border-color: #ef4444;
+}
+
+.errorWrapper {
+  min-height: 18px;
+}
+
+.error {
+  font-size: 12px;
+  color: #ef4444;
+}
+
+.errorAfterForm {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: #ef4444;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: var(--color-mantis-dark);
+  color: var(--color-white);
+  transition:
+    background-color var(--main-transition),
+    transform var(--main-transition),
+    border-color var(--main-transition);
+}
+
+.button:hover,
+.button:focus {
+  cursor: pointer;
+  color: var(--color-scheme-2-text);
+  background-color: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Планшет */
+@media (min-width: 768px) {
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .avatarUploadLabel {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .input {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
+  .error {
+    font-size: 13px;
+  }
+
+  .button {
+    padding: 12px;
+    width: auto;
+  }
+}
+
+/* Десктоп */
+@media (min-width: 1440px) {
+  .form {
+    gap: 24px;
+  }
+
+  .avatar {
+    width: 113px;
+    height: 113px;
+  }
+  .button {
+    padding: 9px 12px;
+    font-size: 20px;
+  }
+}

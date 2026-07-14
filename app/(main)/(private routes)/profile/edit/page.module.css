@@ -1,0 +1,33 @@
+.wrapper {
+  padding: 24px 0 40px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 32px 0 56px;
+  }
+
+  .title {
+    font-size: 26px;
+    margin-bottom: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    padding: 40px 0 64px;
+  }
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+}
