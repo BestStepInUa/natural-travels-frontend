@@ -3,7 +3,7 @@ import { getPublicTravellerProfile } from '@/lib/api/serverApi';
 import { PageTitle } from '@/components/PageTitle/PageTitle';
 import TravellerNotFound from '@/components/TravellerNotFound/TravellerNotFound';
 import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
-import StoriesList from '@/components/StoriesList/StoriesList';
+import TravellerStoriesList from '@/components/TravellerStoriesList/TravellerStoriesList';
 import css from './TravellerPage.module.css';
 
 type TravellerPageProps = { params: Promise<{ travellerId: string }> };
@@ -36,10 +36,7 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
         </PageTitle>
 
         {stories.length > 0 ? (
-          <StoriesList
-            stories={stories}
-            totalPages={travellerProfile.stories.totalPages}
-          />
+          <TravellerStoriesList travellerId={travellerId} />
         ) : (
           <MessageNoStories
             text="Цей користувач ще не публікував історій"

@@ -85,3 +85,20 @@ export async function getCategories(): Promise<Category[]> {
 
   return data;
 }
+
+import { type PublicTravellerProfileResponse } from '@/types/user';
+
+export const getPublicTravellerProfileClient = async (
+  travellerId: string,
+  page = 1,
+  perPage = 6
+): Promise<PublicTravellerProfileResponse> => {
+  const { data } = await nextServer.get<PublicTravellerProfileResponse>(
+    `/users/${travellerId}/public`,
+    {
+      params: { page, perPage },
+    }
+  );
+
+  return data;
+};
