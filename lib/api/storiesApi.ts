@@ -1,4 +1,4 @@
-import { nextServer } from './api';
+import { api as nextServer } from '@/app/api/api';
 import { ProfileStoriesResponse, Story } from '@/types/story';
 
 const baseURL = process.env.NEXT_BACKEND_API_URL;
