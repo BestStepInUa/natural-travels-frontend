@@ -22,7 +22,7 @@ export const unsaveStory = async (storyId: string): Promise<void> => {
 };
 
 export const getPopularStories = async (page: number, perPage: number) => {
-  const res = await nextServer.get('/stories', {
+  const res = await nextServer.get('/api/stories', {
     baseURL,
     params: {
       type: 'popular',
