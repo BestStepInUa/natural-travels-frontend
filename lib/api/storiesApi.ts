@@ -78,7 +78,7 @@ export const getStoriesByCategory = async (
   categoryId: string,
   perPage: number
 ): Promise<Story[]> => {
-  const res = await nextServer.get('/stories', {
+  const res = await nextServer.get('/api/stories', {
     baseURL,
     params: {
       category: categoryId,
