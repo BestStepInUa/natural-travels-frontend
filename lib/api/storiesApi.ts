@@ -1,29 +1,21 @@
-import { api as nextServer } from '@/app/api/api';
+import { nextServer } from './api';
 import { ProfileStoriesResponse, Story } from '@/types/story';
-
-const baseURL = process.env.NEXT_BACKEND_API_URL;
 
 export interface BackendCategory {
   _id: string;
   category: string;
 }
 
-export const getStoryById = async (storyId: string) => {
-  const res = await nextServer.get(`/stories/${storyId}`, { baseURL });
-  return res.data;
-};
-
 export const saveStory = async (storyId: string): Promise<void> => {
-  await nextServer.post(`/stories/save/${storyId}`, { baseURL });
+  await nextServer.post(`/stories/save/${storyId}`);
 };
 
 export const unsaveStory = async (storyId: string): Promise<void> => {
-  await nextServer.delete(`/stories/save/${storyId}`, { baseURL });
+  await nextServer.delete(`/stories/save/${storyId}`);
 };
 
 export const getPopularStories = async (page: number, perPage: number) => {
-  const res = await nextServer.get('/api/stories', {
-    baseURL,
+  const res = await nextServer.get('/stories', {
     params: {
       type: 'popular',
       perPage,
@@ -34,9 +26,7 @@ export const getPopularStories = async (page: number, perPage: number) => {
 };
 
 export const getCategories = async () => {
-  const response = await nextServer.get<BackendCategory[]>('/categories', {
-    baseURL,
-  });
+  const response = await nextServer.get<BackendCategory[]>('/categories');
   return response.data;
 };
 
@@ -78,10 +68,9 @@ export const getStoriesByCategory = async (
   categoryId: string,
   perPage: number
 ): Promise<Story[]> => {
-  const res = await nextServer.get('/api/stories', {
-    baseURL,
+  const res = await nextServer.get('/stories', {
     params: {
-      category: categoryId,
+      categoryId,
       perPage,
       page: 1,
     },
