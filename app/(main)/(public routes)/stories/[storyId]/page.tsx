@@ -1,6 +1,6 @@
 import StoryDetails from '@/components/StoryDetails';
 import StoryPageClient from './StoryPage.client';
-import { getStoryById } from '@/lib/api/storiesApi';
+import { getStoryById } from '@/lib/api/serverApi';
 import RecomendedStories from '@/components/RecomendedStories';
 
 interface StoryPageProps {

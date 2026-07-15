@@ -1,16 +1,15 @@
 import { type Category } from './category';
+import { type User } from './user';
 
 export type Story = {
   _id: string;
   title: string;
-  description: string;
+  article: string;
   img: string;
   category: Category;
-  ownerId: {
-    _id: string;
-    name: string;
-  };
+  ownerId: User & { _id: string };
   rate?: number;
+  date: string;
   createdAt: string;
   updatedAt: string;
 };

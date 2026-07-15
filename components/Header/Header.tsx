@@ -15,7 +15,7 @@ import { useTheme } from '@/components/ThemeContext/ThemeContext';
 
 const navLinks = [
   { href: '/', label: 'Головна' },
-  { href: '/stories', label: 'Статті' },
+  { href: '/stories/filter/all', label: 'Статті' },
   { href: '/travellers', label: 'Еко-Мандрівники' },
 ];
 
