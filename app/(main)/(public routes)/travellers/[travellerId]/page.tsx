@@ -24,7 +24,7 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
 
   return (
     <main className={css.main}>
-      <div className="container">
+      <div className={`${css.travellersWrapper} container`}>
         <TravellerInfo
           name={traveller.name}
           avatarUrl={traveller.avatarUrl || '/hero.jpg'}
