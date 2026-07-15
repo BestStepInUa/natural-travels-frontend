@@ -14,11 +14,11 @@ export const getStoryById = async (storyId: string) => {
 };
 
 export const saveStory = async (storyId: string): Promise<void> => {
-  await nextServer.post(`/stories/save/${storyId}`, { baseURL });
+  await nextServer.post(`/api/stories/save/${storyId}`);
 };
 
 export const unsaveStory = async (storyId: string): Promise<void> => {
-  await nextServer.delete(`/stories/save/${storyId}`, { baseURL });
+  await nextServer.delete(`/stories/save/${storyId}`);
 };
 
 export const getPopularStories = async (page: number, perPage: number) => {
@@ -45,7 +45,7 @@ export const getSavedStories = async (
   perPage = 6
 ): Promise<ProfileStoriesResponse> => {
   const { data } = await nextServer.get<ProfileStoriesResponse>(
-    '/stories/saved-stories',
+    '/api/stories/saved-stories',
     {
       params: {
         page,
@@ -62,7 +62,7 @@ export const getMyStories = async (
   perPage = 6
 ): Promise<ProfileStoriesResponse> => {
   const { data } = await nextServer.get<ProfileStoriesResponse>(
-    '/stories/my-stories',
+    '/api/stories/my-stories',
     {
       params: {
         page,
