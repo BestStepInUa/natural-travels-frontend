@@ -9,16 +9,16 @@ export interface BackendCategory {
 }
 
 export const getStoryById = async (storyId: string) => {
-  const res = await nextServer.get(`/stories/${storyId}`, { baseURL });
+  const res = await nextServer.get(`/api/stories/${storyId}`, { baseURL });
   return res.data;
 };
 
 export const saveStory = async (storyId: string): Promise<void> => {
-  await nextServer.post(`/stories/save/${storyId}`, { baseURL });
+  await nextServer.post(`/api/stories/save/${storyId}`, { baseURL });
 };
 
 export const unsaveStory = async (storyId: string): Promise<void> => {
-  await nextServer.delete(`/stories/save/${storyId}`, { baseURL });
+  await nextServer.delete(`/api/stories/save/${storyId}`, { baseURL });
 };
 
 export const getPopularStories = async (page: number, perPage: number) => {
@@ -34,7 +34,7 @@ export const getPopularStories = async (page: number, perPage: number) => {
 };
 
 export const getCategories = async () => {
-  const response = await nextServer.get<BackendCategory[]>('/categories', {
+  const response = await nextServer.get<BackendCategory[]>('/api/categories', {
     baseURL,
   });
   return response.data;
@@ -45,7 +45,7 @@ export const getSavedStories = async (
   perPage = 6
 ): Promise<ProfileStoriesResponse> => {
   const { data } = await nextServer.get<ProfileStoriesResponse>(
-    '/stories/saved-stories',
+    '/api/stories/saved-stories',
     {
       params: {
         page,
@@ -62,7 +62,7 @@ export const getMyStories = async (
   perPage = 6
 ): Promise<ProfileStoriesResponse> => {
   const { data } = await nextServer.get<ProfileStoriesResponse>(
-    '/stories/my-stories',
+    '/api/stories/my-stories',
     {
       params: {
         page,
