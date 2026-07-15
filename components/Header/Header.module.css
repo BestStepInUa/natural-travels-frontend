@@ -115,6 +115,15 @@
 
 .publishButton {
   display: none;
+  transition: background-color var(--main-transition), color var(--main-transition), border var(--main-transition);
+}
+
+.publishButton:hover,
+.publishButton:focus {
+  background: var(--color-mantis-lighter);
+  border: 1px solid var(--color-mantis-dark);
+  color: var(--color-scheme-2-text);
+  outline: none;
 }
 
 /* --- Кнопка бургера: видима на мобільному й планшеті --- */
