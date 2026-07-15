@@ -25,7 +25,7 @@ export async function POST(
     const cookieHeader = getCookieHeader(cookieStore);
 
     const res = await api.post(
-      "/stories/save/${storyId}",
+      `/stories/save/${storyId}`, // <-- backtick, не подвійні лапки
       {},
       { headers: { Cookie: cookieHeader } }
     );
@@ -45,7 +45,7 @@ export async function DELETE(
     const cookieStore = await cookies();
     const cookieHeader = getCookieHeader(cookieStore);
 
-    const res = await api.delete("/stories/save/${storyId}", {
+    const res = await api.delete(`/stories/save/${storyId}`, { // <-- тут теж
       headers: { Cookie: cookieHeader },
     });
 

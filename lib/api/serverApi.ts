@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import axios from 'axios';
 import { type CheckSessionResponse } from './clientApi';
 import { type User } from '@/types/user';
-import { type StoriesResponse } from '@/types/story';
+import { type StoriesResponse, type Story } from '@/types/story';
 import { type StoriesQueryParams } from '@/types/story';
 import { type TravellersResponse } from '@/types/travellers';
 import { type PublicTravellerProfileResponse } from '@/types/user';
@@ -78,3 +78,8 @@ export async function getCategories(): Promise<Category[]> {
 
   return data;
 }
+
+export const getStoryById = async (storyId: string): Promise<Story> => {
+  const { data } = await backendApi.get(`/stories/${storyId}`);
+  return data;
+};

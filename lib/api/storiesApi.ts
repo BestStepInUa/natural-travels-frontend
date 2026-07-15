@@ -1,15 +1,10 @@
-import { api as nextServer } from '@/app/api/api';
+import { nextServer } from './api';
 import { ProfileStoriesResponse, Story } from '@/types/story';
 
 export interface BackendCategory {
   _id: string;
   category: string;
 }
-
-export const getStoryById = async (storyId: string) => {
-  const res = await nextServer.get(`/stories/${storyId}`);
-  return res.data;
-};
 
 export const saveStory = async (storyId: string): Promise<void> => {
   await nextServer.post(`/stories/save/${storyId}`);
@@ -75,7 +70,7 @@ export const getStoriesByCategory = async (
 ): Promise<Story[]> => {
   const res = await nextServer.get('/stories', {
     params: {
-      category: categoryId,
+      categoryId,
       perPage,
       page: 1,
     },

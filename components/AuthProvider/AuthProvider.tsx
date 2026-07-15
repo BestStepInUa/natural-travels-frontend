@@ -49,3 +49,4 @@ export default function AuthProvider({ children }: Props) {
 
   return children;
 }
+
