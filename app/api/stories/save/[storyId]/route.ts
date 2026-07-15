@@ -1,28 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { api } from '../../../api';
 import { cookies } from 'next/headers';
-import { ApiError, createErrorResponce } from '@/app/api/_utils/utils';
-import { api } from '@/app/api/api';
+import { ApiError, createErrorResponce } from '../../../_utils/utils';
 
-// Сохранение статьи
+function getCookieHeader(cookieStore: Awaited<ReturnType<typeof cookies>>) {
+  const accessToken = cookieStore.get('accessToken')?.value;
+  const sessionId = cookieStore.get('sessionId')?.value;
+
+  return [
+    accessToken ? `accessToken=${accessToken}` : '',
+    sessionId ? `sessionId=${sessionId}` : '',
+  ]
+    .filter(Boolean)
+    .join('; ');
+}
+
 export async function POST(
   req: NextRequest,
-  context: { params: Promise<{ storyId: string }> }
+  { params }: { params: Promise<{ storyId: string }> }
 ) {
   try {
-    const { storyId } = await context.params; // обязательно await
-
+    const { storyId } = await params;
     const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
-    const sessionId = cookieStore.get('sessionId')?.value;
+    const cookieHeader = getCookieHeader(cookieStore);
 
-    const cookieHeader = [
-      accessToken ? `accessToken=${accessToken}` : '',
-      sessionId ? `sessionId=${sessionId}` : '',
-    ].filter(Boolean).join('; ');
-
-    const res = await api.post(`/stories/save/${storyId}`, {}, {
-      headers: { Cookie: cookieHeader },
-    });
+    const res = await api.post(
+      "/stories/save/${storyId}",
+      {},
+      { headers: { Cookie: cookieHeader } }
+    );
 
     return NextResponse.json(res.data);
   } catch (error) {
@@ -30,24 +36,16 @@ export async function POST(
   }
 }
 
-// Удаление из сохранённых
 export async function DELETE(
   req: NextRequest,
-  context: { params: Promise<{ storyId: string }> }
+  { params }: { params: Promise<{ storyId: string }> }
 ) {
   try {
-    const { storyId } = await context.params; // обязательно await
-
+    const { storyId } = await params;
     const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
-    const sessionId = cookieStore.get('sessionId')?.value;
+    const cookieHeader = getCookieHeader(cookieStore);
 
-    const cookieHeader = [
-      accessToken ? `accessToken=${accessToken}` : '',
-      sessionId ? `sessionId=${sessionId}` : '',
-    ].filter(Boolean).join('; ');
-
-    const res = await api.delete(`/stories/save/${storyId}`, {
+    const res = await api.delete("/stories/save/${storyId}", {
       headers: { Cookie: cookieHeader },
     });
 

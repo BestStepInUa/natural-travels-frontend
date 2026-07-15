@@ -1,7 +1,5 @@
-import { api as nextServer } from '@/app/api/api';
+import { nextServer } from '@/lib/api/api';
 import { ProfileStoriesResponse, Story } from '@/types/story';
-
-const baseURL = process.env.NEXT_BACKEND_API_URL;
 
 export interface BackendCategory {
   _id: string;
@@ -9,12 +7,12 @@ export interface BackendCategory {
 }
 
 export const getStoryById = async (storyId: string) => {
-  const res = await nextServer.get(`/stories/${storyId}`, { baseURL });
+  const res = await nextServer.get(`/stories/${storyId}`);
   return res.data;
 };
 
 export const saveStory = async (storyId: string): Promise<void> => {
-  await nextServer.post(`/api/stories/save/${storyId}`);
+  await nextServer.post(`/stories/save/${storyId}`);
 };
 
 export const unsaveStory = async (storyId: string): Promise<void> => {
@@ -22,8 +20,7 @@ export const unsaveStory = async (storyId: string): Promise<void> => {
 };
 
 export const getPopularStories = async (page: number, perPage: number) => {
-  const res = await nextServer.get('/api/stories', {
-    baseURL,
+  const res = await nextServer.get('/stories', {
     params: {
       type: 'popular',
       perPage,
@@ -34,9 +31,7 @@ export const getPopularStories = async (page: number, perPage: number) => {
 };
 
 export const getCategories = async () => {
-  const response = await nextServer.get<BackendCategory[]>('/categories', {
-    baseURL,
-  });
+  const response = await nextServer.get<BackendCategory[]>('/categories');
   return response.data;
 };
 
@@ -45,7 +40,7 @@ export const getSavedStories = async (
   perPage = 6
 ): Promise<ProfileStoriesResponse> => {
   const { data } = await nextServer.get<ProfileStoriesResponse>(
-    '/api/stories/saved-stories',
+    '/stories/saved-stories',
     {
       params: {
         page,
@@ -62,7 +57,7 @@ export const getMyStories = async (
   perPage = 6
 ): Promise<ProfileStoriesResponse> => {
   const { data } = await nextServer.get<ProfileStoriesResponse>(
-    '/api/stories/my-stories',
+    '/stories/my-stories',
     {
       params: {
         page,
@@ -78,8 +73,7 @@ export const getStoriesByCategory = async (
   categoryId: string,
   perPage: number
 ): Promise<Story[]> => {
-  const res = await nextServer.get('/api/stories', {
-    baseURL,
+  const res = await nextServer.get('/stories', {
     params: {
       category: categoryId,
       perPage,
@@ -87,4 +81,10 @@ export const getStoriesByCategory = async (
     },
   });
   return res.data.stories;
+};
+export const getSavedStoryIds = async (): Promise<string[]> => {
+  const { data } = await nextServer.get<{ savedArticles: string[] }>(
+    '/stories/saved-ids'
+  );
+  return data.savedArticles;
 };

@@ -1,10 +1,9 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react';
-
-// import LoaderComponent from '@/components/Loader'
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { checkSession, getMe } from '@/lib/api/clientApi';
+import { getSavedStoryIds } from '@/lib/api/storiesApi';
 
 type Props = {
   children: ReactNode;
@@ -12,6 +11,7 @@ type Props = {
 
 export default function AuthProvider({ children }: Props) {
   const setUser = useAuthStore((state) => state.setUser);
+  const setSavedArticles = useAuthStore((state) => state.setSavedArticles);
   const clearIsAuthenticated = useAuthStore((state) => state.clearIsAuth);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -22,9 +22,13 @@ export default function AuthProvider({ children }: Props) {
         const isSessionValid = await checkSession();
 
         if (isSessionValid) {
-          const user = await getMe();
+          const [user, savedIds] = await Promise.all([
+            getMe(),
+            getSavedStoryIds(),
+          ]);
           if (user) {
             setUser(user);
+            setSavedArticles(savedIds);
           }
         } else {
           clearIsAuthenticated();
@@ -37,12 +41,10 @@ export default function AuthProvider({ children }: Props) {
     };
 
     fetchUser();
-  }, [setUser, clearIsAuthenticated]);
+  }, [setUser, setSavedArticles, clearIsAuthenticated]);
 
-  // Показуємо лоудер під час перевірки сесії
   if (isLoading) {
     return <div>Loading...</div>;
-    // return <LoaderComponent />
   }
 
   return children;
