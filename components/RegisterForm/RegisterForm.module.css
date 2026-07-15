@@ -54,7 +54,7 @@
 }
 
 .inputError {
-  border-color: var(--color-error) !important;
+  border-color: var(--color-red) !important;
 }
 
 /* --- Кнопка --- */
@@ -99,14 +99,14 @@
 
 .error {
   font-size: 12px;
-  color: var(--color-error);
+  color: var(--color-red);
 }
 
 .errorAfterForm {
   text-align: center;
   margin-top: 8px;
   font-size: 12px;
-  color: var(--color-error);
+  color: var(--color-red);
 }
 
 /* --- Адаптив --- */
