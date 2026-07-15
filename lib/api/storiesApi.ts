@@ -1,4 +1,4 @@
-import { nextServer } from '@/lib/api/api';
+import { api as nextServer } from '@/app/api/api';
 import { ProfileStoriesResponse, Story } from '@/types/story';
 
 export interface BackendCategory {
