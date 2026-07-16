@@ -16,10 +16,13 @@ interface StoryCardProps {
   img: string;
   title: string;
   rate?: number;
-  ownerId: {
-    _id: string;
-    name: string;
-  };
+  ownerId:
+    | {
+        _id: string;
+        name: string;
+      }
+    | string;
+  ownerNameFallback?: string;
 }
 
 export default function StoryCard({
@@ -28,11 +31,19 @@ export default function StoryCard({
   title,
   rate,
   ownerId,
+  ownerNameFallback,
 }: StoryCardProps) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
   const savedArticles = useAuthStore((state) => state.savedArticles);
+
+  const authorName = useMemo(() => {
+    if (typeof ownerId === 'object' && ownerId && 'name' in ownerId) {
+      return ownerId.name;
+    }
+    return ownerNameFallback || '';
+  }, [ownerId, ownerNameFallback]);
   const setSavedArticles = useAuthStore((state) => state.setSavedArticles);
   const queryClient = useQueryClient();
 
@@ -119,7 +130,7 @@ export default function StoryCard({
       />
       <div className={css.storyCardContent}>
         <div className={css.storyCardAuthorContainer}>
-          <p className={css.storyCardAuthor}>{ownerId.name}</p>•
+          <p className={css.storyCardAuthor}>{authorName}</p>•
           <p className={css.storyCardSaves}>{currentRate}</p>
           <SaveIcon width={16} height={16} />
         </div>

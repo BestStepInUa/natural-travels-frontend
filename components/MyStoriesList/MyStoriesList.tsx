@@ -2,10 +2,11 @@
 import css from '@/components/MyStoriesList/MyStoriesList.module.css';
 import StoryCard from '@/components/StoryCard/StoryCard';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { getMyStories } from '@/lib/api/storiesApi';
 
 export default function MyStoriesList() {
-
+  const user = useAuthStore((state) => state.user);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery({
@@ -42,6 +43,7 @@ export default function MyStoriesList() {
               title={story.title}
               rate={story.rate}
               ownerId={story.ownerId}
+              ownerNameFallback={user?.name}
             />
           ))
         )}
