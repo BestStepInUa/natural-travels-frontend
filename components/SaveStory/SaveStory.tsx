@@ -14,15 +14,16 @@ interface SaveStoryProps {
 }
 
 export default function SaveStory({ storyId, onOpenModal }: SaveStoryProps) {
-  const { isAuthenticated, user } = useAuthStore();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
+  const savedArticles = useAuthStore((state) => state.savedArticles);
+  const setSavedArticles = useAuthStore((state) => state.setSavedArticles);
 
   const isSaved = useMemo(
-    () => user?.savedArticles?.includes(storyId) ?? false,
-    [user, storyId]
+    () => savedArticles.includes(storyId),
+    [savedArticles, storyId]
   );
-
-  const [manualOverride, setManualOverride] = useState<boolean | null>(null);
-  const saved = manualOverride ?? isSaved;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,12 +35,29 @@ export default function SaveStory({ storyId, onOpenModal }: SaveStoryProps) {
 
     setIsLoading(true);
     try {
-      if (saved) {
+      if (isSaved) {
         await unsaveStory(storyId);
-        setManualOverride(false);
+        setSavedArticles(savedArticles.filter((id) => id !== storyId));
+
+        if (user) {
+          setUser({
+            ...user,
+            savedArticlesAmount: Math.max(
+              (user.savedArticlesAmount ?? 0) - 1,
+              0
+            ),
+          });
+        }
       } else {
         await saveStory(storyId);
-        setManualOverride(true);
+        setSavedArticles([...savedArticles, storyId]);
+
+        if (user) {
+          setUser({
+            ...user,
+            savedArticlesAmount: (user.savedArticlesAmount ?? 0) + 1,
+          });
+        }
       }
     } catch (error: unknown) {
       const message =
@@ -52,11 +70,6 @@ export default function SaveStory({ storyId, onOpenModal }: SaveStoryProps) {
     }
   };
 
-  console.log('user:', user);
-  console.log('user.savedArticles:', user?.savedArticles);
-  console.log('storyId:', storyId);
-  console.log('isSaved:', isSaved);
-
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Збережіть собі історію</h2>
@@ -68,7 +81,13 @@ export default function SaveStory({ storyId, onOpenModal }: SaveStoryProps) {
         onClick={handleSave}
         disabled={isLoading}
       >
-        {isLoading ? <Loader /> : saved ? 'Видалити зі збережених' : 'Зберегти'}
+        {isLoading ? (
+          <Loader />
+        ) : isSaved ? (
+          'Видалити зі збережених'
+        ) : (
+          'Зберегти'
+        )}
       </button>
     </div>
   );

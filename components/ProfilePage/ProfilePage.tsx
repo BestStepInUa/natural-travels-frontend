@@ -16,7 +16,7 @@ export const ProfilePage = ({ children }: ProfilePageProps) => {
   const user = useAuthStore((state) => state.user);
   const pathname = usePathname();
 
-const setUser = useAuthStore((state) => state.setUser);
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     const refreshUser = async () => {
@@ -27,14 +27,13 @@ const setUser = useAuthStore((state) => state.setUser);
     refreshUser();
   }, [setUser]);
 
-
   if (!user) return null;
 
   const isSavedStories = pathname.startsWith('/profile/saved-stories');
 
   const articlesAmount = isSavedStories
-    ? user.savedArticlesAmount ?? 0
-    : user.articlesAmount ?? 0;
+    ? (user.savedArticlesAmount ?? 0)
+    : (user.storiesCount ?? 0);
 
   return (
     <section className={css.section}>
