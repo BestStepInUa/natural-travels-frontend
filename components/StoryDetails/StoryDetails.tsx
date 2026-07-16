@@ -32,7 +32,9 @@ export default function StoryDetails({
             Всі статті
           </Link>
 
-          <PageTitle variant="title">{title}</PageTitle>
+          <PageTitle variant="title" marginBottom={24}>
+            {title}
+          </PageTitle>
 
           <div className={css.meta}>
             <p className={css.metaItem}>

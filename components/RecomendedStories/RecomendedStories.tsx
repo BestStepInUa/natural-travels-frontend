@@ -37,7 +37,9 @@ export default function RecomendedStories({
 
   return (
     <section className={css.section}>
-      <PageTitle variant="title">Вам також сподобається</PageTitle>
+      <PageTitle variant="title" marginBottom={40}>
+        Вам також сподобається
+      </PageTitle>
 
       {isFetching ? (
         <p>Завантаження...</p>
