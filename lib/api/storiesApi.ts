@@ -77,3 +77,10 @@ export const getStoriesByCategory = async (
   });
   return res.data.stories;
 };
+
+export const getSavedStoryIds = async (): Promise<string[]> => {
+  const { data } = await nextServer.get<{ savedArticles: string[] }>(
+    '/stories/saved-ids'
+  );
+  return data.savedArticles;
+};

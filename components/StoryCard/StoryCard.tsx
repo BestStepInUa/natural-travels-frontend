@@ -4,11 +4,11 @@ import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
 import SaveIcon from '@/components/StoriesList/SaveIcon';
 import ErrorWhileSavingModal from '@/components/ErrorWhileSavingModal';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { saveStory, unsaveStory } from '@/lib/api/storiesApi';
-import { getMe } from '@/lib/api/clientApi';
 import css from './StoryCard.module.css';
 
 interface StoryCardProps {
@@ -29,16 +29,19 @@ export default function StoryCard({
   rate,
   ownerId,
 }: StoryCardProps) {
-  const { isAuthenticated, user, setUser } = useAuthStore();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
+  const savedArticles = useAuthStore((state) => state.savedArticles);
+  const setSavedArticles = useAuthStore((state) => state.setSavedArticles);
+  const queryClient = useQueryClient();
 
   const isSaved = useMemo(
-    () => user?.savedArticles?.includes(_id) ?? false,
-    [user, _id]
+    () => savedArticles.includes(_id),
+    [savedArticles, _id]
   );
 
-  const [manualOverride, setManualOverride] = useState<boolean | null>(null);
-  const saved = manualOverride ?? isSaved;
-
+  const [currentRate, setCurrentRate] = useState(rate ?? 0);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -50,17 +53,50 @@ export default function StoryCard({
 
     setIsLoading(true);
     try {
-      if (saved) {
+      if (isSaved) {
         await unsaveStory(_id);
-        setManualOverride(false);
+        setSavedArticles(savedArticles.filter((id) => id !== _id));
+        setCurrentRate((prev) => Math.max(prev - 1, 0));
+
+        if (user) {
+          setUser({
+            ...user,
+            savedArticlesAmount: Math.max(
+              (user.savedArticlesAmount ?? 0) - 1,
+              0
+            ),
+          });
+        }
+
+        queryClient.setQueryData(
+          ['save-stories'],
+          (
+            oldData:
+              | { pages: { data: { _id: string }[] }[]; pageParams: unknown[] }
+              | undefined
+          ) => {
+            if (!oldData) return oldData;
+            return {
+              ...oldData,
+              pages: oldData.pages.map((page) => ({
+                ...page,
+                data: page.data.filter((story) => story._id !== _id),
+              })),
+            };
+          }
+        );
       } else {
         await saveStory(_id);
-        setManualOverride(true);
+        setSavedArticles([...savedArticles, _id]);
+        setCurrentRate((prev) => prev + 1);
+
+        if (user) {
+          setUser({
+            ...user,
+            savedArticlesAmount: (user.savedArticlesAmount ?? 0) + 1,
+          });
+        }
       }
-
-      const updatedUser = await getMe();
-    setUser(updatedUser);
-
     } catch (error: unknown) {
       const message =
         error instanceof Error
@@ -84,7 +120,7 @@ export default function StoryCard({
       <div className={css.storyCardContent}>
         <div className={css.storyCardAuthorContainer}>
           <p className={css.storyCardAuthor}>{ownerId.name}</p>•
-          <p className={css.storyCardSaves}>{rate}</p>
+          <p className={css.storyCardSaves}>{currentRate}</p>
           <SaveIcon width={16} height={16} />
         </div>
         <h3 className={css.storyCardTitle}>{title}</h3>
@@ -94,11 +130,11 @@ export default function StoryCard({
           </Link>
           <button
             className={`${css.storyCardSaveButton} ${
-              saved ? css.storyCardSaveButtonActive : ''
+              isSaved ? css.storyCardSaveButtonActive : ''
             }`}
             onClick={handleSaveClick}
             disabled={isLoading}
-            aria-label={saved ? 'Видалити зі збережених' : 'Зберегти статтю'}
+            aria-label={isSaved ? 'Видалити зі збережених' : 'Зберегти статтю'}
           >
             <SaveIcon width={24} height={24} />
           </button>
