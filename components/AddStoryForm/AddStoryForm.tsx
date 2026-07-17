@@ -1,5 +1,6 @@
 'use client';
-import { useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import css from './AddStoryForm.module.css';
 import ToastAlert from './ToastAlert';
@@ -10,6 +11,7 @@ import AutoResizingTextarea from './AutoResizingTextarea';
 import FormActions from './FormActions';
 import useAddStoryForm from './useAddStoryForm';
 import { initialValues, validationSchema } from './validation';
+import { ConfirmModal } from '@/components/ConfirmModal/ConfirmModal';
 
 export default function AddStoryForm() {
   const {
@@ -22,10 +24,13 @@ export default function AddStoryForm() {
     dropdownRef,
     textareaRef,
     handleImageChange,
+    handleImageDelete,
     handleCancel,
     handleSubmit,
   } = useAddStoryForm();
 
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [resetFormCallback, setResetFormCallback] = useState<(() => void) | null>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -39,12 +44,29 @@ export default function AddStoryForm() {
     };
   }, [dropdownRef, setIsDropdownOpen]);
 
-
-
-
   return (
     <>
       <ToastAlert message={toastMessage} />
+
+      <ConfirmModal
+        isOpen={isCancelModalOpen}
+        title="Скасувати створення?"
+        confirmButtonText="Так, очистити"
+        cancelButtonText="Ні, продовжити"
+        onConfirm={() => {
+          if (resetFormCallback) {
+            handleCancel(resetFormCallback);
+          }
+          setIsCancelModalOpen(false);
+          setResetFormCallback(null);
+        }}
+        onCancel={() => {
+          setIsCancelModalOpen(false);
+          setResetFormCallback(null);
+        }}
+      >
+        Ви дійсно хочете відмінити створення історії? Всі незбережені зміни будуть втрачені.
+      </ConfirmModal>
 
       <Formik
         initialValues={initialValues}
@@ -61,9 +83,8 @@ export default function AddStoryForm() {
             isSubmitting,
             setFieldValue,
             resetForm,
+            dirty,
           } = formikProps;
-
-
 
           const handleCategorySelect = (id: string) => {
             setFieldValue('category', id);
@@ -74,14 +95,13 @@ export default function AddStoryForm() {
 
           return (
             <Form className={css.form}>
-
               <ImageUploader
                 imagePreview={imagePreview}
                 error={errors.coverImage}
                 touched={touched.coverImage}
                 onImageChange={(e) => handleImageChange(e, setFieldValue)}
+                onImageDelete={() => handleImageDelete(setFieldValue)}
               />
-
 
               <InputField
                 label="Заголовок"
@@ -91,7 +111,6 @@ export default function AddStoryForm() {
                 error={errors.title}
                 touched={touched.title}
               />
-
 
               <CategorySelect
                 categories={categories}
@@ -104,7 +123,6 @@ export default function AddStoryForm() {
                 onCategorySelect={handleCategorySelect}
               />
 
-
               <AutoResizingTextarea
                 label="Текст історії"
                 id="story-text"
@@ -115,11 +133,17 @@ export default function AddStoryForm() {
                 textareaRef={textareaRef}
               />
 
-
               <FormActions
                 isSaveDisabled={isSaveDisabled}
                 isSubmitting={isSubmitting}
-                onCancel={() => handleCancel(resetForm)}
+                onCancel={() => {
+                  if (dirty) {
+                    setResetFormCallback(() => resetForm);
+                    setIsCancelModalOpen(true);
+                  } else {
+                    handleCancel(resetForm);
+                  }
+                }}
               />
             </Form>
           );

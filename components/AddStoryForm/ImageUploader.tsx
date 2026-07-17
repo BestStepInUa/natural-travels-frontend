@@ -8,6 +8,7 @@ interface ImageUploaderProps {
   error?: string;
   touched?: boolean;
   onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onImageDelete: () => void;
 }
 
 export default function ImageUploader({
@@ -15,6 +16,7 @@ export default function ImageUploader({
   error,
   touched,
   onImageChange,
+  onImageDelete,
 }: ImageUploaderProps) {
   return (
     <div className={css.fieldWrapper}>
@@ -59,9 +61,15 @@ export default function ImageUploader({
         )}
       </label>
 
-      <label htmlFor="cover-image" className={css.uploadButton}>
-        Завантажити фото
-      </label>
+      {imagePreview ? (
+        <button type="button" className={css.deleteButton} onClick={onImageDelete}>
+          Видалити фото
+        </button>
+      ) : (
+        <label htmlFor="cover-image" className={css.uploadButton}>
+          Завантажити фото
+        </label>
+      )}
 
       <ErrorMessage name="coverImage" component="span" className={css.error} />
     </div>

@@ -74,6 +74,20 @@ export default function useAddStoryForm() {
     }
   };
 
+  const handleImageDelete = (
+    setFieldValue: (field: string, value: unknown, shouldValidate?: boolean) => void
+  ) => {
+    setFieldValue('coverImage', null);
+    if (imagePreview && imagePreview.startsWith('blob:')) {
+      URL.revokeObjectURL(imagePreview);
+    }
+    setImagePreview(null);
+    const fileInput = document.getElementById('cover-image') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  };
+
   const handleCancel = (resetForm: () => void) => {
     resetForm();
 
@@ -133,6 +147,7 @@ export default function useAddStoryForm() {
     dropdownRef,
     textareaRef,
     handleImageChange,
+    handleImageDelete,
     handleCancel,
     handleSubmit,
   };
