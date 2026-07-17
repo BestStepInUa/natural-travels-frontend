@@ -1,7 +1,7 @@
 .card {
   width: 100%;
   max-width: 640px;
-  background: #ffffff;
+  background: var(--color-scheme-2-foreground);
   border-radius: 20px;
   padding: 32px 24px;
   box-shadow: 0 4px 24px rgba(22, 40, 28, 0.06);
@@ -31,7 +31,7 @@
   height: 96px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #eaf3ea;
+  border: 3px solid var(--color-scheme-2-foreground);
 }
 
 .avatarBadge {
@@ -43,18 +43,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #3b8e8e;
+  background: #4a9849;
   color: #ffffff;
   border-radius: 50%;
   border: 3px solid #ffffff;
   cursor: pointer;
   transition:
-    background 0.2s,
+    background-color 0.2s,
     transform 0.15s;
 }
 
 .avatarBadge:hover {
-  background: #2f7373;
+  background: var(--color-mantis-lighter);
   transform: scale(1.06);
 }
 
@@ -95,7 +95,6 @@
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: #16281c;
 }
 
 .input {
@@ -108,11 +107,11 @@
 }
 
 .input:focus {
-  border-color: #3b8e8e;
+  border-color: var(--color-mantis-lighter);
 }
 
 .inputError {
-  border-color: #ef4444;
+  border-color: var(--color-red)
 }
 
 .errorWrapper {
@@ -121,12 +120,12 @@
 
 .error {
   font-size: 12px;
-  color: #ef4444;
+  color: var(--color-red)
 }
 
 .errorAfterForm {
   font-size: 13px;
-  color: #ef4444;
+  color:var(--color-red)
 }
 
 .button {
@@ -136,8 +135,9 @@
   border: none;
   font-weight: 600;
   font-size: 15px;
-  background-color: var(--color-mantis-dark);
+  background: var(--color-mantis-dark);
   color: var(--color-white);
+  border: 1px solid transparent;
   transition:
     background-color var(--main-transition),
     transform var(--main-transition),
@@ -145,9 +145,9 @@
 }
 
 .button:hover:not(:disabled) {
+  background: var(--color-mantis-lighter);
+  border: 1px solid var(--color-mantis-dark);
   color: var(--color-scheme-2-text);
-  background-color: var(--color-mantis-lighter);
-  border-color: var(--color-mantis-dark);
 }
 
 .button:disabled {
