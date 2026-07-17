@@ -18,24 +18,23 @@
 
 .button:hover,
 .button:focus {
-  cursor: pointer;
   color: var(--color-scheme-2-text);
   background-color: var(--color-mantis-lighter);
   border-color: var(--color-mantis-dark);
 }
 
 @media only screen and (min-width: 768px) {
-.button {
-  padding: 12px;
-  width: auto;
-}
+  .button {
+    padding: 12px;
+    width: auto;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
-.button {
-  padding: 9px 12px;
-  font-size: 20px;
-}
+  .button {
+    padding: 9px 12px;
+    font-size: 20px;
+  }
 }
 
 .wrapper {

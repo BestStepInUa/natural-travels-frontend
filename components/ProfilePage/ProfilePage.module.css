@@ -16,3 +16,54 @@
   gap: 24px;
   padding: 16px 64px;
 }
+
+
+
+
+.profileRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.editButton {
+ display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1.5px solid var(--color-mantis-dark);
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  color: var(--color-mantis-dark);
+  transition:
+    background-color var(--main-transition),
+    color var(--main-transition),
+    border-color var(--main-transition);
+}
+
+.editButton:hover {
+
+  color: var(--color-scheme-2-text);
+  background-color: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
+}
+
+@media only screen and (min-width: 768px) {
+  .editButton{
+    padding: 12px;
+    width: auto;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .editButton {
+    padding: 9px 12px;
+    font-size: 20px;
+  }
+}

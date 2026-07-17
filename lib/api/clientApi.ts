@@ -102,3 +102,31 @@ export const getPublicTravellerProfileClient = async (
 
   return data;
 };
+
+export type UpdateUserRequest = {
+  name?: string;
+};
+
+export const updateUserClient = async (
+  data: UpdateUserRequest
+): Promise<User> => {
+  const { data: res } = await nextServer.patch<{ message: string; user: User }>(
+    '/users/me',
+    data
+  );
+  return res.user;
+};
+
+export const updateAvatarClient = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append('avatar', file);
+
+  const { data } = await nextServer.patch<{
+    message: string;
+    avatarUrl: string;
+  }>('/users/me/avatar', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+  return data.avatarUrl;
+};

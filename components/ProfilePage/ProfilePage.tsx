@@ -6,6 +6,7 @@ import { TravellerInfo } from '../TravellerInfo/TravellerInfo';
 import { ProfileTabs } from '../ProfileTabs';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { getMe } from '@/lib/api/clientApi';
+import Link from 'next/link';
 import css from './ProfilePage.module.css';
 
 interface ProfilePageProps {
@@ -38,11 +39,37 @@ export const ProfilePage = ({ children }: ProfilePageProps) => {
   return (
     <section className={css.section}>
       <div className={`container ${css.inner}`}>
-        <TravellerInfo
-          name={user.name}
-          avatarUrl={user.avatarUrl}
-          articlesAmount={articlesAmount}
-        />
+        <div className={css.profileRow}>
+          <TravellerInfo
+            name={user.name}
+            avatarUrl={user.avatarUrl}
+            articlesAmount={articlesAmount}
+          />
+          <Link href="/profile/edit" className={css.editButton}>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 20h9"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Редагувати профіль
+          </Link>
+        </div>
 
         <ProfileTabs />
 
