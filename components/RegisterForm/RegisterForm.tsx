@@ -12,11 +12,22 @@ import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { isAxiosError } from 'axios';
 
 const ValidationSchemaRegister = Yup.object().shape({
-  name: Yup.string().required("Введіть ім'я користувача").min(10, "Імʼя повинно містити не менше 10 символів"),
+  name: Yup.string()
+    .trim()
+    .required("Введіть ім'я користувача")
+    .min(10, 'Імʼя повинно містити не менше 10 символів')
+    .max(32, 'Імʼя не може перевищувати 32 символи'),
+
   email: Yup.string()
+    .trim()
     .email('Введіть коректний email')
-    .required('Введіть email для реєстрації'),
-  password: Yup.string().required('Введіть пароль').min(10, 'Пароль повинен містити не менше 10 символів'),
+    .required('Введіть email для реєстрації')
+    .max(64, 'Email не може перевищувати 64 символи'),
+
+  password: Yup.string()
+    .required('Введіть пароль')
+    .min(8, 'Пароль повинен містити не менше 8 символів')
+    .max(128, 'Пароль не може перевищувати 128 символів'),
 });
 
 interface RegisterValues {

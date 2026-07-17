@@ -19,7 +19,7 @@ export default function MyStoriesPage() {
       <MessageNoStories
         text="У вас ще немає власних історій."
         buttonText="Створити історію"
-        linkTo="/stories/create"
+        linkTo="/stories/new"
       />
     );
   }

@@ -1,29 +1,21 @@
 import { nextServer } from './api';
 import { ProfileStoriesResponse, Story } from '@/types/story';
 
-const baseURL = process.env.NEXT_BACKEND_API_URL;
-
 export interface BackendCategory {
   _id: string;
   category: string;
 }
 
-export const getStoryById = async (storyId: string) => {
-  const res = await nextServer.get(`/stories/${storyId}`, { baseURL });
-  return res.data;
-};
-
 export const saveStory = async (storyId: string): Promise<void> => {
-  await nextServer.post(`/stories/save/${storyId}`, { baseURL });
+  await nextServer.post(`/stories/save/${storyId}`);
 };
 
 export const unsaveStory = async (storyId: string): Promise<void> => {
-  await nextServer.delete(`/stories/save/${storyId}`, { baseURL });
+  await nextServer.delete(`/stories/save/${storyId}`);
 };
 
 export const getPopularStories = async (page: number, perPage: number) => {
   const res = await nextServer.get('/stories', {
-    baseURL,
     params: {
       type: 'popular',
       perPage,
@@ -34,9 +26,7 @@ export const getPopularStories = async (page: number, perPage: number) => {
 };
 
 export const getCategories = async () => {
-  const response = await nextServer.get<BackendCategory[]>('/categories', {
-    baseURL,
-  });
+  const response = await nextServer.get<BackendCategory[]>('/categories');
   return response.data;
 };
 
@@ -70,7 +60,6 @@ export const getMyStories = async (
       },
     }
   );
-
   return data;
 };
 
@@ -79,12 +68,18 @@ export const getStoriesByCategory = async (
   perPage: number
 ): Promise<Story[]> => {
   const res = await nextServer.get('/stories', {
-    baseURL,
     params: {
-      category: categoryId,
+      categoryId,
       perPage,
       page: 1,
     },
   });
   return res.data.stories;
+};
+
+export const getSavedStoryIds = async (): Promise<string[]> => {
+  const { data } = await nextServer.get<{ savedArticles: string[] }>(
+    '/stories/saved-ids'
+  );
+  return data.savedArticles;
 };

@@ -302,16 +302,16 @@
   position: absolute;
   font-family: var(--font-family);
   font-size: 12px;
-  color: var(--color-error);
+  color: var(--color-red);
   bottom: 5px;
 }
 
 .inputError {
-  border-color: var(--color-error) !important;
+  border-color: var(--color-red) !important;
 }
 
 .imagePlaceholderError {
-  outline: 2px solid var(--color-error);
+  outline: 2px solid var(--color-red);
   outline-offset: -2px;
   border-radius: 12px;
   overflow: hidden;

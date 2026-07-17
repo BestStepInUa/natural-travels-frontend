@@ -3,6 +3,8 @@ import css from '@/components/MyStoriesList/MyStoriesList.module.css';
 import StoryCard from '@/components/StoryCard/StoryCard';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getSavedStories } from '@/lib/api/storiesApi';
+import Loader from '@/components/Loader/Loader';
+import MessageNoStories from '@/components/MessageNoStories';
 
 export default function SaveStoriesList() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
@@ -23,8 +25,20 @@ export default function SaveStoriesList() {
       },
     });
 
-  if (status === 'pending') return <p>Завантаження...</p>;
+  if (status === 'pending') return <Loader />;
   if (status === 'error') return <p>Помилка завантаження історій.</p>;
+
+  const totalStories = data?.pages.reduce((acc, page) => acc + page.data.length, 0) ?? 0;
+
+  if (totalStories === 0) {
+    return (
+      <MessageNoStories
+        text="У вас ще немає збережених історій."
+        buttonText="Переглянути історії"
+        linkTo="/stories"
+      />
+    );
+  }
 
   return (
     <div className={css.storiesListContainer}>

@@ -10,6 +10,7 @@ export type User = {
   savedArticles?: string[];
   createAt: Date;
   updateAt: Date;
+  storiesCount: number;
 };
 
 export type PublicTravellerProfileResponse = {
