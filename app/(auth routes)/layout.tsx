@@ -16,7 +16,6 @@ export default function AuthLayout({
     backgroundColor: isDark ? '#254c24' : '#ffffff',
     minHeight: '100vh',
     transition: 'background-color 0.4s ease',
-    paddingTop:0,
   };
 
   return (

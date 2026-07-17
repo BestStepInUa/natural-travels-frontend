@@ -52,66 +52,68 @@ export default function Header() {
 
   return (
     <header ref={headerRef} className={css.header}>
-      <div className={`container ${css.content}`}>
-        <Link href="/" className={css.logo} aria-label="Перейти на головну">
-          <Image src="/icons/logo.svg" alt="" width={24} height={24} />
-          <span>
-            Природні
-            <br />
-            Мандри
-          </span>
-        </Link>
-
-        <div className={darkcss['toggle-switch']}>
-          <label className={darkcss['switch-label']}>
-            <input
-              type="checkbox"
-              className={darkcss.checkbox}
-              checked={isDark}
-              onChange={toggleTheme}
-            />
-            <span className={darkcss.slider}>
-              <BiLeaf className={darkcss.leafIcon} />
+      <div className={`container`}>
+        <div className={css.content}>
+          <Link href="/" className={css.logo} aria-label="Перейти на головну">
+            <Image src="/icons/logo.svg" alt="" width={24} height={24} />
+            <span>
+              Природні
+              <br />
+              Мандри
             </span>
-          </label>
-        </div>
+          </Link>
 
-        <div className={css.rightGroup}>
-          <nav className={css.nav} aria-label="Навігація">
-            {links.map((link) => (
-              <Link key={link.href} href={link.href} className={css.navLink}>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <div className={darkcss['toggle-switch']}>
+            <label className={darkcss['switch-label']}>
+              <input
+                type="checkbox"
+                className={darkcss.checkbox}
+                checked={isDark}
+                onChange={toggleTheme}
+              />
+              <span className={darkcss.slider}>
+                <BiLeaf className={darkcss.leafIcon} />
+              </span>
+            </label>
+          </div>
 
-          <div className={css.wrapper}>
-            {isAuthenticated && (
-              <Link href="/stories/new" className={css.publishButton}>
-                Опублікувати статтю
-              </Link>
-            )}
+          <div className={css.rightGroup}>
+            <nav className={css.nav} aria-label="Навігація">
+              {links.map((link) => (
+                <Link key={link.href} href={link.href} className={css.navLink}>
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-            {!isAuthenticated && (
-              <div className={css.actions}>
-                <AuthBar variant="inline" />
-              </div>
-            )}
+            <div className={css.wrapper}>
+              {isAuthenticated && (
+                <Link href="/stories/new" className={css.publishButton}>
+                  Опублікувати статтю
+                </Link>
+              )}
 
-            {isAuthenticated && (
-              <div className={css.desktopUserActions}>
-                <UserBar />
-              </div>
-            )}
+              {!isAuthenticated && (
+                <div className={css.actions}>
+                  <AuthBar variant="inline" />
+                </div>
+              )}
 
-            <button
-              type="button"
-              className={css.burgerButton}
-              aria-label="Відкрити меню"
-              onClick={() => setIsMenuOpen(true)}
-            >
-              <RxHamburgerMenu size={24} />
-            </button>
+              {isAuthenticated && (
+                <div className={css.desktopUserActions}>
+                  <UserBar />
+                </div>
+              )}
+
+              <button
+                type="button"
+                className={css.burgerButton}
+                aria-label="Відкрити меню"
+                onClick={() => setIsMenuOpen(true)}
+              >
+                <RxHamburgerMenu size={24} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -34,7 +34,6 @@ export const UserBar = () => {
         className={css.avatar}
       />
       <span className={css.userName}>{user.name || "Ім'я"}</span>
-      <span className={css.divider} />
 
       <button
         type="button"

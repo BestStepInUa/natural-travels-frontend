@@ -46,8 +46,6 @@
   --font-family: 'Montserrat', sans-serif;
 
   --main-transition: 333ms ease-in-out;
-
-  --header-height: 72px;
 }
 
 
@@ -84,10 +82,6 @@ body {
   overflow-x: hidden;
   color: var(--color-scheme-2-text);
   background: var(--color-scheme-2-background);
-}
-
-main {
-  padding-top: var(--header-height);
 }
 
 * {
