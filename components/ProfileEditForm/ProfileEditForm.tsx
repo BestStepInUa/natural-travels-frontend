@@ -75,7 +75,7 @@ export default function ProfileEditForm() {
   };
 
   return (
-    <div className={css.wrapper}>
+    <div className={css.card}>
       <Formik
         validationSchema={ValidationSchemaProfile}
         initialValues={initialValues}
@@ -84,55 +84,83 @@ export default function ProfileEditForm() {
       >
         {({ errors, touched, isSubmitting }) => (
           <Form className={css.form}>
-            <div className={css.avatarSection}>
-              <Image
-                src={avatarPreview}
-                alt={user.name}
-                width={113}
-                height={113}
-                className={css.avatar}
-              />
-              <label className={css.avatarUploadLabel}>
-                Змінити фото
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleAvatarChange}
-                  className={css.avatarInput}
+            <div className={css.avatarColumn}>
+              <div className={css.avatarFrame}>
+                <Image
+                  src={avatarPreview}
+                  alt={user.name}
+                  width={120}
+                  height={120}
+                  className={css.avatar}
                 />
-              </label>
+                <label className={css.avatarBadge} aria-label="Змінити фото">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M4 8a2 2 0 012-2h1.5l1-1.5h7l1 1.5H18a2 2 0 012 2v9a2 2 0 01-2 2H6a2 2 0 01-2-2V8z"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinejoin="round"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12.5"
+                      r="3.2"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                    />
+                  </svg>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarChange}
+                    className={css.avatarInput}
+                  />
+                </label>
+              </div>
+              <span className={css.avatarCaption}>Ваше фото</span>
             </div>
 
-            <label className={css.label}>
-              Ім&apos;я*
-              <Field
-                className={`${css.input} ${
-                  errors.name && touched.name ? css.inputError : ''
-                }`}
-                type="text"
-                name="name"
-                placeholder="Ваше ім'я"
-              />
-              <div className={css.errorWrapper}>
-                <ErrorMessage
-                  name="name"
-                  component="span"
-                  className={css.error}
-                />
-              </div>
-            </label>
+            <div className={css.trail} aria-hidden="true" />
 
-            <button
-              type="submit"
-              className={css.button}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Збереження...' : 'Зберегти зміни'}
-            </button>
+            <div className={css.fieldsColumn}>
+              <label className={css.label}>
+                Ім&apos;я
+                <Field
+                  className={`${css.input} ${
+                    errors.name && touched.name ? css.inputError : ''
+                  }`}
+                  type="text"
+                  name="name"
+                  placeholder="Ваше ім'я"
+                />
+                <div className={css.errorWrapper}>
+                  <ErrorMessage
+                    name="name"
+                    component="span"
+                    className={css.error}
+                  />
+                </div>
+              </label>
+
+              <button
+                type="submit"
+                className={css.button}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Збереження...' : 'Зберегти зміни'}
+              </button>
+
+              {error && <p className={css.errorAfterForm}>{error}</p>}
+            </div>
           </Form>
         )}
       </Formik>
-      {error && <p className={css.errorAfterForm}>{error}</p>}
     </div>
   );
 }
