@@ -1,28 +1,28 @@
 .wrapper {
   max-width: 640px;
   margin: 0 auto;
-  padding: 32px 16px 64px;
+  padding: 0 0 64px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   text-align: center;
 }
 
 .backLink {
-  align-self: flex-start;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #5c6b60;
+  font-weight: 500;
+  gap: 8px;
   text-decoration: none;
+  color: inherit;
   margin-bottom: 24px;
-  transition: color 0.2s;
+  transition: color var(--main-transition);
 }
 
-.backLink:hover {
-  color: #2f6b45;
+
+.backLink:hover,
+.backLink:active {
+  color: var(--color-mantis-darkest);
 }
 
 .eyebrow {
@@ -30,23 +30,22 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #3b8e8e;
+  color:var(--color-mantis-darkest);
   margin-bottom: 8px;
 }
 
 .title {
   font-size: 26px;
   font-weight: 800;
-  color: #16281c;
-  margin-bottom: 8px;
+  margin: 0 auto 30px;
 }
 
-.subtitle {
+/* .subtitle {
   font-size: 14px;
-  color: #5c6b60;
+  color: var(--opacity-neutral-darkest-5);
   margin-bottom: 32px;
   max-width: 360px;
-}
+} */
 
 @media (min-width: 768px) {
   .wrapper {

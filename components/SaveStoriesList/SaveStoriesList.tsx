@@ -33,8 +33,8 @@ export default function SaveStoriesList() {
   if (totalStories === 0) {
     return (
       <MessageNoStories
-        text="У вас ще немає збережених історій."
-        buttonText="Переглянути історії"
+        text="У вас ще немає збережених історій, мершій збережіть вашу першу історію!"
+        buttonText="До історій"
         linkTo="/stories"
       />
     );

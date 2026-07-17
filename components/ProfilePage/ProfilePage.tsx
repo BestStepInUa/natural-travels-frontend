@@ -38,7 +38,7 @@ export const ProfilePage = ({ children }: ProfilePageProps) => {
 
   return (
     <section className={css.section}>
-      <div className={`container ${css.inner}`}>
+      <div className={`container`}>
         <div className={css.profileRow}>
           <TravellerInfo
             name={user.name}
