@@ -6,6 +6,7 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useQueryClient } from '@tanstack/react-query';
 import SaveIcon from '@/components/StoriesList/SaveIcon';
+
 import ErrorWhileSavingModal from '@/components/ErrorWhileSavingModal';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { saveStory, unsaveStory } from '@/lib/api/storiesApi';
@@ -130,7 +131,8 @@ export default function StoryCard({
       />
       <div className={css.storyCardContent}>
         <div className={css.storyCardAuthorContainer}>
-          <p className={css.storyCardAuthor}>{authorName}</p>•
+          <p className={css.storyCardAuthor}>{authorName}</p>
+          <p className={css.storyCardPoint}>•</p>
           <p className={css.storyCardSaves}>{currentRate}</p>
           <SaveIcon width={16} height={16} />
         </div>

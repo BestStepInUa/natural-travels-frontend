@@ -1,66 +1,20 @@
-/* .storyCard {
-  flex: 1 1 100%;
-  width: 100%;
-  margin-bottom: 40px;
-}
-
-@media (min-width: 768px) {
-  .storyCard {
-    flex: 1 1 calc(50% - 12px);
-  }
-}
-
-@media (min-width: 1440px) {
-  .storyCard {
-    flex: 1 1 calc(33.333% - 16px);
-  }
-} */
-
 .storyCardImage {
   width: 100%;
-  max-width: 335px;
-  height: 335px;
+  height: auto;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }
 
-@media only screen and (min-width: 768px) {
-  .storyCardImage {
-    max-width: 340px;
-    height: 340px;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .storyCardImage {
-    max-width: 421px;
-    height: 421px;
-  }
-}
-
 .storyCardContent {
   padding: 16px;
-  max-width: 335px;
   background-color: var(--color-scheme-2-foreground);
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }
 
-@media only screen and (min-width: 768px) {
-  .storyCardContent {
-    max-width: 340px;
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .storyCardContent {
-    max-width: 421px;
-  }
-}
-
 .storyCardAuthorContainer {
   display: flex;
-  gap: 0 8px;
+  padding: 3px 0;
   margin-bottom: 12px;
   align-items: center;
 }
@@ -68,13 +22,18 @@
 .storyCardAuthor {
   font-weight: 600;
   font-size: 12px;
-  line-height: 1.5;
+  margin-right: 8px;
   color: var(--color-scheme-2-text);
+}
+
+.storyCardPoint {
+  margin-right: 8px;
 }
 
 .storyCardSaves {
   font-size: 12px;
   color: var(--color-scheme-2-text);
+  margin-right: 2px;
 }
 
 .storyCardTitle {
@@ -88,15 +47,8 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
-  width: 100%;
 
   overflow: hidden;
-}
-
-@media only screen and (min-width: 1440px) {
-  .storyCardTitle {
-    height: 78px;
-  }
 }
 
 @media only screen and (min-width: 1440px) {
@@ -112,6 +64,7 @@
 
 .storyCardButton {
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -119,42 +72,38 @@
   border: 1px solid var(--color-scheme-2-border);
   border-radius: 6px;
   padding: 6px 12px;
-  width: 239px;
-  height: 48px;
   font-weight: 500;
   font-size: 16px;
   color: var(--color-scheme-2-text);
-  transition: background-color 300ms ease;
+  transition: background-color var(--main-transition), border-color var(--main-transition), color  var(--main-transition);
 }
 
-.storyCardButton:hover {
-  border: 1px solid var(--opacity-transparent);
+.storyCardButton:hover,
+ .storyCardButton:focus {
+  border-color: var(--color-mantis-dark);
   color: var(--color-white);
-  border-radius: 6px;
   background-color: var(--color-mantis-dark);
 }
 
-@media only screen and (min-width: 768px) {
-  .storyCardButton {
-    width: 244px;
-  }
+.storyCardButton:active {
+  border-color: var(--color-mantis-darker);
+  color: var(--color-white);
+  background-color: var(--color-mantis-darker);
 }
 
 @media only screen and (min-width: 1440px) {
   .storyCardButton {
-    width: 325px;
     font-size: 20px;
   }
 }
 
 .storyCardSaveButton {
+  display: flex;
   background-color: var(--opacity-neutral-darkest-5);
   border: 1px solid var(--color-scheme-2-border);
   border-radius: 6px;
-  padding: 6px;
-  width: 48px;
-  height: 48px;
-  transition: background-color 300ms ease;
+  padding: 12px;
+  transition: background-color var(--main-transition), border-color var(--main-transition), color  var(--main-transition);
 }
 
 :global(.dark) .storyCardSaveButton svg {
@@ -166,24 +115,20 @@
   filter: none;
 }
 
-
-.storyCardSaveButton:hover {
-  border: 1px solid var(--opacity-transparent);
+.storyCardSaveButton:hover,
+.storyCardSaveButton:focus,
+.storyCardSaveButtonActive {
+  border-color: var(--color-mantis-dark);
   color: var(--color-white);
-  border-radius: 6px;
   background-color: var(--color-mantis-dark);
 }
 
-.storyCardSaveButtonActive {
-  background-color: var(--color-mantis-dark);
-  border: 1px solid var(--opacity-transparent);
+.storyCardSaveButton:active {
+ border-color: var(--color-mantis-darker);
   color: var(--color-white);
+  background-color: var(--color-mantis-darker);
 }
 
 .storyCardSaveButtonActive:hover {
   background-color: var(--color-mantis-lighter);
-}
-
-:global(.dark) .storyCardSaveButtonActive svg {
-  filter: none;
 }
