@@ -166,5 +166,7 @@ span {
   --color-neutral-darkest:#eef8ee;
   --opacity-neutral-darkest-5: #1b391b;
   --opacity-neutral-darkest-60: #def2de;
+  --color-mantis-light: #1b391b;
+  --color-neutral-lightest: #1b391b;
    --color-red:#FF6B6B;
 }
