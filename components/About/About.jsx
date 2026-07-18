@@ -7,14 +7,9 @@ const About = () => {
     <section className={css.aboutSection}>
       <div className={css.aboutContainer}>
         <div className={css.contentWrapper}>
-          <PageTitle
-            variant="traveller"
-            align="left"
-            color="scheme2"
-            marginBottom={24}
-          >
+          <h2 className={css.title}>
             Мандруй екологічно та відкривай нові горизонти
-          </PageTitle>
+          </h2>
 
           <p className={css.description}>
             Наш проєкт створений для тих, хто хоче досліджувати Україну
