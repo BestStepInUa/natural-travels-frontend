@@ -1,6 +1,5 @@
-import Categories from '@/components/Categories/Categories';
-import StoriesList from '@/components/StoriesList/StoriesList';
 import { getAllStories, getCategories } from '@/lib/api/serverApi';
+import StoriesPage from '@/components/StoriesPage/StoriesPage';
 
 type Props = {
   params: Promise<{
@@ -30,9 +29,6 @@ export default async function Stories({ params }: Props) {
   });
 
   return (
-    <>
-      <Categories params={params} />
-      <StoriesList />
-    </>
+     <StoriesPage params={params} />
   );
 }

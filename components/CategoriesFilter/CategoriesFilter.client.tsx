@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 import { useEffect } from 'react';
 import { useCategoryStore } from '@/lib/store/categoryStore/categoryStore';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
 import css from '@/components/AddStoryForm/AddStoryForm.module.css';
 
 type Props = {
@@ -30,15 +29,6 @@ export default function CategoriesClient({ currentSlug }: Props) {
     return <div>Завантаження категорій...</div>;
 
   return (
-    <div className={css.stories}>
-      <PageTitle
-        variant="title"
-        color="scheme1"
-        marginBottom={40}
-        align="center"
-      >
-        Статті
-      </PageTitle>
       <div className={`${css.fieldWrapper} ${css.hidden}`} ref={dropdownRef}>
         <span className={css.label}>Категорія</span>
 
@@ -96,6 +86,5 @@ export default function CategoriesClient({ currentSlug }: Props) {
           )}
         </div>
       </div>
-    </div>
   );
 }

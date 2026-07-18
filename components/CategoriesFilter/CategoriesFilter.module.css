@@ -1,14 +1,3 @@
-.stories {
-  padding: 32px 0 0;
-}
-
-@media (min-width: 1440px) {
-  .stories {
-    padding: 48px 0 0;
-  }
-}
-
-
 .categoryListSelect {
   display: block;
   border: 1px solid var(--opacity-neutral-darkest-15);

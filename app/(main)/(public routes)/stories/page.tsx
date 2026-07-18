@@ -1,5 +1,5 @@
-import Categories from '@/components/Categories/Categories';
-import StoriesList from '@/components/StoriesList/StoriesList';
+import StoriesPage from '@/components/StoriesPage/StoriesPage';
+
 
 type Props = {
   params: Promise<{
@@ -9,10 +9,6 @@ type Props = {
 
 export default function Stories({ params }: Props) {
   return (
-    <>
-      <Categories params={params} />
-
-      <StoriesList />
-    </>
+      <StoriesPage params={params} />
   );
 }
