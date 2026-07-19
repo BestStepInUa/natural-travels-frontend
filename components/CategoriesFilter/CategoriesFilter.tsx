@@ -36,24 +36,27 @@ export default async function Categories({ params }: CategoriesProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-        <CategoriesClient currentSlug={currentSlug} />
-        <ul className={css.categoryList}>
-          <li className={css.categoryItem}>
-            <Link href="/stories/filter/all" className={css.menuLink}>
-              Всі статті
+      <CategoriesClient currentSlug={currentSlug} />
+      <ul className={css.categoryList}>
+        <li className={css.categoryItem}>
+          <Link
+            href="/stories/filter/all"
+            className={`${css.menuLink} ${currentSlug === 'all' ? css.active : ''}`}
+          >
+            Всі статті
+          </Link>
+        </li>
+        {categories.map((category) => (
+          <li className={css.categoryItem} key={category._id}>
+            <Link
+              href={`/stories/filter/${category.slug}`}
+              className={`${css.categoryItemLink} ${currentSlug === category.slug ? css.active : ''}`}
+            >
+              {category.category}
             </Link>
           </li>
-          {categories.map((category) => (
-            <li className={css.categoryItem} key={category._id}>
-              <Link
-                href={`/stories/filter/${category.slug}`}
-                className={css.categoryItemLink}
-              >
-                {category.category}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        ))}
+      </ul>
     </HydrationBoundary>
   );
 }
