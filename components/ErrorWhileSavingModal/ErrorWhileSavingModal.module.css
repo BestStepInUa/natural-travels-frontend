@@ -85,20 +85,20 @@
   font-weight: 500;
   font-size: 16px;
   color: var(--color-scheme-2-text);
-  line-height: 1.5;
-  transition: var(--main-transition);
+  transition: border-color var(--main-transition), background-color var(--main-transition), color var(--main-transition);
   }
 
-  .loginBtn:hover, .loginBtn:focus{
-    border: 1px solid var(--opacity-transparent);
+  .loginBtn:hover,
+  .loginBtn:focus{
+    border-color: var(--color-mantis-dark);
   background-color: var(--color-mantis-dark);
   color: var(--color-white);
   outline: none;
   }
 
   .loginBtn:active  {
-    border: 1px solid var(--opacity-transparent);
-  background: var(--color-mantis-darker);
+    border-color:var(--color-mantis-darker);
+  background-color: var(--color-mantis-darker);
   color: var(--color-white);
   }
 
@@ -123,19 +123,18 @@
   font-weight: 500;
   font-size: 16px;
   color: var(--color-white);
-  line-height: 1.5;
-  transition: var(--main-transition);
+  transition: border-color var(--main-transition), background-color var(--main-transition), color var(--main-transition);
   }
 
   .registerBtn:hover, .registerBtn:focus {
-  border: 1px solid var(--color-mantis-dark);
+  border-color: var(--color-mantis-dark);
   background-color: var(--color-mantis-lighter);
   outline: none;
   color: var(--color-scheme-2-text);
   }
 
   .registerBtn:active {
-  border: 1px solid var(--color-mantis-dark);
+  border-color: var(--color-mantis-dark);
   background-color: var(--color-mantis-dark);
   color: var(--color-white);
   }
@@ -152,12 +151,3 @@
      font-size: 20px;
   }
   }
-
-.loginBtn,
-.registerBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  cursor: pointer;
-}
