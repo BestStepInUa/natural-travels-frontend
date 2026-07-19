@@ -1,6 +1,6 @@
-import { PageTitle } from '@/components/PageTitle/PageTitle';
-import CategoriesFilter from '@/components/CategoriesFilter/CategoriesFilter';
-import StoriesList from '@/components/StoriesList/StoriesList';
+import PageTitle from '@/components/PageTitle';
+import CategoriesFilter from '@/components/CategoriesFilter';
+import StoriesList from '@/components/StoriesList';
 import css from './StoriesPage.module.css';
 
 // 1. Оголошуємо тип пропсів

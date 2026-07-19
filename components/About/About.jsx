@@ -1,8 +1,7 @@
 import Image from 'next/image';
-import { PageTitle } from '../PageTitle/PageTitle';
 import css from './About.module.css';
 
-const About = () => {
+export default function About() {
   return (
     <section className={css.aboutSection}>
       <div className={css.aboutContainer}>
@@ -55,5 +54,3 @@ const About = () => {
     </section>
   );
 };
-
-export default About;

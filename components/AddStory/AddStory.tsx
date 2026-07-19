@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import PageTitle from '@/components/PageTitle';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import AddStoryForm from '../AddStoryForm';
 import css from './AddStory.module.css';
@@ -17,7 +17,7 @@ export default function AddStory() {
     }
   }, [isAuthenticated, router]);
 
-  
+
   if (!isAuthenticated) {
     return null;
   }

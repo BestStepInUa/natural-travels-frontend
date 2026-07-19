@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MdArrowBack } from 'react-icons/md';
-import { PageTitle } from '../PageTitle/PageTitle';
+import PageTitle from '../PageTitle';
 import css from './StoryDetails.module.css';
 import { User } from '@/types/user';
 import { Category } from '@/types/category';

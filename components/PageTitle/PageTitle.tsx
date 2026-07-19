@@ -10,14 +10,14 @@ interface PageTitleProps {
   className?: string;
 }
 
-export const PageTitle = ({
+export default function PageTitle({
   children,
   variant = 'title',
   align = 'left',
   color = 'scheme2',
   marginBottom = 0,
   className = '',
-}: PageTitleProps) => {
+}: PageTitleProps) {
   const colorStyles = {
     scheme1: styles.colorScheme1,
     scheme2: styles.colorScheme2,

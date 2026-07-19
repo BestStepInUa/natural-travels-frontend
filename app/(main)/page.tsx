@@ -1,8 +1,8 @@
-import { Hero } from '@/components/Hero/Hero';
+import Hero from '@/components/Hero';
 
 import Join from '@/components/Join';
-import About from '@/components/About/About';
-import { PopularStories } from '@/components/PopularStories/PopularStories';
+import About from '@/components/About';
+import PopularStories from '@/components/PopularStories';
 import { OurTravellers } from '@/components/OurTravellers/OurTravellers';
 
 export default function Home() {

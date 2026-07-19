@@ -10,7 +10,7 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import 'swiper/css';
 import 'swiper/css/grid';
 import { TravellerCard } from '@/components/TravellerCard/TravellerCard';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import PageTitle  from '@/components/PageTitle';
 import { getTravellers, type BackendTraveller } from '@/lib/api/usersApi';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import css from './OurTravellers.module.css';

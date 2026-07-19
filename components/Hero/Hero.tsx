@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import PageTitle from '@/components/PageTitle';
 import css from './Hero.module.css';
 
-export const Hero = () => {
+export default function Hero() {
   return (
     <section className={css.hero}>
       <div className={css.inner}>

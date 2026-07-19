@@ -1,4 +1,4 @@
-import StoriesPage from '@/components/StoriesPage/StoriesPage';
+import StoriesPage from '@/components/StoriesPage';
 
 
 type Props = {

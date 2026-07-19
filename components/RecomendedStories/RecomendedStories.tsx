@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import StoryCard from '@/components/StoryCard';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import PageTitle from '@/components/PageTitle';
 import { getStoriesByCategory } from '@/lib/api/storiesApi';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import css from './RecomendedStories.module.css';

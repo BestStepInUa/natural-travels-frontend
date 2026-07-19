@@ -26,7 +26,7 @@ interface Story {
 
 const TOTAL_POPULAR = 10;
 
-export const PopularStories = () => {
+export default function PopularStories() {
   const width = useWindowSize();
   const swiperRef = useRef<SwiperType | null>(null);
   const pendingAdvanceRef = useRef(false);

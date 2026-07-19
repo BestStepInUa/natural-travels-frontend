@@ -1,5 +1,5 @@
 import { getAllStories, getCategories } from '@/lib/api/serverApi';
-import StoriesPage from '@/components/StoriesPage/StoriesPage';
+import StoriesPage from '@/components/StoriesPage';
 
 type Props = {
   params: Promise<{

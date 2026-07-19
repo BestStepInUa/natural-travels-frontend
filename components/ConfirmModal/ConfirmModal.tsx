@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import PageTitle from '@/components/PageTitle';
 import css from './ConfirmModal.module.css';
 import { IoMdClose } from 'react-icons/io';
 

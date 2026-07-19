@@ -1,6 +1,6 @@
 import { TravellerInfo } from '@/components/TravellerInfo/TravellerInfo';
 import { getPublicTravellerProfile } from '@/lib/api/serverApi';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import PageTitle from '@/components/PageTitle';
 import TravellerNotFound from '@/components/TravellerNotFound/TravellerNotFound';
 import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
 import TravellerStoriesList from '@/components/TravellerStoriesList/TravellerStoriesList';
