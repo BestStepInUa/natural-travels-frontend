@@ -11,7 +11,7 @@ import AutoResizingTextarea from './AutoResizingTextarea';
 import FormActions from './FormActions';
 import useAddStoryForm from './useAddStoryForm';
 import { initialValues, validationSchema } from './validation';
-import { ConfirmModal } from '@/components/ConfirmModal/ConfirmModal';
+import ConfirmModal from '@/components/ConfirmModal';
 
 export default function AddStoryForm() {
   const {

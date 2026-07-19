@@ -4,9 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
-import { AuthBar } from '@/components/AuthBar/AuthBar';
-import { UserBar } from '@/components/UserBar/UserBar';
-import { BurgerMenu } from '@/components/BurgerMenu/BurgerMenu';
+import AuthBar from '@/components/AuthBar';
+import UserBar from '@/components/UserBar/';
+import BurgerMenu from '@/components/BurgerMenu';
 import css from './Header.module.css';
 import { RxHamburgerMenu } from "react-icons/rx";
 import darkcss from './Dark.module.css'

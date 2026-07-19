@@ -2,8 +2,8 @@
 
 import { useMyStories } from '@/hooks/useMyStories';
 import MessageNoStories from '@/components/MessageNoStories';
-import Loader from '@/components/Loader/Loader';
-import MyStoriesList from '@/components/MyStoriesList/MyStoriesList';
+import Loader from '@/components/Loader';
+import MyStoriesList from '@/components/MyStoriesList';
 
 export default function MyStoriesPage() {
   const { data, isPending, isError } = useMyStories(1);

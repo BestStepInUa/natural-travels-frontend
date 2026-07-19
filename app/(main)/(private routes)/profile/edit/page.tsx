@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import ProfileEditForm from '@/components/ProfileEditForm/ProfileEditForm';
+import ProfileEditForm from '@/components/ProfileEditForm';
 import css from './page.module.css';
 
 export const metadata: Metadata = {

@@ -2,8 +2,8 @@
 
 import { ReactNode, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { TravellerInfo } from '../TravellerInfo/TravellerInfo';
-import { ProfileTabs } from '../ProfileTabs';
+import TravellerInfo from '../TravellerInfo';
+import ProfileTabs from '../ProfileTabs';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { getMe } from '@/lib/api/clientApi';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ interface ProfilePageProps {
   children: ReactNode;
 }
 
-export const ProfilePage = ({ children }: ProfilePageProps) => {
+export default function ProfilePage ({ children }: ProfilePageProps) {
   const user = useAuthStore((state) => state.user);
   const pathname = usePathname();
 

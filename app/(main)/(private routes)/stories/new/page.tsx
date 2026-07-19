@@ -1,4 +1,4 @@
-import AddStory from '@/components/AddStory/AddStory';
+import AddStory from '@/components/AddStory';
 export default function Page() {
   return <AddStory />;
 }

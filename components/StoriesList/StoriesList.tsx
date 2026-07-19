@@ -1,6 +1,6 @@
 'use client';
 import css from '@/components/StoriesList/StoriesList.module.css';
-import StoryCard from '@/components/StoryCard/StoryCard';
+import StoryCard from '@/components/StoryCard';
 import { getStoriesClient } from '@/lib/api/clientApi';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
@@ -63,7 +63,7 @@ export default function StoriesList() {
           onClick={() => fetchNextPage()}
           disabled={isFetchingNextPage}
         >
-          {isFetchingNextPage ? 'Завантаження...' : 'Показати ще'}
+          Показати ще
         </button>
       )}
     </div>

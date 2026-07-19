@@ -42,9 +42,14 @@
 
 .storiesLoadMore:hover,
 .storiesLoadMore:focus {
-  cursor: pointer;
   color: var(--color-scheme-2-text);
   background-color: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
+}
+
+.storiesLoadMore:active {
+  color: var(--color-white);
+  background-color: var(--color-mantis-dark);
   border-color: var(--color-mantis-dark);
 }
 
@@ -64,5 +69,6 @@
 
 .storiesLoadMore:disabled {
   cursor: not-allowed;
+  background-color: var(--color-mantis-dark);
   opacity: 0.5;
 }

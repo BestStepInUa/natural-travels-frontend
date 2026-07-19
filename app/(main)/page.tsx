@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import Join from '@/components/Join';
 import About from '@/components/About';
 import PopularStories from '@/components/PopularStories';
-import { OurTravellers } from '@/components/OurTravellers/OurTravellers';
+import OurTravellers from '@/components/OurTravellers';
 
 export default function Home() {
   return (

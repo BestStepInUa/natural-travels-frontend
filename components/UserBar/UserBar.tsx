@@ -3,12 +3,12 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
-import { ConfirmModal } from '@/components/ConfirmModal/ConfirmModal';
+import ConfirmModal from '@/components/ConfirmModal';
 import { logout } from '@/lib/api/clientApi';
 import { RxExit } from "react-icons/rx";
 import css from './UserBar.module.css';
 
-export const UserBar = () => {
+export default function UserBar() {
   const user = useAuthStore((state) => state.user);
   const clearIsAuth = useAuthStore((state) => state.clearIsAuth);
   const [isModalOpen, setIsModalOpen] = useState(false);

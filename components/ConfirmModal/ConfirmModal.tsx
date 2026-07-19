@@ -16,7 +16,7 @@ interface ConfirmModalProps {
   children?: React.ReactNode;
 }
 
-export const ConfirmModal = ({
+export default function ConfirmModal ({
   isOpen,
   title,
   confirmButtonText,
@@ -24,7 +24,7 @@ export const ConfirmModal = ({
   onConfirm,
   onCancel,
   children,
-}: ConfirmModalProps) => {
+}: ConfirmModalProps) {
   useEffect(() => {
     if (!isOpen) return;
 

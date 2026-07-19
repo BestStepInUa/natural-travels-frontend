@@ -1,6 +1,6 @@
 'use client';
 import css from '@/components/MyStoriesList/MyStoriesList.module.css';
-import StoryCard from '@/components/StoryCard/StoryCard';
+import StoryCard from '@/components/StoryCard';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { getMyStories } from '@/lib/api/storiesApi';

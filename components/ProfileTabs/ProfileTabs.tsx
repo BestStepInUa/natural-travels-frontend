@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import css from './ProfileTabs.module.css';
 
-export const ProfileTabs = () => {
+export default function ProfileTabs () {
   const pathname = usePathname();
 
   const isSavedStories = pathname.startsWith('/profile/saved-stories');

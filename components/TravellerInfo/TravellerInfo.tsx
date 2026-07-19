@@ -7,11 +7,11 @@ interface TravellerInfoProps {
   articlesAmount: number;
 }
 
-export const TravellerInfo = ({
+export default function TravellerInfo ({
   name,
   avatarUrl,
   articlesAmount,
-}: TravellerInfoProps) => {
+}: TravellerInfoProps) {
   return (
     <div className={`${css.container} ${css.card}`}>
       <Image

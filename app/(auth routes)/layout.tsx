@@ -1,8 +1,8 @@
 'use client';
 
-import AuthFooter from '@/components/AuthFooter/AuthFooter';
-import AuthHeader from '@/components/AuthHeader/AuthHeader';
-import MainAuthNav from '@/components/MainAuthNav/MainAuthNav';
+import AuthFooter from '@/components/AuthFooter';
+import AuthHeader from '@/components/AuthHeader';
+import MainAuthNav from '@/components/MainAuthNav';
 import { useTheme } from '@/components/ThemeContext/ThemeContext';
 
 export default function AuthLayout({

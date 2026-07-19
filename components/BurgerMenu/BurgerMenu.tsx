@@ -6,8 +6,8 @@ import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { useAuthStore } from '@/lib/store/authStore/authStore';
-import { AuthBar } from '@/components/AuthBar/AuthBar';
-import { UserBar } from '@/components/UserBar/UserBar';
+import AuthBar from '@/components/AuthBar';
+import UserBar from '@/components/UserBar';
 import css from './BurgerMenu.module.css';
 
 interface NavLink {
@@ -21,7 +21,7 @@ interface BurgerMenuProps {
   links: NavLink[];
 }
 
-export const BurgerMenu = ({ isOpen, onClose, links }: BurgerMenuProps) => {
+export default function BurgerMenu ({ isOpen, onClose, links }: BurgerMenuProps) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {

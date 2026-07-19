@@ -9,7 +9,7 @@ import type { Swiper as SwiperType, SwiperOptions } from 'swiper/types';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import 'swiper/css';
 import 'swiper/css/grid';
-import { TravellerCard } from '@/components/TravellerCard/TravellerCard';
+import TravellerCard from '@/components/TravellerCard';
 import PageTitle  from '@/components/PageTitle';
 import { getTravellers, type BackendTraveller } from '@/lib/api/usersApi';
 import { useWindowSize } from '@/hooks/useWindowSize';
@@ -44,7 +44,7 @@ const breakpoints: { [width: number]: SwiperOptions } = {
   },
 };
 
-export const OurTravellers = () => {
+export default function OurTravellers () {
   const width = useWindowSize();
   const swiperRef = useRef<SwiperType | null>(null);
   // Запам'ятовуємо, скільки карток було ПЕРЕД довантаженням — щоб

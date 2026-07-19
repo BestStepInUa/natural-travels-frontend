@@ -1,6 +1,6 @@
 'use client';
 import css from '@/components/StoriesList/StoriesList.module.css';
-import StoryCard from '@/components/StoryCard/StoryCard';
+import StoryCard from '@/components/StoryCard';
 import { getPublicTravellerProfileClient } from '@/lib/api/clientApi';
 import { useInfiniteQuery } from '@tanstack/react-query';
 

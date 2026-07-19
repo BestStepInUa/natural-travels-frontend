@@ -4,7 +4,7 @@ import { useLoadingStore } from '@/lib/store/loadingStore/loadingStore';
 import '@/lib/api/loaderInterceptor';
 import css from './LeafLoader.module.css';
 
-export const LeafLoader = () => {
+export default function LeafLoader()  {
   const isLoading = useLoadingStore((state) => state.isLoading);
 
   if (!isLoading) return null;

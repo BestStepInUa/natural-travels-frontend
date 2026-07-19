@@ -1,9 +1,9 @@
-import { TravellerInfo } from '@/components/TravellerInfo/TravellerInfo';
+import TravellerInfo from '@/components/TravellerInfo';
 import { getPublicTravellerProfile } from '@/lib/api/serverApi';
 import PageTitle from '@/components/PageTitle';
-import TravellerNotFound from '@/components/TravellerNotFound/TravellerNotFound';
-import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
-import TravellerStoriesList from '@/components/TravellerStoriesList/TravellerStoriesList';
+import TravellerNotFound from '@/components/TravellerNotFound';
+import MessageNoStories from '@/components/MessageNoStories';
+import TravellerStoriesList from '@/components/TravellerStoriesList';
 import css from './TravellerPage.module.css';
 
 type TravellerPageProps = { params: Promise<{ travellerId: string }> };

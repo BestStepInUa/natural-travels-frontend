@@ -19,13 +19,12 @@
   border-radius: 8px;
   color: var(--color-scheme-2-text);
   border: 1px solid transparent;
-  transition: background-color var(--main-transition) transform var(--main-transition);
+  transition: background-color var(--main-transition), text-shadow var(--main-transition);
 }
 
 .menuLink:hover,
 .categoryItemLink:hover {
   background-color: var(--color-scheme-1-foreground);
-  transform: scale(1.05);
   text-shadow: 0.3px 0 0 currentColor, -0.3px 0 0 currentColor;
 }
 
