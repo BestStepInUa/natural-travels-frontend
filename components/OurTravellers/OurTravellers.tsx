@@ -10,7 +10,6 @@ import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import 'swiper/css';
 import 'swiper/css/grid';
 import TravellerCard from '@/components/TravellerCard';
-import PageTitle  from '@/components/PageTitle';
 import { getTravellers, type BackendTraveller } from '@/lib/api/usersApi';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import css from './OurTravellers.module.css';
@@ -132,7 +131,7 @@ export default function OurTravellers () {
   return (
     <section className={css.section}>
       <div className={css.header}>
-        <PageTitle variant="traveller">Наші Мандрівники</PageTitle>
+        <h2 className={css.title}>Наші Мандрівники</h2>
         <Link
           href="/travellers"
           className={`${css.allTravellersBtn} ${css.allTravellersBtnDesktop}`}
