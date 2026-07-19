@@ -72,7 +72,7 @@ export default function Register() {
     }
   };
   return (
-    <div className="container">
+    <>
       <h1 className={css.registerH1}>Реєстрація</h1>
       <p className={css.textRegisterForm}>
         Раді вас бачити у спільноті мандрівників!
@@ -155,6 +155,6 @@ export default function Register() {
         )}
       </Formik>
       {error && <p className={css.errorAfterForm}>{error}</p>}
-    </div>
+    </>
   );
 }

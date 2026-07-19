@@ -65,7 +65,7 @@ export default function LoginForm() {
 }
   };
   return (
-    <div className="container">
+    <>
       <h1 className={css.LoginH1}>Вхід</h1>
       <p className={css.textLoginForm}>
         Вітаємо знову у спільноту мандрівників!
@@ -128,6 +128,6 @@ export default function LoginForm() {
         )}
       </Formik>
       {error && <p className={css.errorAfterForm}>{error}</p>}
-    </div>
+    </>
   );
 }

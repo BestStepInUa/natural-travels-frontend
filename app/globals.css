@@ -156,6 +156,7 @@ span {
 .dark {
 --color-scheme-2-text: #eef8ee;
   --color-scheme-2-background:#254c24;
+  --color-scheme-1-background: #254c24;
   --color-scheme-2-foreground: #1b391b;
   --color-scheme-2-border:  #def2de;
   --opacity-neutral-darkest-5:#254c24;
