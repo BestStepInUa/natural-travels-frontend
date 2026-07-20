@@ -20,7 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uk" className={montserratFont.variable}>
+    <html
+      lang="uk"
+      className={montserratFont.variable}
+      data-scroll-behavior="smooth"
+    >
       <body>
         <TanStackProvider>
           <AuthProvider>

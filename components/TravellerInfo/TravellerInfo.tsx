@@ -20,6 +20,7 @@ export default function TravellerInfo ({
         width={113}
         height={113}
         className={css.avatar}
+        priority
       />
       <div className={css.info}>
         <p className={css.name}>{name}</p>

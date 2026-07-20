@@ -4,7 +4,6 @@ import AuthFooter from '@/components/AuthFooter';
 import AuthHeader from '@/components/AuthHeader';
 import MainAuthNav from '@/components/MainAuthNav';
 import { useEffect } from 'react';
-import css from "./page.module.css"
 
 export default function AuthLayout({
   children,
@@ -21,7 +20,7 @@ export default function AuthLayout({
   return (
     <>
       <AuthHeader />
-      <div className={`container ${css.responsiveContainer}`}>
+      <div className={`container`}>
         <main>
           <MainAuthNav />
           {children}

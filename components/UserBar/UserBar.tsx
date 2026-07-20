@@ -27,11 +27,18 @@ export default function UserBar() {
   return (
     <div className={css.userBar}>
       <Image
-        src={user.avatarUrl || '/default-avatar.png'}
-        alt={user.name ? `Аватар користувача ${user.name}` : 'Аватар користувача'}
+        src={
+          user.avatarUrl && !user.avatarUrl.includes('default-avatar')
+            ? user.avatarUrl
+            : '/my-avatar.png'
+        }
+        alt={
+          user.name ? `Аватар користувача ${user.name}` : 'Аватар користувача'
+        }
         width={32}
         height={32}
         className={css.avatar}
+        priority
       />
       <span className={css.userName}>{user.name || "Ім'я"}</span>
 
@@ -41,7 +48,7 @@ export default function UserBar() {
         aria-label="Вийти з системи"
         onClick={() => setIsModalOpen(true)}
       >
-        <RxExit  size={20} />
+        <RxExit size={20} />
       </button>
 
       <ConfirmModal

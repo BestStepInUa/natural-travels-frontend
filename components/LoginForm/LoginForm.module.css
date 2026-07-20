@@ -112,6 +112,11 @@
 
 /* --- Адаптив --- */
 @media only screen and (min-width: 768px) {
+    .section {
+    max-width: 644px;
+    margin: 0 auto;
+  }
+
   .LoginH1 {
     font-size: 44px;
   }
