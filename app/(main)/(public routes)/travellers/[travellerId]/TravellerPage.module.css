@@ -1,16 +1,9 @@
-.main {
-  padding-top: 32px;
+.section {
+  padding: 104px 0 64px;
 }
-.travellersWrapper {
-  padding-bottom: 64px;
-}
-@media only screen and (min-width: 768px) {
-  .main {
-    padding-top: 48px;
-  }
-}
+
 @media only screen and (min-width: 1440px) {
-  .travellersWrapper {
-    padding-bottom: 72px;
-  }
+ .section {
+  padding: 120px 0 72px;
+}
 }

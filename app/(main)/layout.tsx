@@ -1,7 +1,8 @@
-import Header from '@/components/Header/Header';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { LeafLoader } from '@/components/LeafLoader';
+import LeafLoader from '@/components/LeafLoader';
 import type { Metadata } from 'next';
+import '../globals.css';
 
 export const metadata: Metadata = {
   title: 'Природні Мандри',

@@ -1,20 +1,14 @@
 import Image from 'next/image';
-import { PageTitle } from '../PageTitle/PageTitle';
 import css from './About.module.css';
 
-const About = () => {
+export default function About() {
   return (
     <section className={css.aboutSection}>
       <div className={css.aboutContainer}>
         <div className={css.contentWrapper}>
-          <PageTitle
-            variant="traveller"
-            align="left"
-            color="scheme2"
-            marginBottom={24}
-          >
+          <h2 className={css.title}>
             Мандруй екологічно та відкривай нові горизонти
-          </PageTitle>
+          </h2>
 
           <p className={css.description}>
             Наш проєкт створений для тих, хто хоче досліджувати Україну
@@ -60,5 +54,3 @@ const About = () => {
     </section>
   );
 };
-
-export default About;

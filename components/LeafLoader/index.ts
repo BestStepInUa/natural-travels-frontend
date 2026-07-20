@@ -1,1 +1,1 @@
-export { LeafLoader } from './LeafLoader';
+export { default } from './LeafLoader';

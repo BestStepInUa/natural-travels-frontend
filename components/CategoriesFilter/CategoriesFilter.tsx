@@ -4,9 +4,9 @@ import {
   QueryClient,
 } from '@tanstack/react-query';
 import { getAllStories, getCategories } from '@/lib/api/serverApi';
-import CategoriesClient from './Categories.client';
+import CategoriesClient from './CategoriesFilter.client';
 import Link from 'next/link';
-import css from './Categories.module.css';
+import css from './CategoriesFilter.module.css';
 
 type CategoriesProps = {
   params: Promise<{
@@ -39,7 +39,10 @@ export default async function Categories({ params }: CategoriesProps) {
       <CategoriesClient currentSlug={currentSlug} />
       <ul className={css.categoryList}>
         <li className={css.categoryItem}>
-          <Link href="/stories/filter/all" className={css.menuLink}>
+          <Link
+            href="/stories/filter/all"
+            className={`${css.menuLink} ${currentSlug === 'all' ? css.active : ''}`}
+          >
             Всі статті
           </Link>
         </li>
@@ -47,7 +50,7 @@ export default async function Categories({ params }: CategoriesProps) {
           <li className={css.categoryItem} key={category._id}>
             <Link
               href={`/stories/filter/${category.slug}`}
-              className={css.categoryItemLink}
+              className={`${css.categoryItemLink} ${currentSlug === category.slug ? css.active : ''}`}
             >
               {category.category}
             </Link>

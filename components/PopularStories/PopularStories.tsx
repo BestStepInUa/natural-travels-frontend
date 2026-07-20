@@ -9,7 +9,6 @@ import type { Swiper as SwiperType } from 'swiper';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import 'swiper/css';
 import StoryCard from '@/components/StoryCard';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
 import { getPopularStories } from '@/lib/api/storiesApi';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import css from './PopularStories.module.css';
@@ -27,7 +26,7 @@ interface Story {
 
 const TOTAL_POPULAR = 10;
 
-export const PopularStories = () => {
+export default function PopularStories() {
   const width = useWindowSize();
   const swiperRef = useRef<SwiperType | null>(null);
   const pendingAdvanceRef = useRef(false);
@@ -94,7 +93,7 @@ export const PopularStories = () => {
   return (
     <section className={css.section}>
       <div className={css.header}>
-        <PageTitle variant="title">Популярні статті</PageTitle>
+        <h2 className={css.title}>Популярні статті</h2>
         <Link
           href="/stories/filter/all"
           className={`${css.allStoriesBtn} ${css.allStoriesBtnDesktop}`}
@@ -117,7 +116,7 @@ export const PopularStories = () => {
             onSlideChange={syncNavState}
             breakpoints={{
               320: { slidesPerView: 1, spaceBetween: 16, slidesPerGroup: 1 },
-              768: { slidesPerView: 2, spaceBetween: 16, slidesPerGroup: 2 },
+              768: { slidesPerView: 2, spaceBetween: 24, slidesPerGroup: 2 },
               1440: { slidesPerView: 3, spaceBetween: 24, slidesPerGroup: 3 },
             }}
           >

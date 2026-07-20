@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import PageTitle from '@/components/PageTitle';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import AddStoryForm from '../AddStoryForm';
 import css from './AddStory.module.css';
@@ -17,18 +17,20 @@ export default function AddStory() {
     }
   }, [isAuthenticated, router]);
 
-  
+
   if (!isAuthenticated) {
     return null;
   }
 
   return (
-    <div className={`${css.wrapper} container`}>
-      <PageTitle variant="title" color="scheme2">
-        Створити нову історію
-      </PageTitle>
+    <section className={css.section}>
+      <div className='container'>
+        <PageTitle variant="title" color="scheme2">
+          Створити нову історію
+        </PageTitle>
 
-      <AddStoryForm />
-    </div>
+        <AddStoryForm />
+      </div>
+    </section>
   );
 }

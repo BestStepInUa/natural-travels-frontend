@@ -1,10 +1,9 @@
-import { Hero } from '@/components/Hero/Hero';
-// // import css from './page.module.css';
+import Hero from '@/components/Hero';
 
 import Join from '@/components/Join';
-import About from '@/components/About/About';
-import { PopularStories } from '@/components/PopularStories/PopularStories';
-import { OurTravellers } from '@/components/OurTravellers/OurTravellers';
+import About from '@/components/About';
+import PopularStories from '@/components/PopularStories';
+import OurTravellers from '@/components/OurTravellers';
 
 export default function Home() {
   return (

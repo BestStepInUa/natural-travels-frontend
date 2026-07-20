@@ -46,8 +46,6 @@
   --font-family: 'Montserrat', sans-serif;
 
   --main-transition: 333ms ease-in-out;
-
-  --header-height: 72px;
 }
 
 
@@ -84,10 +82,6 @@ body {
   overflow-x: hidden;
   color: var(--color-scheme-2-text);
   background: var(--color-scheme-2-background);
-}
-
-main {
-  padding-top: var(--header-height);
 }
 
 * {
@@ -162,6 +156,7 @@ span {
 .dark {
 --color-scheme-2-text: #eef8ee;
   --color-scheme-2-background:#254c24;
+  --color-scheme-1-background: #254c24;
   --color-scheme-2-foreground: #1b391b;
   --color-scheme-2-border:  #def2de;
   --opacity-neutral-darkest-5:#254c24;
@@ -172,5 +167,7 @@ span {
   --color-neutral-darkest:#eef8ee;
   --opacity-neutral-darkest-5: #1b391b;
   --opacity-neutral-darkest-60: #def2de;
+  --color-mantis-light: #1b391b;
+  --color-neutral-lightest: #1b391b;
    --color-red:#FF6B6B;
 }

@@ -2,7 +2,7 @@ import { Montserrat } from 'next/font/google';
 import TanStackProvider from '@/components/TanStackProvider';
 import AuthProvider from '@/components/AuthProvider';
 import Cursor from '@/components/Cursor';
-import { ThemeProvider } from '@/components/ThemeContext/ThemeContext';
+import ThemeProvider from '@/components/ThemeContext';
 
 import 'modern-normalize';
 import './globals.css';
@@ -20,7 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uk" className={montserratFont.variable}>
+    <html
+      lang="uk"
+      className={montserratFont.variable}
+      data-scroll-behavior="smooth"
+    >
       <body>
         <TanStackProvider>
           <AuthProvider>

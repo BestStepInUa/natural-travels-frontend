@@ -35,17 +35,24 @@
   font-weight: 500;
   font-size: 16px;
   color: var(--color-white);
-  background: var(--color-mantis-dark);
+  background-color: var(--color-mantis-dark);
   transition:
     background-color var(--main-transition),
     color var(--main-transition),
     border-color var(--main-transition);
 }
 
-.joinButton:hover {
-  background: var(--color-mantis-lighter);
-  border: 1px solid var(--color-mantis-dark);
+.joinButton:hover,
+.joinButton:focus {
+  background-color: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
   color: var(--color-scheme-2-text);
+}
+
+.joinButton:active {
+  background-color: var(--color-mantis-dark);
+  border-color:var(--color-mantis-dark);
+  color: var(--color-white);
 }
 
 @media only screen and (min-width: 768px) {

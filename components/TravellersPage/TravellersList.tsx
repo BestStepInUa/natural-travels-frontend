@@ -1,7 +1,7 @@
 'use client';
 
 import { Traveller } from '@/types/travellers';
-import { TravellerCard } from '@/components/TravellerCard/TravellerCard';
+import TravellerCard from '@/components/TravellerCard';
 import css from './page.module.css';
 
 interface TravellersListProps {

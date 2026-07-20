@@ -9,8 +9,7 @@ import type { Swiper as SwiperType, SwiperOptions } from 'swiper/types';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import 'swiper/css';
 import 'swiper/css/grid';
-import { TravellerCard } from '@/components/TravellerCard/TravellerCard';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import TravellerCard from '@/components/TravellerCard';
 import { getTravellers, type BackendTraveller } from '@/lib/api/usersApi';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import css from './OurTravellers.module.css';
@@ -44,7 +43,7 @@ const breakpoints: { [width: number]: SwiperOptions } = {
   },
 };
 
-export const OurTravellers = () => {
+export default function OurTravellers () {
   const width = useWindowSize();
   const swiperRef = useRef<SwiperType | null>(null);
   // Запам'ятовуємо, скільки карток було ПЕРЕД довантаженням — щоб
@@ -132,7 +131,7 @@ export const OurTravellers = () => {
   return (
     <section className={css.section}>
       <div className={css.header}>
-        <PageTitle variant="traveller">Наші Мандрівники</PageTitle>
+        <h2 className={css.title}>Наші Мандрівники</h2>
         <Link
           href="/travellers"
           className={`${css.allTravellersBtn} ${css.allTravellersBtnDesktop}`}

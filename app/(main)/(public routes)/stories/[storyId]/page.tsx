@@ -16,7 +16,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
   }
 
   return (
-    <main>
+    <div className='container'>
       <StoryDetails
         img={story.img}
         title={story.title}
@@ -32,6 +32,6 @@ export default async function StoryPage({ params }: StoryPageProps) {
         categoryId={story.category._id}
         currentStoryId={story._id}
       />
-    </main>
+    </div>
   );
 }

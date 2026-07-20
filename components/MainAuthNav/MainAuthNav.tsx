@@ -7,8 +7,7 @@ import css from './MainAuthNav.module.css';
 export default function MainAuthNav() {
   const pathname = usePathname();
   return (
-    <div className="container">
-      <div className={css.wraperAuth}>
+      <section className={css.wraperAuth}>
         <Link
           href="/register"
           className={`${css.blockLoginRegister} ${pathname === '/register' ? css.active : ''}`}
@@ -21,7 +20,6 @@ export default function MainAuthNav() {
         >
           Вхід
         </Link>
-      </div>
-    </div>
+      </section>
   );
 }

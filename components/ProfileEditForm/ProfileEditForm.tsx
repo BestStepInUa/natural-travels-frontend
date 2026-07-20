@@ -87,11 +87,16 @@ export default function ProfileEditForm() {
             <div className={css.avatarColumn}>
               <div className={css.avatarFrame}>
                 <Image
-                  src={avatarPreview}
+                  src={
+                    avatarPreview.includes('default-avatar') || !avatarPreview
+                      ? '/my-avatar.png'
+                      : avatarPreview
+                  }
                   alt={user.name}
                   width={120}
                   height={120}
                   className={css.avatar}
+                  priority
                 />
                 <label className={css.avatarBadge} aria-label="Змінити фото">
                   <svg

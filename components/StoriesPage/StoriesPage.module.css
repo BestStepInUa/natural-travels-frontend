@@ -1,0 +1,9 @@
+.section {
+  padding: 104px 0 64px;
+}
+
+@media (min-width: 1440px) {
+  .stories {
+    padding: 120px 0 72px;
+  }
+}

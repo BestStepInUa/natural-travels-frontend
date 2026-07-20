@@ -16,40 +16,51 @@
   padding: 4px 0;
   font-weight: 500;
   font-size: 16px;
-  line-height: 150%;
   white-space: nowrap;
-  transition: background-color var(--main-transition), color var(--main-transition), border var(--main-transition);
+  transition: background-color var(--main-transition), color var(--main-transition), border-color var(--main-transition);
 }
 
 .loginButton {
-  background: var(--opacity-neutral-darkest-5);
+  background-color: var(--opacity-neutral-darkest-5);
   color: var(--color-scheme-2-text);
 }
 
 .loginButton:hover,
 .loginButton:focus {
-  background: var(--color-mantis-dark);
-  border: 1px solid var(--color-mantis-dark);
+  background-color: var(--color-mantis-dark);
+  border-color: var(--color-mantis-dark);
   color: var(--color-white);
   outline: none;
 }
 
+.loginButton:active {
+  background-color: var(--color-mantis-darker);
+  border-color: var(--opacity-transparent);
+  color: var(--color-white);
+}
+
 .registerButton {
-  background: var(--color-mantis-dark);
+  background-color: var(--color-mantis-dark);
   color: var(--color-white);
   border: 1px solid transparent;
 }
 
 .registerButton:hover,
 .registerButton:focus {
-  background: var(--color-mantis-lighter);
-  border: 1px solid var(--color-mantis-dark);
+  background-color: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
   color: var(--color-scheme-2-text);
+}
+
+.registerButton:active {
+  background-color: var(--color-mantis-dark);
+  border-color: var(--color-mantis-dark);
+  color: var(--color-white);
 }
 
 .authBar.inline {
   flex-direction: row;
-  gap: 12px;
+  gap: 16px;
 }
 
 .inline .loginButton,
@@ -62,6 +73,5 @@
   .loginButton,
   .registerButton {
     font-size: 20px;
-    line-height: 150%;
   }
 }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import TravellersList from './TravellersList';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import PageTitle from '@/components/PageTitle';
 import css from './page.module.css';
 import { getTravellersClient } from '@/lib/api/clientApi';
 import { Traveller } from '@/types/travellers';

@@ -1,30 +1,32 @@
 'use client';
 
-import AuthFooter from '@/components/AuthFooter/AuthFooter';
-import AuthHeader from '@/components/AuthHeader/AuthHeader';
-import MainAuthNav from '@/components/MainAuthNav/MainAuthNav';
-import { useTheme } from '@/components/ThemeContext/ThemeContext';
+import AuthFooter from '@/components/AuthFooter';
+import AuthHeader from '@/components/AuthHeader';
+import MainAuthNav from '@/components/MainAuthNav';
+import { useEffect } from 'react';
 
 export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isDark } = useTheme();
-
-  const mainStyle = {
-    backgroundColor: isDark ? '#254c24' : '#ffffff',
-    minHeight: '100vh',
-    transition: 'background-color 0.4s ease',
-    paddingTop:0,
-  };
+ useEffect(() => {
+   document.body.style.backgroundColor = 'var(--color-scheme-1-background)';
+   return () => {
+     document.body.style.backgroundColor = 'var(--color-scheme-2-background)';
+   };
+ }, []);
 
   return (
-    <main style={mainStyle}>
+    <>
       <AuthHeader />
-      <MainAuthNav />
-      {children}
+      <div className={`container`}>
+        <main>
+          <MainAuthNav />
+          {children}
+        </main>
+      </div>
       <AuthFooter />
-    </main>
+    </>
   );
 }

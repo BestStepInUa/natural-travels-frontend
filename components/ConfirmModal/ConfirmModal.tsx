@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
+import PageTitle from '@/components/PageTitle';
 import css from './ConfirmModal.module.css';
 import { IoMdClose } from 'react-icons/io';
 
@@ -16,7 +16,7 @@ interface ConfirmModalProps {
   children?: React.ReactNode;
 }
 
-export const ConfirmModal = ({
+export default function ConfirmModal ({
   isOpen,
   title,
   confirmButtonText,
@@ -24,7 +24,7 @@ export const ConfirmModal = ({
   onConfirm,
   onCancel,
   children,
-}: ConfirmModalProps) => {
+}: ConfirmModalProps) {
   useEffect(() => {
     if (!isOpen) return;
 

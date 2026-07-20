@@ -1,5 +1,5 @@
 .mainSection {
-  padding-top: 32px;
+  padding-top: 104px;
   padding-bottom: 64px;
 }
 
@@ -24,7 +24,7 @@ max-width: 218px;
 
 @media only screen and (min-width: 1440px) {
   .mainSection {
-    padding-top: 48px;
+    padding-top: 120px;
     padding-bottom: 72px;
   }
 
@@ -57,16 +57,27 @@ max-width: 310px;
   color: var(--color-white);
   transition:
     background-color var(--main-transition),
-    transform var(--main-transition),
+    color var(--main-transition),
     border-color var(--main-transition);
 }
 
 .loadMoreBtn:hover,
 .loadMoreBtn:focus {
-  cursor: pointer;
   color: var(--color-scheme-2-text);
   background-color: var(--color-mantis-lighter);
   border-color: var(--color-mantis-dark);
+}
+
+.loadMoreBtn:active {
+  color: var(--color-white);
+  background-color: var(--color-mantis-dark);
+  border-color: var(--color-mantis-dark);
+}
+
+.loadMoreBtn:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-mantis-dark);
+  opacity: 0.5;
 }
 
 @media only screen and (min-width: 768px) {
@@ -81,12 +92,6 @@ max-width: 310px;
   padding: 9px 12px;
   font-size: 20px;
 }
-}
-
-.loadMoreBtn:active {
-  background-color: var(--color-mantis-darker);
-  border-color: var(--opacity-white-15);
-  transform: scale(0.97);
 }
 
 .loaderContainer {

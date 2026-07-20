@@ -9,12 +9,12 @@ interface TravellerCardProps {
   photoUrl?: string;
 }
 
-export const TravellerCard = ({
+export default function TravellerCard ({
   id,
   name,
   articlesCount,
   photoUrl,
-}: TravellerCardProps) => {
+}: TravellerCardProps) {
   return (
     <div className={css.card}>
       <Image

@@ -1,9 +1,9 @@
-import { TravellerInfo } from '@/components/TravellerInfo/TravellerInfo';
+import TravellerInfo from '@/components/TravellerInfo';
 import { getPublicTravellerProfile } from '@/lib/api/serverApi';
-import { PageTitle } from '@/components/PageTitle/PageTitle';
-import TravellerNotFound from '@/components/TravellerNotFound/TravellerNotFound';
-import MessageNoStories from '@/components/MessageNoStories/MessageNoStories';
-import TravellerStoriesList from '@/components/TravellerStoriesList/TravellerStoriesList';
+import PageTitle from '@/components/PageTitle';
+import TravellerNotFound from '@/components/TravellerNotFound';
+import MessageNoStories from '@/components/MessageNoStories';
+import TravellerStoriesList from '@/components/TravellerStoriesList';
 import css from './TravellerPage.module.css';
 
 type TravellerPageProps = { params: Promise<{ travellerId: string }> };
@@ -23,8 +23,8 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
   const stories = travellerProfile.stories?.data ?? [];
 
   return (
-    <main className={css.main}>
-      <div className={`${css.travellersWrapper} container`}>
+    <section className={css.section}>
+      <div className={`container`}>
         <TravellerInfo
           name={traveller.name}
           avatarUrl={traveller.avatarUrl || '/hero.jpg'}
@@ -45,6 +45,6 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
           />
         )}
       </div>
-    </main>
+    </section>
   );
 }

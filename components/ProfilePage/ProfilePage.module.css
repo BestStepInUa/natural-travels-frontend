@@ -1,20 +1,20 @@
 .section {
-  padding: 32px 0 64px;
+  padding: 104px 0 64px;
 }
 
 @media only screen and (min-width: 1440px) {
   .section {
-  padding: 48px 0 72px;
+  padding: 120px 0 72px;
 }
 }
 
 .editButton {
  display: inline-flex;
   align-items: center;
-  padding: 10px 18px;
-  font-weight: 600;
-  font-size: 13px;
-  margin-bottom: 30px;
+  padding: 12px;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 16px;
   background: var(--color-mantis-dark);
     color: var(--color-white);
     border: 1px solid var(--color-mantis-dark);
@@ -27,11 +27,18 @@
     border-color var(--main-transition);
 }
 
+
 .editButton:hover,
 .editButton:focus {
-  background: var(--color-mantis-lighter);
-  border: 1px solid var(--color-mantis-dark);
+  background-color: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
   color: var(--color-scheme-2-text);
+}
+
+.editButton:active {
+  background-color: var(--color-mantis-dark);
+  border-color: var(--color-mantis-dark);
+  color: var(--color-white);
 }
 
 @media only screen and (min-width: 768px) {
@@ -46,13 +53,23 @@
     padding: 9px 12px;
     font-size: 20px;
   }
+
+  .editButton svg {
+width: 20px;
+height: 20px;
+}
+}
+
+.profileRow {
+  margin-bottom: 30px;
 }
 
 @media only screen and (min-width: 768px) {
 .profileRow {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
  justify-content: space-between;
   gap: 20px;
+  margin-bottom: 0;
 }
 }

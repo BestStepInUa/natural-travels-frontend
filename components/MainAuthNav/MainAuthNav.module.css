@@ -1,26 +1,35 @@
 .active {
   border-bottom: 1px solid var(--color-scheme-1-border);
 }
+
 .wraperAuth {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 32px;
+  width: 100%;
+  padding: 64px 0 32px;
 }
-.blockLoginRegister {
-  padding: 12px 24px;
-  width: 322px;
-  height: 48px;
-  text-align: center;
 
+.blockLoginRegister {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 12px 0;
   font-size: 16px;
   color: var(--color-scheme-1-text);
 }
 
 
+@media only screen and (min-width: 768px) {
+.wraperAuth {
+  max-width: 644px;
+  margin: 0 auto;
+}
+}
+
 @media only screen and (min-width: 1440px) {
 .blockLoginRegister {
   font-size: 18px;
 }
-
 }

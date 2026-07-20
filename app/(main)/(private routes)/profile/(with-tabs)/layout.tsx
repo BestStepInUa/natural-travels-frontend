@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ProfilePage}  from '@/components/ProfilePage/ProfilePage';
+import ProfilePage  from '@/components/ProfilePage';
 
 
 interface ProfileLayoutProps {

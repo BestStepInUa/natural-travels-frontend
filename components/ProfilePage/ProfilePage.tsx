@@ -2,8 +2,8 @@
 
 import { ReactNode, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { TravellerInfo } from '../TravellerInfo/TravellerInfo';
-import { ProfileTabs } from '../ProfileTabs';
+import TravellerInfo from '../TravellerInfo';
+import ProfileTabs from '../ProfileTabs';
 import { useAuthStore } from '@/lib/store/authStore/authStore';
 import { getMe } from '@/lib/api/clientApi';
 import Link from 'next/link';
@@ -13,7 +13,7 @@ interface ProfilePageProps {
   children: ReactNode;
 }
 
-export const ProfilePage = ({ children }: ProfilePageProps) => {
+export default function ProfilePage ({ children }: ProfilePageProps) {
   const user = useAuthStore((state) => state.user);
   const pathname = usePathname();
 
@@ -42,13 +42,17 @@ export const ProfilePage = ({ children }: ProfilePageProps) => {
         <div className={css.profileRow}>
           <TravellerInfo
             name={user.name}
-            avatarUrl={user.avatarUrl}
+            avatarUrl={
+              user.avatarUrl && !user.avatarUrl.includes('default-avatar')
+                ? user.avatarUrl
+                : '/my-avatar.png'
+            }
             articlesAmount={articlesAmount}
           />
           <Link href="/profile/edit" className={css.editButton}>
             <svg
-              width="14"
-              height="14"
+              width="15"
+              height="15"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

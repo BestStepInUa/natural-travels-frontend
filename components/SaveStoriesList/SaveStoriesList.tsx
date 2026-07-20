@@ -1,9 +1,9 @@
 'use client';
 import css from '@/components/MyStoriesList/MyStoriesList.module.css';
-import StoryCard from '@/components/StoryCard/StoryCard';
+import StoryCard from '@/components/StoryCard';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getSavedStories } from '@/lib/api/storiesApi';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/components/Loader';
 import MessageNoStories from '@/components/MessageNoStories';
 
 export default function SaveStoriesList() {

@@ -55,19 +55,19 @@
   font-size: 16px;
   padding: 12px 0;
   color: var(--color-scheme-2-text);
-  transition: var(--main-transition);
+  transition: border-color var(--main-transition), background-color var(--main-transition), color var(--main-transition);
 }
 
 .linkButton:hover, .linkButton:focus {
-  border: 1px solid var(--opacity-transparent);
-background: var(--color-mantis-dark);
+  border-color: var(--opacity-transparent);
+background-color: var(--color-mantis-dark);
 color: var(--color-white);
 outline: none;
 }
 
 .linkButton:active  {
-  border: 1px solid var(--opacity-transparent);
-background: var(--color-mantis-darker);
+  border-color: var(--opacity-transparent);
+background-color: var(--color-mantis-darker);
 color: var(--color-white);
 }
 

@@ -71,7 +71,7 @@ export default function SaveStory({ storyId, onOpenModal }: SaveStoryProps) {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.section}>
       <h2 className={styles.title}>Збережіть собі історію</h2>
       <p className={styles.description}>
         Вона буде доступна у вашому профілі у розділі збережене
@@ -89,6 +89,6 @@ export default function SaveStory({ storyId, onOpenModal }: SaveStoryProps) {
           'Зберегти'
         )}
       </button>
-    </div>
+    </section>
   );
 }

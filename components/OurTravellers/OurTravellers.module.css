@@ -1,92 +1,142 @@
 .section {
-  padding: 40px 0;
+  padding: 64px 0;
+}
+
+@media (min-width: 1440px) {
+  .section {
+  padding: 72px 0;
+}
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0;
+font-weight: 700;
+font-size: 28px;
+line-height: 1.2;
+letter-spacing: -0.01em;
+color: var(--color-scheme-1-text);
+}
+
+@media (min-width: 768px) {
+  .title {
+  font-size: 44px;
+}
+}
+
+@media (min-width: 1440px) {
+  .title {
+ font-size: 52px;
+}
 }
 
 .allTravellersBtn {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  height: 48px;
   background-color: var(--color-mantis-dark);
   color: var(--color-white);
   border: 1px solid transparent;
-  padding: 6px 12px;
+  padding: 12px 0;
+  width: 100%;
   border-radius: 6px;
-  height: 48px;
-  text-decoration: none;
   font-weight: 500;
   font-size: 16px;
-  white-space: nowrap;
-  transition: background-color var(--main-transition), border var(--main-transition), color var(--main-transition);
+  transition: background-color var(--main-transition), border-color var(--main-transition), color var(--main-transition);
 }
 
 .allTravellersBtn:hover,
 .allTravellersBtn:focus {
-  background-color: var(--opacity-neutral-darkest-5);
-  border: 1px solid var(--color-scheme-2-border);
+  background-color: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
   color: var(--color-scheme-2-text);
+}
+
+.allTravellersBtn:active {
+  background-color: var(--color-mantis-dark);
+  border-color: var(--color-mantis-dark);
+  color: var(--color-white);
+}
+
+
+@media (min-width: 768px) {
+  .allTravellersBtn {
+ width: auto;
+ padding: 12px;
+}
+}
+
+@media (min-width: 1440px) {
+  .allTravellersBtn {
+ padding: 9px 12px;
+}
 }
 
 .navigation {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 10px;
   margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .navigation {
+   margin-bottom: 0;
+  }
 }
 
 .prevBtn,
 .nextBtn {
-  width: 48px;
-  height: 48px;
   border-radius: 8px;
   border: 1px solid var(--color-scheme-1-border);
   cursor: pointer;
-  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--color-mantis-lighter);
-  margin-bottom: 40px;
+  padding: 12px;
+  transition: background-color var(--main-transition), border-color var(--main-transition);
 }
 
 .prevBtn:hover,
-.nextBtn:hover {
+.nextBtn:hover,
+.prevBtn:focus,
+ .nextBtn:focus {
   background-color: var(--color-neutral-lightest);
+  border-color: var(--color-mantis-light);
 }
+
+.prevBtn:active,
+.nextBtn:active {
+  background-color: var(--color-mantis-light);
+  border-color: var(--color-mantis-light);
+}
+
+.prevBtn:disabled,
+.nextBtn:disabled {
+  background-color: var(--color-scheme-1-foreground);
+  border-color: var(--color-scheme-1-border);
+  opacity: 0.4;
+}
+
 
 :global(.dark) .navigation button svg {
   filter: invert(1) brightness(2);
   transition: filter 300ms ease;
 }
 
-:global(.dark) .navigation button:hover svg {
-  filter: brightness(0) saturate(100%);
-}
-
 .allTravellersBtnMobile {
   display: flex;
-  justify-content: center;
-  width: 100%;
 }
 
 .allTravellersBtnDesktop {
   display: none;
-  min-width: 166px;
-  text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -96,7 +146,5 @@
 
   .allTravellersBtnDesktop {
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
