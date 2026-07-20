@@ -1,15 +1,52 @@
 .section {
-  padding: 64px 0;
+  padding: 96px 0 64px;
+}
+
+.title {
+font-weight: 700;
+font-size: 28px;
+line-height: 1.2;
+letter-spacing: -0.01em;
+color: var(--color-scheme-1-text);
+margin-bottom: 40px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .title {
+font-size: 44px;
+}
+
 }
 
 @media only screen and (min-width: 1440px) {
-  .image {
-    padding: 72px 0;
-  }
+  .section {
+  padding: 120px 0 72px;
+}
+  .title {
+font-size: 52px;
+}
 }
 
 .list {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    flex-direction: row;
+  }
+
+  .list > * {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .list > * {
+    flex: 0 0 calc((100% - 48px) / 3);
+  }
 }

@@ -23,7 +23,6 @@
 .text {
   font-size: 16px;
   font-weight: 500;
-  line-height: 150%;
   color: var(--color-scheme-2-text);
   margin-bottom: 32px;
 }
@@ -38,7 +37,6 @@
    border: 1px solid transparent;
   font-weight: 500;
   font-size: 16px;
-  line-height: 150%;
   border-radius: 6px;
   padding: 7.5px 0;
   width: 100%;

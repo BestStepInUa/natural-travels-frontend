@@ -23,12 +23,14 @@ export default function AddStory() {
   }
 
   return (
-    <div className={`${css.wrapper} container`}>
-      <PageTitle variant="title" color="scheme2">
-        Створити нову історію
-      </PageTitle>
+    <section className={css.section}>
+      <div className='container'>
+        <PageTitle variant="title" color="scheme2">
+          Створити нову історію
+        </PageTitle>
 
-      <AddStoryForm />
-    </div>
+        <AddStoryForm />
+      </div>
+    </section>
   );
 }

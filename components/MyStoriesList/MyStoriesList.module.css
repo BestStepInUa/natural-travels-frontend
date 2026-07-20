@@ -1,19 +1,25 @@
-.storiesListContainer {
-  padding: 0 0 64px;
-}
-
-@media only screen and (min-width: 1440px) {
-  .storiesListContainer {
-      padding: 0 0 72px;
-    }
-}
-
 .storiesList {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 24px;
 }
 
+@media screen and (min-width: 768px) {
+  .storiesList {
+    flex-direction: row;
+  }
+
+  .storiesList > * {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .storiesList > * {
+    flex: 0 0 calc((100% - 48px) / 3);
+  }
+}
 .storiesLoadMore {
   margin: 40px auto 0;
   display: flex;
@@ -35,9 +41,14 @@
 
 .storiesLoadMore:hover,
 .storiesLoadMore:focus {
-  cursor: pointer;
   color: var(--color-scheme-2-text);
   background-color: var(--color-mantis-lighter);
+  border-color: var(--color-mantis-dark);
+}
+
+.storiesLoadMore:active {
+  color: var(--color-white);
+  background-color: var(--color-mantis-dark);
   border-color: var(--color-mantis-dark);
 }
 
@@ -57,5 +68,6 @@
 
 .storiesLoadMore:disabled {
   cursor: not-allowed;
+  background-color: var(--color-mantis-dark);
   opacity: 0.5;
 }

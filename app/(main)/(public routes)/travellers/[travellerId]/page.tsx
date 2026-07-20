@@ -23,8 +23,8 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
   const stories = travellerProfile.stories?.data ?? [];
 
   return (
-    <main className={css.main}>
-      <div className={`${css.travellersWrapper} container`}>
+    <section className={css.section}>
+      <div className={`container`}>
         <TravellerInfo
           name={traveller.name}
           avatarUrl={traveller.avatarUrl || '/hero.jpg'}
@@ -45,6 +45,6 @@ export default async function TravellerPage({ params }: TravellerPageProps) {
           />
         )}
       </div>
-    </main>
+    </section>
   );
 }

@@ -1,11 +1,12 @@
-.wrapper {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0 0 64px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: center;
+.section {
+  padding: 104px 0 72px;
+}
+
+
+@media (min-width: 768px) {
+  .section {
+   padding: 120px 0;
+  }
 }
 
 .backLink {
@@ -15,10 +16,9 @@
   gap: 8px;
   text-decoration: none;
   color: inherit;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
   transition: color var(--main-transition);
 }
-
 
 .backLink:hover,
 .backLink:active {
@@ -34,36 +34,8 @@
   margin-bottom: 8px;
 }
 
-.title {
-  font-size: 26px;
-  font-weight: 800;
-  margin: 0 auto 30px;
-}
-
-/* .subtitle {
-  font-size: 14px;
-  color: var(--opacity-neutral-darkest-5);
-  margin-bottom: 32px;
-  max-width: 360px;
-} */
-
 @media (min-width: 768px) {
-  .wrapper {
-    padding: 48px 16px 80px;
-  }
-
-  .title {
-    font-size: 32px;
-  }
-
   .subtitle {
     font-size: 15px;
-    margin-bottom: 40px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .title {
-    font-size: 36px;
   }
 }

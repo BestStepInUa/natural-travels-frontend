@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import ProfileEditForm from '@/components/ProfileEditForm';
 import css from './page.module.css';
+import PageTitle from "@/components/PageTitle"
 
 export const metadata: Metadata = {
   title: 'Персональна інформація | Природні Мандри',
@@ -9,10 +10,8 @@ export const metadata: Metadata = {
 
 export default function ProfileEditPage() {
   return (
-    <main>
-      <div className={'container'}>
-        <div className={css.wrapper}>
-
+      <section className={css.section}>
+        <div className={'container'}>
           <Link href="/profile" className={css.backLink}>
             <svg
               width="16"
@@ -32,13 +31,17 @@ export default function ProfileEditPage() {
             Повернутися до профілю
           </Link>
 
-          <h1 className={css.title}>Персональна інформація</h1>
-          {/* <p className={css.subtitle}>
-            Ці дані бачать інші мандрівники на вашій сторінці
-          </p> */}
+          <PageTitle
+            variant="title"
+            color="scheme1"
+            marginBottom={40}
+            align="center"
+          >
+            Персональна інформація
+          </PageTitle>
+
           <ProfileEditForm />
         </div>
-      </div>
-    </main>
+      </section>
   );
 }

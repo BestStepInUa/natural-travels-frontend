@@ -24,7 +24,7 @@ export default function StoryDetails({
   user,
 }: StoryDetailsProps) {
   return (
-    <div className={`${css.container}`}>
+    <section className={css.section}>
       <div className={css.topSection}>
         <div className={css.leftColumn}>
           <Link href="/stories" className={css.backLink}>
@@ -61,6 +61,6 @@ export default function StoryDetails({
       </div>
 
       <p className={css.article}>{article}</p>
-    </div>
+    </section>
   );
 }

@@ -1,18 +1,26 @@
 .form {
-  margin-top: 24px;
+  margin-top: 32px;
+}
+
+@media only screen and (min-width: 1440px) {
+  .form {
+    max-width: 1091px;
+    margin-left: 0;
+    margin-right: auto;
+    margin-top: 48px;
+  }
 }
 
 .fieldWrapper {
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-bottom: 24px;
 }
 
 .label {
   display: block;
-  font-weight: 400;
   font-size: 16px;
-  line-height: 1.5;
   color: var(--color-scheme-2-text);
   margin-bottom: 8px;
 }
@@ -38,20 +46,14 @@
   align-items: center;
   align-self: flex-start;
   width: auto;
-  min-width: 176px;
-  height: 32px;
   padding: 4px 10px;
   border-radius: 6px;
   border: 1px solid var(--color-scheme-2-border);
   background: var(--opacity-neutral-darkest-5);
-  font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.5;
   color: var(--color-scheme-2-text);
   cursor: pointer;
-  box-sizing: border-box;
-  margin-bottom: 24px;
   transition: background-color var(--main-transition), border-color var(--main-transition);
 }
 
@@ -64,21 +66,14 @@
   justify-content: center;
   align-items: center;
   align-self: flex-start;
-  width: auto;
-  min-width: 176px;
-  height: 32px;
   padding: 4px 10px;
   border-radius: 6px;
   border: 1px solid rgba(176, 1, 1, 0.4);
   background: var(--opacity-neutral-darkest-5);
-  font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.5;
   color: #b00101;
   cursor: pointer;
-  box-sizing: border-box;
-  margin-bottom: 24px;
   transition: background-color var(--main-transition), border-color var(--main-transition);
 }
 
@@ -90,24 +85,19 @@
 .input {
   display: block;
   width: 100%;
-  padding: 7px 12px;
+  padding: 8px;
   border-radius: 6px;
   border: 1px solid var(--color-scheme-2-border);
   background-color: transparent;
-  font-family: var(--font-family);
-  font-weight: 400;
   font-size: 16px;
-  line-height: 1.5;
   color: var(--color-scheme-2-text);
-  box-sizing: border-box;
-  margin-bottom: 24px;
   outline: none;
   transition: border-color var(--main-transition);
-  position: relative;
 }
 
 .input::placeholder {
   color: var(--opacity-neutral-darkest-60);
+  font-size: 16px;
 }
 
 .input:focus {
@@ -115,10 +105,8 @@
 }
 
 .selectContainer {
-  position: relative;
   display: block;
   width: 100%;
-  margin-bottom: 24px;
 }
 
 .selectToggle {
@@ -127,17 +115,13 @@
   justify-content: space-between;
   width: 100%;
   height: 40px;
-  padding: 7px 12px;
+  padding: 8px;
   border-radius: 6px;
   border: 1px solid var(--color-scheme-2-border);
   background-color: transparent;
-  font-family: var(--font-family);
-  font-weight: 400;
   font-size: 16px;
-  line-height: 1.5;
   color: var(--opacity-neutral-darkest-60);
   cursor: pointer;
-  box-sizing: border-box;
   text-align: left;
   outline: none;
   transition: border-color var(--main-transition), border-radius var(--main-transition);
@@ -175,10 +159,8 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   padding: 4px 0;
-  margin: 0;
   list-style: none;
   z-index: 10;
-  box-sizing: border-box;
 }
 
 :global(.dark) .optionsList {
@@ -186,8 +168,9 @@
   border: 1px solid #1b391b;
   color: #eef8ee;
 }
+
 .hidden {
-    margin-bottom: 16px;
+    margin-bottom: 40px;
   }
 
 @media only screen and (min-width: 768px) {
@@ -198,10 +181,7 @@
 
 .optionItem {
   padding: 8px 12px;
-  font-family: var(--font-family);
-  font-weight: 400;
   font-size: 16px;
-  line-height: 1.5;
   color: var(--color-scheme-2-text);
   cursor: pointer;
   transition: background-color var(--main-transition);
@@ -216,20 +196,13 @@
 }
 
 .textarea {
-  display: block;
-  width: 100%;
-  min-height: 128px;
-  padding: 8px 12px;
+  min-height: 180px;
+  padding: 12px;
   border-radius: 6px;
   border: 1px solid var(--color-scheme-2-border);
   background-color: transparent;
-  font-family: var(--font-family);
-  font-weight: 400;
   font-size: 16px;
-  line-height: 1.5;
   color: var(--color-scheme-2-text);
-  box-sizing: border-box;
-  margin-bottom: 24px;
   outline: none;
   resize: vertical;
   overflow-y: hidden;
@@ -238,6 +211,7 @@
 
 .textarea::placeholder {
   color: var(--opacity-neutral-darkest-60);
+  font-size: 16px;
 }
 
 .textarea:focus {
@@ -247,7 +221,7 @@
 .buttonContainer {
   display: flex;
   flex-direction: column;
-  margin-top: 36px;
+  margin-top: 60px;
   width: 100%;
 }
 
@@ -256,82 +230,66 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 48px;
-  padding: 6px 12px;
+  padding: 12px 0;
   border-radius: 6px;
   border: 1px solid var(--color-scheme-2-border);
   background: var(--opacity-neutral-darkest-5);
-  font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.5;
   color: var(--color-scheme-2-text);
   cursor: pointer;
-  box-sizing: border-box;
   margin-bottom: 16px;
   transition: background-color var(--main-transition), border-color var(--main-transition), color var(--main-transition);
 }
-
-.cancelButton:hover,
-.cancelButton:focus-visible {
-  background-color: rgba(74, 152, 73, 1);
-  border-color: transparent;
-  color: var(--color-neutral-lightest, #fff);
+  .cancelButton:hover,
+  .cancelButton:focus{
+    border-color: var(--color-mantis-dark);
+  background-color: var(--color-mantis-dark);
+  color: var(--color-white);
   outline: none;
-}
+  }
 
-.cancelButton:active {
-  background-color: rgba(37, 76, 36, 1);
-  border-color: transparent;
-  color: var(--color-neutral-lightest, #fff);
-}
+  .cancelButton:active  {
+    border-color:var(--color-mantis-darker);
+  background-color: var(--color-mantis-darker);
+  color: var(--color-white);
+  }
 
 .saveButton {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 48px;
-  padding: 6px 12px;
+  padding: 12px 0;
   border-radius: 6px;
-  border: 1px solid var(--color-mantis-dark);
-  background: var(--color-mantis-dark);
-  font-family: var(--font-family);
+border: 1px solid var(--color-mantis-dark);
+  background-color: var(--color-mantis-dark);
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.5;
-  color: var(--color-neutral-lightest, #fff);
+  color: var(--color-white);
   cursor: pointer;
-  box-sizing: border-box;
   transition: opacity var(--main-transition), background-color var(--main-transition), border-color var(--main-transition), color var(--main-transition);
 }
 
-.saveButton:hover:not(:disabled),
-.saveButton:focus-visible:not(:disabled) {
-  background-color: rgba(222, 242, 222, 1);
-  border-color: rgba(74, 152, 73, 1);
-  color: var(--color-scheme-2-text);
+.saveButton:hover, .saveButton:focus {
+  border-color: var(--color-mantis-dark);
+  background-color: var(--color-mantis-lighter);
   outline: none;
-}
+  color: var(--color-scheme-2-text);
+  }
 
-.saveButton:active:not(:disabled) {
-  background-color: rgba(74, 152, 73, 1);
-  border-color: transparent;
-  color: var(--color-neutral-lightest, #fff);
-}
-
-.saveButton:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
+  .saveButton:active {
+  border-color: var(--color-mantis-dark);
+  background-color: var(--color-mantis-dark);
+  color: var(--color-white);
+  }
 
 .error {
   display: block;
   position: absolute;
-  font-family: var(--font-family);
   font-size: 12px;
   color: var(--color-red);
-  bottom: 5px;
+  bottom: -20px;
 }
 
 .inputError {
@@ -392,7 +350,6 @@
 }
 
 .toastText {
-  font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
   color: #b00101;
@@ -412,17 +369,11 @@
   }
 
   .saveButton {
-    order: 1;
     width: 203.5px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .form {
-    max-width: 1091px;
-    margin-left: 0;
-    margin-right: auto;
-  }
 
   .label {
     font-size: 18px;
@@ -461,4 +412,9 @@
   .saveButton {
     font-size: 20px;
   }
+
+  .input::placeholder, .textarea::placeholder {
+  font-size: 18px;
+}
+
 }

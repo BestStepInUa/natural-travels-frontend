@@ -1,11 +1,9 @@
-.wrapper {
-  padding-top: 32px;
-  padding-bottom: 32px;
+.section {
+  padding: 104px 0 64px;
 }
 
 @media only screen and (min-width: 1440px) {
-  .wrapper {
-    padding-top: 48px;
-    padding-bottom: 48px;
+  .section {
+    padding: 120px 0 72px;
   }
 }

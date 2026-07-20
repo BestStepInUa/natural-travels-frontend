@@ -7,32 +7,24 @@
   border: 1px solid var(--opacity-transparent);
   border-radius: 10px;
   padding: 4px;
-  width: 100%;
-  max-width: 335px;
-  height: 48px;
   background: var(--color-scheme-2-foreground);
 }
 
 .tab {
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--opacity-transparent);
   border-radius: 8px;
-  padding: 4px;
-  width: 100%;
-  max-width: 163px;
-  height: 40px;
-  font-family: var(--font-family);
-  font-weight: 400;
+  padding: 8px 0;
   font-size: 16px;
-  line-height: 150%;
   color: var(--color-scheme-2-text);
 }
 
 .active {
   border: 1px solid var(--color-scheme-2-border);
-  background: var(--color-scheme-2-background);
+  background-color: var(--color-scheme-2-background);
   font-weight: 500;
 }
 
@@ -40,8 +32,11 @@
   .tabs {
     max-width: 422px;
   }
+}
 
+@media only screen and (min-width: 1440px) {
   .tab {
-    max-width: 207px;
-  }
+  padding: 5px 0;
+  font-size: 20px;
+}
 }

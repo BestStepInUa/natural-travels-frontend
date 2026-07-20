@@ -2,7 +2,6 @@
 
 import { useQuery } from '@tanstack/react-query';
 import StoryCard from '@/components/StoryCard';
-import PageTitle from '@/components/PageTitle';
 import { getStoriesByCategory } from '@/lib/api/storiesApi';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import css from './RecomendedStories.module.css';
@@ -37,9 +36,9 @@ export default function RecomendedStories({
 
   return (
     <section className={css.section}>
-      <PageTitle variant="title" marginBottom={40}>
+      <h2 className={css.title}>
         Вам також сподобається
-      </PageTitle>
+      </h2>
 
       {isFetching ? (
         <p>Завантаження...</p>
